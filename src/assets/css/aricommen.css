@@ -1,0 +1,70 @@
+/**
+* @name: aricommen
+* @author: 92160-李维康
+* @date: 2021-05-26 19:27
+* @description：aricommen
+* @update: 2021-05-26 19:27
+*/
+
+.ari-subtitle {
+    margin: 10px;
+    padding: 0 0 3px 0;
+}
+
+.content-green{
+    color: #8acf00;
+}
+
+.content-ori{
+    color: #b0b435;
+}
+.content-violet{
+    color:  #ae74ac;
+}
+.content-grey{
+    color: #cccccc;
+}
+.content-blue{
+    color:  #0092ff;
+}
+.content-ored{
+    color:  #f92672;
+}
+.content-red{
+    color:  #bd1e22;
+}
+
+.content-orange{
+   color: #f10214;
+}
+
+.item-time {
+    font-size: 10px;
+    color: #666666;
+}
+
+
+.growing-item {
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out 0s;
+    border-radius: 8px;
+    border: #f5f5f5 1px solid;
+}
+
+.item-content {
+    font-weight: 500;
+    color: #666666;
+}
+.item-img {
+    margin-top: 20px;
+    max-width: 100%;
+}
+
+.introduce-landemark {
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+}
