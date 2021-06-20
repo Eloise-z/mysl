@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 
 import $ from 'jquery'
+import axios from 'axios'
 
 // import 'popper.js'
 // import 'bootstrap'
@@ -39,12 +40,14 @@ import './assets/js/jquery.nicescroll.min.js'
 import './assets/js/form-validator.min.js'
 import './assets/js/contact-form-script.js'
 // 有问题的custom.js
-import custom from './assets/js/custom.js'
+import './assets/js/custom.js'
 
 console.log('测试Jquery : main.js调用了 ' + $)
+console.log('测试axios : main.js调用了 ' + axios)
 
 const app = createApp(App)
-app.use(store).use(router).use(custom)
+app.use(store).use(router)
 app.config.globalProperties.$ = $
 app.config.globalProperties.jQuery = $
+app.config.globalProperties.axios = axios
 app.mount('#app')

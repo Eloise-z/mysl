@@ -27,7 +27,7 @@
       <div class="row">
         <div class="col-md-12" style="text-align: right;font-size: 40px">
           <div class="top-botton">
-            <button class="btn btn-primary" onclick="window.location.href='addressadd.html'">新增地址信息</button>
+            <button class="btn btn-primary" @click="toAddAddrPage"> 新增地址信息</button>
           </div>
         </div>
       </div>
@@ -92,7 +92,12 @@
 
 <script>
 export default {
-  name: 'AddressManage'
+  name: 'AddressManage',
+  methods: {
+    toAddAddrPage () {
+      this.$router.push({ path: '/add-addr' })
+    }
+  }
 }
 </script>
 

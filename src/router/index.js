@@ -59,6 +59,11 @@ const routes = [
         path: '/notice',
         name: 'notice',
         component: () => import(/* webpackChunkName: "my-account" */ '../views/Notice')
+      },
+      {
+        path: '/add-addr',
+        name: 'add-addr',
+        component: () => import(/* webpackChunkName: "my-account" */ '../views/AddAddress')
       }
     ]
   }
