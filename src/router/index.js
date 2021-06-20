@@ -73,22 +73,27 @@ const routes = [
       {
         path: '/tour',
         name: 'tour',
-        component: () => import(/* webpackChunkName: "my-account" */ '../views/Tour')
+        component: () => import(/* webpackChunkName: "tour" */ '../views/tour/Tour')
       },
       {
         path: '/search',
         name: 'search',
-        component: () => import(/* webpackChunkName: "my-account" */ '../views/Search')
+        component: () => import(/* webpackChunkName: "search" */ '../views/search/Search')
       },
       {
-        path: '/dateproduct',
-        name: 'dateproduct',
-        component: () => import(/* webpackChunkName: "my-account" */ '../views/DateProduct')
+        path: '/date-product',
+        name: 'date-product',
+        component: () => import(/* webpackChunkName: "date-product" */ '../views/data-product/DateProduct')
       },
       {
         path: '/landmark',
         name: 'landmark',
-        component: () => import(/* webpackChunkName: "my-account" */ '../views/LandMark')
+        component: () => import(/* webpackChunkName: "landmark" */ '../views/land-mark/LandMark')
+      },
+      {
+        path: '/tour-detail',
+        name: 'tour-detail',
+        component: () => import(/* webpackChunkName: "tour" */ '../views/tour/TourDetail')
       }
     ]
   }

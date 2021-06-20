@@ -29,7 +29,7 @@
               <div class="my-instagram owl-carousel owl-theme">
                 <div class="item">
                   <div class="ins-inner-box">
-                    <img src="../assets/images/ylp.jpg" alt=""/>
+                    <img src="../../assets/images/ylp.jpg" alt=""/>
                     <div class="hov-in">
                       <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -38,7 +38,7 @@
 
                 <div class="item">
                   <div class="ins-inner-box">
-                    <img src="../assets/images/instagram-img-01.jpg" alt=""/>
+                    <img src="../../assets/images/instagram-img-01.jpg" alt=""/>
                     <div class="hov-in">
                       <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -47,7 +47,7 @@
 
                 <div class="item">
                   <div class="ins-inner-box">
-                    <img src="../assets/images/banner-01.jpg" alt=""/>
+                    <img src="../../assets/images/banner-01.jpg" alt=""/>
                     <div class="hov-in">
                       <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -87,7 +87,7 @@
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
-                          <img src="../assets/images/yzm.png" alt="图片不见了">
+                          <img src="../../assets/images/yzm.png" alt="图片不见了">
                         </div>
                       </div>
                     </div>

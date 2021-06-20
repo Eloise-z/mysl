@@ -27,7 +27,7 @@
       <div class="introduce-landemark">
         <div class="row">
           <div class="col-md-12" style="text-align: center">
-            <img style="max-width: 200px" src="../assets/images/landmark.png" alt="图片不见了">
+            <img style="max-width: 200px" src="../../assets/images/landmark.png" alt="图片不见了">
           </div>
           <div class="col-md-12" style="font-size: 16px; margin-top: 10px">
             <p>

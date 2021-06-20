@@ -81,7 +81,7 @@
             <img class="img-fluid"
                  src="https://b1-q.mafengwo.net/s10/M00/64/D1/wKgBZ1i_vHCAK5gMAA9i-gEH7iM94.jpeg?imageMogr2%2Fthumbnail%2F%21690x450r%2Fgravity%2FCenter%2Fcrop%2F%21690x450%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cHM6Ly9iMS1xLm1hZmVuZ3dvLm5ldC9zMTEvTTAwLzQ0LzlCL3dLZ0JFRnNQNVJ5QUR2N3BBQUFIWlpVUFJsUTk5MC5wbmc%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11"
                  alt=""/>
-            <a class="btn hvr-hover" href="tour-detail.html">重庆渣滓洞</a>
+            <router-link class="btn hvr-hover" to="/tour-detail">重庆渣滓洞</router-link>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -89,7 +89,7 @@
             <img class="img-fluid"
                  src="https://b1-q.mafengwo.net/s5/M00/77/80/wKgB21ASPsmU6cjvABuIA31sx4A28.jpeg?imageMogr2%2Fthumbnail%2F%21690x370r%2Fgravity%2FCenter%2Fcrop%2F%21690x370%2Fquality%2F100"
                  alt=""/>
-            <a class="btn hvr-hover" href="tour-detail.html">红岩村革命纪念馆</a>
+            <router-link class="btn hvr-hover" to="/tour-detail">红岩村革命纪念馆</router-link>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -97,7 +97,7 @@
             <img class="img-fluid"
                  src="https://p1-q.mafengwo.net/s11/M00/F7/0C/wKgBEFtP7_SALTYvAA4GOR25Lk408.jpeg?imageMogr2%2Fthumbnail%2F%21690x370r%2Fgravity%2FCenter%2Fcrop%2F%21690x370%2Fquality%2F100"
                  alt=""/>
-            <a class="btn hvr-hover" href="tour-detail.html">井冈山革命博物馆</a>
+            <router-link class="btn hvr-hover" to="/tour-detail">井冈山革命博物馆</router-link>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -105,7 +105,7 @@
             <img class="img-fluid"
                  src="https://p1-q.mafengwo.net/s6/M00/EF/B9/wKgB4lNl_O6AdnrTAAEjlmH__Jc56.jpeg?imageMogr2%2Fthumbnail%2F%21690x370r%2Fgravity%2FCenter%2Fcrop%2F%21690x370%2Fquality%2F100"
                  alt=""/>
-            <a class="btn hvr-hover" href="tour-detail.html">赵一曼纪念馆</a>
+            <router-link class="btn hvr-hover" to="/tour-detail">赵一曼纪念馆</router-link>
           </div>
         </div>
       </div>
@@ -126,22 +126,22 @@
       <div class="row">
         <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
           <div class="offer-box-products" style="text-align: center;height: 360px;">
-            <a href="tour-detail.html">
+            <router-link to="/tour-detail">
               <img style="max-width: 100%"
                    src="https://b1-q.mafengwo.net/s18/M00/62/E8/CoUBYGBd1BiAXakuAA6MFnA66Jk647.jpg?imageMogr2%2Fthumbnail%2F1360x%2Fstrip%2Fquality%2F90"
                    alt="">
               <p style="font-size: 20px;margin-top: 5px;">株洲攸县</p>
-            </a>
+            </router-link>
           </div>
         </div>
         <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
           <div class="offer-box-products" style="text-align: center;height: 360px">
-            <a href="tour-detail.html">
+            <router-link to="/tour-detail">
               <img style="max-width: 100%"
                    src="http://b1-q.mafengwo.net/s11/M00/EC/7F/wKgBEFxboPqAC5spAA8iGx9NlPk80.jpeg?imageMogr2%2Fthumbnail%2F1360x%2Fstrip%2Fquality%2F90"
                    alt="">
               <p style="font-size: 20px;margin-top: 5px;">宜宾屏山</p>
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
@@ -172,7 +172,7 @@
             <img class="img-fluid"
                  src="https://b1-q.mafengwo.net/s18/M00/83/EA/CoUBYGCn4ciAfLDDABkIOyciOPU502.jpg?imageMogr2%2Fthumbnail%2F%21310x175r%2Fgravity%2FCenter%2Fcrop%2F%21310x175%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cHM6Ly9iMS1xLm1hZmVuZ3dvLm5ldC9zMTEvTTAwLzQ0LzlCL3dLZ0JFRnNQNVJ5QUR2N3BBQUFIWlpVUFJsUTk5MC5wbmc%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11"
                  alt=""/>
-            <a class="btn hvr-hover" href="tour-detail.html">湘西十八洞村</a>
+            <router-link class="btn hvr-hover" to="/tour-detail">湘西十八洞村</router-link>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -183,7 +183,7 @@
             <img class="img-fluid"
                  src="https://b1-q.mafengwo.net/s18/M00/83/EA/CoUBYGCn4ciAfLDDABkIOyciOPU502.jpg?imageMogr2%2Fthumbnail%2F%21310x175r%2Fgravity%2FCenter%2Fcrop%2F%21310x175%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cHM6Ly9iMS1xLm1hZmVuZ3dvLm5ldC9zMTEvTTAwLzQ0LzlCL3dLZ0JFRnNQNVJ5QUR2N3BBQUFIWlpVUFJsUTk5MC5wbmc%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11"
                  alt=""/>
-            <a class="btn hvr-hover" href="tour-detail.html">湘西十八洞村</a>
+            <router-link class="btn hvr-hover" to="/tour-detail">湘西十八洞村</router-link>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -194,7 +194,7 @@
             <img class="img-fluid"
                  src="https://b1-q.mafengwo.net/s18/M00/83/EA/CoUBYGCn4ciAfLDDABkIOyciOPU502.jpg?imageMogr2%2Fthumbnail%2F%21310x175r%2Fgravity%2FCenter%2Fcrop%2F%21310x175%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cHM6Ly9iMS1xLm1hZmVuZ3dvLm5ldC9zMTEvTTAwLzQ0LzlCL3dLZ0JFRnNQNVJ5QUR2N3BBQUFIWlpVUFJsUTk5MC5wbmc%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11"
                  alt=""/>
-            <a class="btn hvr-hover" href="tour-detail.html">湘西十八洞村</a>
+            <router-link class="btn hvr-hover" to="/tour-detail">湘西十八洞村</router-link>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -205,7 +205,7 @@
             <img class="img-fluid"
                  src="https://b1-q.mafengwo.net/s18/M00/83/EA/CoUBYGCn4ciAfLDDABkIOyciOPU502.jpg?imageMogr2%2Fthumbnail%2F%21310x175r%2Fgravity%2FCenter%2Fcrop%2F%21310x175%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cHM6Ly9iMS1xLm1hZmVuZ3dvLm5ldC9zMTEvTTAwLzQ0LzlCL3dLZ0JFRnNQNVJ5QUR2N3BBQUFIWlpVUFJsUTk5MC5wbmc%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11"
                  alt=""/>
-            <a class="btn hvr-hover" href="tour-detail.html">湘西十八洞村</a>
+            <router-link class="btn hvr-hover" to="/tour-detail">湘西十八洞村</router-link>
           </div>
         </div>
       </div>
@@ -220,12 +220,12 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12">
           <div class="offer-box-products">
-            <img class="img-fluid" src="../assets/images/add-img-02.jpg" alt=""/>
+            <img class="img-fluid" src="../../assets/images/add-img-02.jpg" alt=""/>
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <div class="offer-box-products">
-            <img class="img-fluid" src="../assets/images/add-img-02.jpg" alt=""/>
+            <img class="img-fluid" src="../../assets/images/add-img-02.jpg" alt=""/>
           </div>
         </div>
       </div>
