@@ -50,9 +50,9 @@
               </ul>
             </li>
             <li class="nav-item"><router-link class="nav-link" to="/tour">文·旅</router-link></li>
-            <li class="nav-item"><a class="nav-link" href="dateproduct.html">产品溯源</a></li>
-            <li class="nav-item" style="margin-left: 72px"><a class="nav-link" href="search.html"><i class="fa fa-search"></i></a></li>
-            <li class="nav-item"><a class="nav-link" href="search.html"><i class="fa fa-shopping-bag mr-1"></i>我的收藏</a></li>
+            <li class="nav-item"><router-link class="nav-link" to="/dateproduct">产品溯源</router-link></li>
+            <li class="nav-item" style="margin-left: 72px"><router-link class="nav-link" to="/search"><i class="fa fa-search"></i></router-link></li>
+            <li class="nav-item"><router-link class="nav-link" to="/"><i class="fa fa-shopping-bag mr-1"></i>我的收藏</router-link></li>
           </ul>
         </div>
         <!-- /.navbar-collapse -->

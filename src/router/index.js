@@ -74,6 +74,16 @@ const routes = [
         path: '/tour',
         name: 'tour',
         component: () => import(/* webpackChunkName: "my-account" */ '../views/Tour')
+      },
+      {
+        path: '/search',
+        name: 'search',
+        component: () => import(/* webpackChunkName: "my-account" */ '../views/Search')
+      },
+      {
+        path: '/dateproduct',
+        name: 'dateproduct',
+        component: () => import(/* webpackChunkName: "my-account" */ '../views/DateProduct')
       }
     ]
   }
