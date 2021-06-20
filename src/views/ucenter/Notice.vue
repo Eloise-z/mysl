@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col-lg-12">
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">首页</a></li>
+            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
             <li class="breadcrumb-item active"> 系统消息</li>
           </ul>
           <h2>系统消息</h2>

@@ -10,7 +10,7 @@
         <div class="col-lg-12">
 
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">首页</a></li>
+            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
             <li class="breadcrumb-item"><a href="#"> 商品列表 </a></li>
             <li class="breadcrumb-item active"> 商品详情</li>
           </ul>

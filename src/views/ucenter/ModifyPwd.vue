@@ -8,10 +8,9 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">首页</a></li>
-            <li class="breadcrumb-item"><a href="#">用户中心</a></li>
+            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
+            <li class="breadcrumb-item"><router-link to="/my-account"> 用户中心 </router-link></li>
             <li class="breadcrumb-item active"> 修改密码</li>
           </ul>
           <h2>修改密码</h2>
