@@ -33,37 +33,37 @@ const routes = [
       {
         path: '/my-account',
         name: 'my-account',
-        component: () => import(/* webpackChunkName: "my-account" */ '../views/MyAccount')
+        component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/MyAccount')
       },
       {
         path: '/order-list',
         name: 'orderList',
-        component: () => import(/* webpackChunkName: "my-account" */ '../views/OrderList')
+        component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/OrderList')
       },
       {
         path: '/modifypwd',
         name: 'modifypwd',
-        component: () => import(/* webpackChunkName: "my-account" */ '../views/ModifyPwd')
+        component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/ModifyPwd')
       },
       {
         path: '/addr',
         name: 'addr',
-        component: () => import(/* webpackChunkName: "my-account" */ '../views/AddressManage')
+        component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/AddressManage')
       },
       {
         path: '/userinfo',
         name: 'userinfo',
-        component: () => import(/* webpackChunkName: "my-account" */ '../views/UserInfo')
+        component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/UserInfo')
       },
       {
         path: '/notice',
         name: 'notice',
-        component: () => import(/* webpackChunkName: "my-account" */ '../views/Notice')
+        component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/Notice')
       },
       {
         path: '/add-addr',
         name: 'add-addr',
-        component: () => import(/* webpackChunkName: "my-account" */ '../views/AddAddress')
+        component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/AddAddress')
       }
     ]
   }

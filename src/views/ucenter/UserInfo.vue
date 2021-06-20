@@ -27,7 +27,7 @@
         <form>
           <div class="row">
             <div class="userImg" style="margin: 0 auto">
-              <img src="../assets/images/banner-01.jpg" style="width: 150px;height: 150px;object-fit: cover"
+              <img src="../../assets/images/banner-01.jpg" style="width: 150px;height: 150px;object-fit: cover"
                    class="border border-light rounded-circle text-center">
             </div>
           </div>
