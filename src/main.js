@@ -4,7 +4,6 @@ import router from './router'
 import store from './store'
 
 import $ from 'jquery'
-import 'imagesloaded'
 
 // import 'popper.js'
 // import 'bootstrap'
@@ -40,12 +39,12 @@ import './assets/js/jquery.nicescroll.min.js'
 import './assets/js/form-validator.min.js'
 import './assets/js/contact-form-script.js'
 // 有问题的custom.js
-import './assets/js/custom.js'
+import custom from './assets/js/custom.js'
 
 console.log('测试Jquery : main.js调用了 ' + $)
 
 const app = createApp(App)
-app.use(store).use(router)
+app.use(store).use(router).use(custom)
 app.config.globalProperties.$ = $
 app.config.globalProperties.jQuery = $
 app.mount('#app')

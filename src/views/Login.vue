@@ -34,10 +34,11 @@
                 <!-- <a href="#" class="social"><i class="fab fa-alipay"></i></a>-->
               </div>
               <span>或使用您的帐号</span>
-              <input type="email" placeholder="用户名">
-              <input type="password" placeholder="密码">
+              <input type="text" v-model="user.userTel"  name="userTel" placeholder="用户名">
+              <input type="password" v-model="user.userPwd" name="userPwd" placeholder="密码">
               <a href="#">忘记密码？</a>
-              <button @click="login">登录</button>
+              <button type="button" @click="submitLogin()">登录</button>
+
             </form>
           </div>
           <div class="overlay-container">
@@ -45,7 +46,7 @@
               <div class="overlay-panel overlay-left">
                 <h1>已有帐号？</h1>
                 <p>请使用您的帐号进行登录</p>
-                <button class="ghost" id="signIn">登录</button>
+                <button type="submit" class="ghost" id="signIn" @click="submitLogin">登录</button>
               </div>
               <div class="overlay-panel overlay-right">
                 <h1>没有帐号？</h1>
@@ -61,11 +62,52 @@
 </template>
 
 <script>
+// 引入调用js-cookie
+import cookie from 'js-cookie'
+// 引入调用login.js文件
+import loginApi from '@/api/login'
 export default {
-  name: 'Login',
+  layout: 'sign',
+
+  data() {
+    return {
+      // 封装登录的手机号和密码对象
+      user: {
+        userTel: '',
+        userPwd: ''
+      },
+      // 获取到用户信息  用于显示头部
+      loginInfo: {}
+    }
+  },
+
   methods: {
-    login () {
-      this.$router.push({ path: '/index' })
+    // 登录的方法
+    submitLogin() {
+      // 调用登录接口 返回token字符串
+      loginApi.userLogin(this.user)
+        .then(response => {
+          // 获取到的token字符串放入cookie
+          // 1.cookie名称，2.token参数值，3.作用范围-在什么样的请求中
+          cookie.set('agriculture_token', response.data.token, { domain: 'localhost' })
+          // 调用接口 根据token解析出用户信息 给首页用
+          loginApi.getUserInfo()
+            .then(response => {
+              this.loginInfo = response.data.userInfo
+              // 获取返回的用户信息  放入cookie
+              cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
+              // 路由跳转 跳转守页面
+              this.$router.push({ path: '/' })
+            })
+        })
+    },
+
+    checkPhone(rule, value, callback) {
+      // debugger
+      if (!(/^1[34578]\d{9}$/.test(value))) {
+        return callback(new Error('手机号码格式不正确'))
+      }
+      return callback()
     }
   }
 }

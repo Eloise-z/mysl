@@ -1,8 +1,4 @@
 import baguetteBox from './baguetteBox.min'
-import 'jquery'
-import './images-loded.min'
-import 'imagesloaded'
-import './masonry.pkgd.min'
 (function ($) {
 	"use strict";
 

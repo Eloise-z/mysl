@@ -31,27 +31,34 @@
             <!--顶部栏-->
             <div class="product-item-filter row">
               <div class="col-12 col-sm-8 text-center text-sm-left">
-                <div class="toolbar-sorter-right">
-                  <span>排序 </span>
-                  <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
+                <div class="toolbar-sorter-right" >
+                  <span style="font-size: 15px" class="font-weight-bold">排序 </span>
+                  <select  id="basic" style="width: 200px;" class="custom-select show-tick form-control" data-placeholder="￥">
                     <option data-display="Select">默认</option>
                     <option value="1">浏览量</option>
                     <option value="2">价格从高到低</option>
                     <option value="3">价格从低到高</option>
                     <option value="4">最多售卖</option>
                   </select>
+<!--                  <select id="basic1" class="selectpicker show-tick form-control" data-placeholder="$ USD">
+                    <option data-display="Select">默认</option>
+                    <option value="1">浏览量</option>
+                    <option value="2">价格从高到低</option>
+                    <option value="3">价格从低到高</option>
+                    <option value="4">最多售卖</option>
+                  </select>-->
                 </div>
-                <p>展示了所有 4 个结果</p>
               </div>
               <div class="col-12 col-sm-4 text-center text-sm-right">
-                <ul class="nav nav-tabs ml-auto">
+                <span style="font-size: 15px; display: inline-block;line-height: 41px">展示了所有 4 个结果</span>
+<!--                <ul class="nav nav-tabs ml-auto">
                   <li>
                     <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i class="fa fa-th"></i> </a>
                   </li>
-                  <!--  <li>
+                  &lt;!&ndash;  <li>
                         <a class="nav-link" href="#list-view" data-toggle="tab"> <i class="fa fa-list-ul"></i> </a>
-                    </li>-->
-                </ul>
+                    </li>&ndash;&gt;
+                </ul>-->
               </div>
             </div>
             <!--商品列表内容区-->
@@ -67,7 +74,7 @@
                           </div>
                           <img src="../../assets/images/img-pro-01.jpg" class="img-fluid" alt="Image">
                           <div class="mask-icon">
-                            <a class="cart" href="shop-detail.html">查看详情</a>
+                            <router-link class="cart" :to="{ path: '/shop-detail', query: { goodId: '1' }}">查看详情</router-link>
                           </div>
                         </div>
                         <div class="why-text">
