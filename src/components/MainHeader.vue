@@ -46,7 +46,7 @@
               <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">乡村振兴</a>
               <ul class="dropdown-menu">
                 <li><router-link :to="{ path: '/shop', query: { typeId: '9' }}">农产品</router-link></li>
-                <li><a href="landmark.html">地理标志</a></li>
+                <li><router-link to="/landmark">地理标志</router-link></li>
               </ul>
             </li>
             <li class="nav-item"><router-link class="nav-link" to="/tour">文·旅</router-link></li>

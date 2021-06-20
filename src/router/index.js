@@ -84,6 +84,11 @@ const routes = [
         path: '/dateproduct',
         name: 'dateproduct',
         component: () => import(/* webpackChunkName: "my-account" */ '../views/DateProduct')
+      },
+      {
+        path: '/landmark',
+        name: 'landmark',
+        component: () => import(/* webpackChunkName: "my-account" */ '../views/LandMark')
       }
     ]
   }
