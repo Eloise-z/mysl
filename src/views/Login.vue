@@ -7,7 +7,7 @@
   <div class="login">
     <div class="row">
       <div class="col-md-12">
-        <div class="dowebok" id="dowebok">
+        <div class="dowebok" id="dowebok" :class="{'right-panel-active' : isRegisterShow}">
           <div class="form-container sign-up-container">
             <form action="#">
               <h1>注册</h1>
@@ -34,11 +34,10 @@
                 <!-- <a href="#" class="social"><i class="fab fa-alipay"></i></a>-->
               </div>
               <span>或使用您的帐号</span>
-              <input type="text" v-model="user.userTel"  name="userTel" placeholder="用户名">
+              <input type="text" v-model="user.userTel" name="userTel" placeholder="用户名">
               <input type="password" v-model="user.userPwd" name="userPwd" placeholder="密码">
-              <a href="#">忘记密码？</a>
+              <router-link to="/findpwd">忘记密码？</router-link>
               <button type="button" @click="submitLogin()">登录</button>
-
             </form>
           </div>
           <div class="overlay-container">
@@ -46,12 +45,12 @@
               <div class="overlay-panel overlay-left">
                 <h1>已有帐号？</h1>
                 <p>请使用您的帐号进行登录</p>
-                <button type="submit" class="ghost" id="signIn" @click="submitLogin">登录</button>
+                <button type="submit" class="ghost" id="signIn" @click="submitLogin;isRegisterShow=false">登录</button>
               </div>
               <div class="overlay-panel overlay-right">
                 <h1>没有帐号？</h1>
                 <p>立即注册加入我们，和我们一起开启购物吧</p>
-                <button class="ghost" id="signUp">注册</button>
+                <button class="ghost" id="signUp" @click="isRegisterShow=true">注册</button>
               </div>
             </div>
           </div>
@@ -66,10 +65,11 @@
 import cookie from 'js-cookie'
 // 引入调用login.js文件
 import loginApi from '@/api/login'
+
 export default {
   layout: 'sign',
 
-  data() {
+  data () {
     return {
       // 封装登录的手机号和密码对象
       user: {
@@ -77,13 +77,14 @@ export default {
         userPwd: ''
       },
       // 获取到用户信息  用于显示头部
-      loginInfo: {}
+      loginInfo: {},
+      isRegisterShow: false
     }
   },
 
   methods: {
     // 登录的方法
-    submitLogin() {
+    submitLogin () {
       // 调用登录接口 返回token字符串
       loginApi.userLogin(this.user)
         .then(response => {
@@ -102,7 +103,7 @@ export default {
         })
     },
 
-    checkPhone(rule, value, callback) {
+    checkPhone (rule, value, callback) {
       // debugger
       if (!(/^1[34578]\d{9}$/.test(value))) {
         return callback(new Error('手机号码格式不正确'))

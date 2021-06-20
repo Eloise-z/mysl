@@ -82,7 +82,7 @@
       });
     });
   }catch (e){
-    console.log("Container.imagesLoaded(function () 这里 try")
+    console.log("custom.js 的 Container.imagesLoaded(function () 的 try")
   }
 
 	/* ..............................................
@@ -95,7 +95,7 @@
       noScrollbars: true
     });
   }catch (e){
-    console.log('BaguetteBox 这里 try')
+    console.log('custom.js 的 BaguetteBox 的 try')
   }
 
 	/* ..............................................

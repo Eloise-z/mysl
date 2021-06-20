@@ -20,6 +20,7 @@ import './assets/css/custom.css'
 /* 非公共 */
 import './assets/css/dmaku.css'
 
+/* 导入js */
 import './assets/js/jquery-3.2.1.min.js'
 import './assets/js/popper.min.js'
 import './assets/js/bootstrap.min.js'
