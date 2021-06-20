@@ -9,7 +9,8 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="right-phone-box">
-            <p>CUIT:- <a href="#"> 软件工程学院</a></p>
+<!--            <p>CUIT:- <a href="#"> 软件工程学院</a></p>-->
+            <router-link to="/my-account"><p class="font-weight-bold">个人中心</p></router-link>
           </div>
           <div class="our-link">
             <ul>
@@ -41,7 +42,7 @@
                 <router-link to=""><i class="fas fa-file-alt"></i> 订单</router-link>
               </li>
               <li>
-                <router-link to=""><i class="fas fa-bell"></i> 系统消息</router-link>
+                <router-link to="/notice"><i class="fas fa-bell"></i> 系统消息</router-link>
               </li>
             </ul>
           </div>
