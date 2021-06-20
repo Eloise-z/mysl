@@ -1,4 +1,8 @@
-import { imagesLoaded } from './images-loded.min'
+import baguetteBox from './baguetteBox.min'
+import 'jquery'
+import './images-loded.min'
+import 'imagesloaded'
+import './masonry.pkgd.min'
 (function ($) {
 	"use strict";
 
@@ -67,29 +71,37 @@ import { imagesLoaded } from './images-loded.min'
 	   Special Menu
 	   ................................................. */
 
-	var Container = $('.container');
-	Container.imagesLoaded(function () {
-		var portfolio = $('.special-menu');
-		portfolio.on('click', 'button', function () {
-			$(this).addClass('active').siblings().removeClass('active');
-			var filterValue = $(this).attr('data-filter');
-			$grid.isotope({
-				filter: filterValue
-			});
-		});
-		var $grid = $('.special-list').isotope({
-			itemSelector: '.special-grid'
-		});
-	});
+  try {
+    var Container = $('.container');
+    Container.imagesLoaded(function () {
+      var portfolio = $('.special-menu');
+      portfolio.on('click', 'button', function () {
+        $(this).addClass('active').siblings().removeClass('active');
+        var filterValue = $(this).attr('data-filter');
+        $grid.isotope({
+          filter: filterValue
+        });
+      });
+      var $grid = $('.special-list').isotope({
+        itemSelector: '.special-grid'
+      });
+    });
+  }catch (e){
+    console.log("Container.imagesLoaded(function () 这里 try")
+  }
 
 	/* ..............................................
 	   BaguetteBox
 	   ................................................. */
 
-	baguetteBox.run('.tz-gallery', {
-		animation: 'fadeIn',
-		noScrollbars: true
-	});
+  try {
+    baguetteBox.run('.tz-gallery', {
+      animation: 'fadeIn',
+      noScrollbars: true
+    });
+  }catch (e){
+    console.log('BaguetteBox 这里 try')
+  }
 
 	/* ..............................................
 	   Offer Box

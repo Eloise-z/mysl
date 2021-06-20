@@ -25,6 +25,7 @@
 @import url(code_animate.css);
 @import url(bootsnav.css);
 @import url(owl.carousel.min.css);
+@import url(owl.theme.default.min.css);
 @import url(jquery-ui.css);
 /*@import url(nice-select.css);*/
 @import url(baguetteBox.min.css);
@@ -2654,7 +2655,6 @@
 }
  .single-product-details p{
      font-size: 16px;
-     margin-bottom: 20px;
 }
  .single-product-details ul{
      display: inline-block;

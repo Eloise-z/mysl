@@ -21,6 +21,7 @@ const routes = [
       {
         path: '/shop',
         name: 'shop',
+        props: route => ({ query: route.query.typeId }),
         component: () => import(/* webpackChunkName: "index" */ '../views/shop/Shop')
       }
     ]

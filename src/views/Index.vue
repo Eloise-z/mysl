@@ -58,12 +58,12 @@
       <div class="row">
         <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
           <div class="offer-box-products" style="text-align: center;height: 360px;">
-            <img src="https://ww1.sinaimg.cn/bmiddle/9b697c38gy1gqts4i5ph4j20go0dfgnf.jpg" alt="没找到图片">
+            <img src="https://ww1.sinaimg.cn/bmiddle/9b697c38gy1gqts4i5ph4j20go0dfgnf.jpg" alt="">
           </div>
         </div>
         <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
           <div class="offer-box-products" style="text-align: center;height: 360px">
-            <img src="https://ww2.sinaimg.cn/bmiddle/9b697c38gy1gqts4hdxtfj20go0bsmya.jpg" alt="没找到图片">
+            <img src="https://ww2.sinaimg.cn/bmiddle/9b697c38gy1gqts4hdxtfj20go0bsmya.jpg" alt="">
           </div>
         </div>
       </div>
@@ -81,6 +81,7 @@
             <div class="border-orange">
               <h1 style="margin-left: 20px">乡村振兴专区</h1>
             </div>
+
             <p style="margin-left: 20px">助力乡村振兴，加快农业农村现代化</p>
           </div>
         </div>
@@ -121,6 +122,7 @@
   </div>
   <!-- End Categories -->
   <!--3列 推荐商品结束-->
+
   <!--2列 小广告开始-->
   <div class="box-add-products">
     <div class="container">
@@ -439,6 +441,7 @@
   </div>
   <!-- End Blog  -->
   <!--商品简介结束-->
+
   <!--图片滚动开始-->
   <!-- Start Instagram Feed  -->
   <div class="instagram-box">
@@ -530,6 +533,26 @@
 </template>
 
 <script>
+/*
+(function ($) {
+  'use strict'
+
+  var Container = $('.container')
+  Container.../assets/imagesLoaded(function () {
+    var portfolio = $('.special-menu')
+    portfolio.on('click', 'button', function () {
+      $(this).addClass('active').siblings().removeClass('active')
+      var filterValue = $(this).attr('data-filter')
+      $grid.isotope({
+        filter: filterValue
+      })
+    })
+    var $grid = $('.special-list').isotope({
+      itemSelector: '.special-grid'
+    })
+  })
+}(jQuery)) */
+
 export default {
   name: 'Index'
 }

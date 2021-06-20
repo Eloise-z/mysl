@@ -22,7 +22,7 @@
             <div class="footer-link">
               <h4>网站服务</h4>
               <ul>
-                <li><a href="#">关于我们</a></li>
+                <li><a href="contact-us.html">关于我们</a></li>
                 <li><a href="#">后台管理</a></li>
                 <li><a href="#">客户服务</a></li>
                 <li><a href="#">服务条款</a></li>
@@ -48,12 +48,15 @@
     </div>
   </footer>
   <!-- 底部结束  -->
+
   <!-- 版权开始  -->
   <div class="footer-copyright">
     <p class="footer-company">All Rights Reserved. &copy; 2021 <a href="#">软件工程学院-工程实践4</a>
       <a href="http://www.copot.cn/">工程实践系列网站</a></p>
   </div>
   <!-- 版权结束  -->
+
+  <a href="#" id="back-to-top" title="返回顶部" style="display: none;"><i class="fas fa-angle-double-up"></i></a>
 </template>
 
 <script>

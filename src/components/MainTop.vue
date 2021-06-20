@@ -17,10 +17,10 @@
                 <router-link to="/login"><i class="fa fa-user s_color"></i> 登录注册</router-link>
               </li>
               <li>
-                <router-link to=""><i class="fas fa-file-alt"></i> 订单</router-link>
+                <router-link to="/orderlist" append><i class="fas fa-file-alt"></i> 订单</router-link>
               </li>
               <li>
-                <router-link to=""><i class="fas fa-bell"></i> 系统消息</router-link>
+                <router-link to="/notice" append><i class="fas fa-bell"></i> 系统消息</router-link>
               </li>
             </ul>
           </div>
