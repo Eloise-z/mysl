@@ -25,13 +25,13 @@
             <li class="dropdown">
               <a class="nav-link dropdown-toggle arrow" data-toggle="dropdown" href="#">现货商品</a>
               <ul class="dropdown-menu">
-                <li><router-link :to="{ path: '/shop-detail', query: { typeId: '1' }}">粮油</router-link></li>
-                <li><router-link :to="{ path: '/shop-detail', query: { typeId: '2' }}">果蔬</router-link></li>
-                <li><router-link :to="{ path: '/shop-detail', query: { typeId: '3' }}">花卉</router-link></li>
-                <li><router-link :to="{ path: '/shop-detail', query: { typeId: '4' }}">稻谷</router-link></li>
-                <li><router-link :to="{ path: '/shop-detail', query: { typeId: '5' }}">小麦</router-link></li>
-                <li><router-link :to="{ path: '/shop-detail', query: { typeId: '6' }}">粮油</router-link></li>
-                <li><router-link :to="{ path: '/shop-detail', query: { typeId: '7' }}">粮油</router-link></li>
+                <li><router-link :to="{ path: '/shop', query: { typeId: '1' }}">粮油</router-link></li>
+                <li><router-link :to="{ path: '/shop', query: { typeId: '2' }}">果蔬</router-link></li>
+                <li><router-link :to="{ path: '/shop', query: { typeId: '3' }}">花卉</router-link></li>
+                <li><router-link :to="{ path: '/shop', query: { typeId: '4' }}">稻谷</router-link></li>
+                <li><router-link :to="{ path: '/shop', query: { typeId: '5' }}">小麦</router-link></li>
+                <li><router-link :to="{ path: '/shop', query: { typeId: '6' }}">粮油</router-link></li>
+                <li><router-link :to="{ path: '/shop', query: { typeId: '7' }}">粮油</router-link></li>
               </ul>
             </li>
             <li class="dropdown">

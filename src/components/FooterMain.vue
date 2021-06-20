@@ -56,12 +56,21 @@
   </div>
   <!-- 版权结束  -->
 
-  <a href="#" id="back-to-top" title="返回顶部" style="display: none;"><i class="fas fa-angle-double-up"></i></a>
+  <!-- 返回顶部 -->
+  <span title="返回顶部" id="back-to-top" style="display: none" @click="scrollTop"><i class="fas fa-angle-double-up"></i></span>
 </template>
 
 <script>
 export default {
-  name: 'FooterMain'
+  name: 'FooterMain',
+  methods: {
+    scrollTop () {
+      $('html, body').animate({
+        scrollTop: 0
+      }, 600)
+      return false
+    }
+  }
 }
 </script>
 
