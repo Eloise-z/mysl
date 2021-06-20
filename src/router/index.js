@@ -69,6 +69,11 @@ const routes = [
         path: '/findpwd',
         name: 'findpwd',
         component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/FindPwd')
+      },
+      {
+        path: '/tour',
+        name: 'tour',
+        component: () => import(/* webpackChunkName: "my-account" */ '../views/Tour')
       }
     ]
   }
