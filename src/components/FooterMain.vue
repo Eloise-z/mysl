@@ -22,7 +22,7 @@
             <div class="footer-link">
               <h4>网站服务</h4>
               <ul>
-                <li><a href="contact-us.html">关于我们</a></li>
+                <li><a href="#">关于我们</a></li>
                 <li><a href="#">后台管理</a></li>
                 <li><a href="#">客户服务</a></li>
                 <li><a href="#">服务条款</a></li>

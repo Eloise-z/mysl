@@ -22,13 +22,13 @@ const routes = [
         path: '/shop',
         name: 'shop',
         props: route => ({ query: route.query.typeId }),
-        component: () => import(/* webpackChunkName: "index" */ '../views/shop/Shop')
+        component: () => import(/* webpackChunkName: "shop" */ '../views/shop/Shop')
       },
       {
         path: '/shop-detail',
         name: 'shop-detail',
         props: route => ({ query: route.query.goodId }),
-        component: () => import(/* webpackChunkName: "index" */ '../views/shop/ShopDetail')
+        component: () => import(/* webpackChunkName: "shop" */ '../views/shop/ShopDetail')
       },
       {
         path: '/my-account',
@@ -83,12 +83,12 @@ const routes = [
       {
         path: '/date-product',
         name: 'date-product',
-        component: () => import(/* webpackChunkName: "date-product" */ '../views/data-product/DateProduct')
+        component: () => import(/* webpackChunkName: "shop" */ '../views/data-product/DateProduct')
       },
       {
         path: '/landmark',
         name: 'landmark',
-        component: () => import(/* webpackChunkName: "landmark" */ '../views/land-mark/LandMark')
+        component: () => import(/* webpackChunkName: "farm" */ '../views/land-mark/LandMark')
       },
       {
         path: '/tour-detail',
@@ -98,22 +98,27 @@ const routes = [
       {
         path: '/wishlist',
         name: 'wishlist',
-        component: () => import(/* webpackChunkName: "tour" */ '../views/order/WishList')
+        component: () => import(/* webpackChunkName: "order" */ '../views/order/WishList')
       },
       {
         path: '/my-farm',
         name: 'my-farm',
-        component: () => import(/* webpackChunkName: "tour" */ '../views/farm/MyFarm')
+        component: () => import(/* webpackChunkName: "farm" */ '../views/farm/MyFarm')
       },
       {
         path: '/order-generate',
         name: 'order-generate',
-        component: () => import(/* webpackChunkName: "tour" */ '../views/order/OrderGenerate')
+        component: () => import(/* webpackChunkName: "order" */ '../views/order/OrderGenerate')
       },
       {
         path: '/order-review',
         name: 'order-review',
-        component: () => import(/* webpackChunkName: "tour" */ '../views/order/OrderReview')
+        component: () => import(/* webpackChunkName: "order" */ '../views/order/OrderReview')
+      },
+      {
+        path: '/order-detail',
+        name: 'order-detail',
+        component: () => import(/* webpackChunkName: "order" */ '../views/order/OrderDetail')
       }
     ]
   }

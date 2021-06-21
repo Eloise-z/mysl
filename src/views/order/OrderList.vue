@@ -52,7 +52,7 @@
               <div class="col-md-3"><router-link to="/order-review">评价</router-link></div>
               <div class="col-md-3"><a href="#">再次购买</a></div>
               <div class="col-md-3"><a href="#">删除订单</a></div>
-              <div class="col-md-3"><a href="order-detail.html">查看详情</a></div>
+              <div class="col-md-3"><router-link to="/order-detail">查看详情</router-link></div>
             </div>
           </div>
         </div>
