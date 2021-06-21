@@ -14,7 +14,7 @@
                   aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-bars"></i>
           </button>
-          <router-link class="navbar-brand" to="#"><img src="../assets/images/logo11.png" class="logo" alt=""></router-link>
+          <router-link class="navbar-brand" to="/index"><img src="../assets/images/logo11.png" class="logo" alt=""></router-link>
         </div>
         <!-- End Header Navigation -->
 

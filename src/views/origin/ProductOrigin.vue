@@ -97,7 +97,7 @@
                     <div class="form-group">
                       <div class="submit-button text-center">
                         <!--<button class="btn hvr-hover" id="submit" type="submit">查询</button>-->
-                        <button class="btn hvr-hover" onclick="window.location.href = 'dateresult.html'">查询</button>
+                        <button class="btn hvr-hover" @click="$router.push('/origin-res')">查询</button>
                         <div id="msgSubmit" class="h3 text-center hidden"></div>
                         <div class="clearfix"></div>
                       </div>

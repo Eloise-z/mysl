@@ -167,9 +167,8 @@
 
                 <div class="col-md-12" style="margin-top: 20px;">
                   <div class="text-center">
-                    <button class="btn hvr-hover" onclick="window.location.href = '#'">打印页面</button>
+                    <button class="btn hvr-hover" onclick="alert('打印页面')">打印页面</button>
                   </div>
-
                 </div>
               </form>
             </div>

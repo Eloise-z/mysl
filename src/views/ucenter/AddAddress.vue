@@ -9,9 +9,15 @@
       <div class="row">
         <div class="col-lg-12">
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
-            <li class="breadcrumb-item"><router-link to="/my-account"> 用户中心 </router-link></li>
-            <li class="breadcrumb-item"><router-link to="/addr"> 地址管理 </router-link></li>
+            <li class="breadcrumb-item">
+              <router-link to="/index">首页</router-link>
+            </li>
+            <li class="breadcrumb-item">
+              <router-link to="/my-account"> 用户中心</router-link>
+            </li>
+            <li class="breadcrumb-item">
+              <router-link to="/addr"> 地址管理</router-link>
+            </li>
             <li class="breadcrumb-item active"> 地址添加编辑</li>
           </ul>
           <h2>地址添加/编辑</h2>
@@ -85,7 +91,7 @@
                 <input type="button" class="btn btn-success" value="提交">
               </div>
               <div class="col-auto">
-                <input type="button" class="btn" value="返回">
+                <input type="button" class="btn" @click="$router.back()" value="返回">
               </div>
             </div>
           </form>
@@ -97,21 +103,23 @@
 </template>
 
 <script>
+import { province as provinceData, city as cityData, area as areaData } from './addressData.json'
+
 export default {
   name: 'AddressAdd',
   data () {
     return {
-      provinceCode: '110100000000',
-      cityCode: '110100000000',
-      areaCode: '110101000000',
+      provinceCode: '510100000000',
+      cityCode: '510100000000',
+      areaCode: '510116000000',
 
-      provinceSelectCode: '110100000000',
-      citySelectCode: '110100000000',
-      areaSelectCode: '110101000000',
+      provinceSelectCode: '510100000000',
+      citySelectCode: '510100000000',
+      areaSelectCode: '510116000000',
 
-      province: '',
-      city: {},
-      area: []
+      province: provinceData,
+      city: cityData,
+      area: areaData
     }
   },
   mounted: function () {
@@ -127,8 +135,9 @@ export default {
   },
   methods: {
     loadAllInfo () {
+      /* 停止使用此方法获取源数据了，直接import就可以了
       var that = this
-      this.axios.get('../../addressData.json')
+      this.axios.get('./addressData.json')
         .then((resp) => {
           that.province = resp.data.province
           that.city = resp.data.city
@@ -136,7 +145,7 @@ export default {
         })
         .catch((error) => {
           console.log(error)
-        })
+        }) */
     },
     provinceSelected: function () {
       this.provinceCode = this.provinceSelectCode
