@@ -133,7 +133,12 @@ const routes = [
       {
         path: '/growing',
         name: 'growing',
-        component: () => import(/* webpackChunkName: "order" */ '../views/shop/Growing')
+        component: () => import(/* webpackChunkName: "shop" */ '../views/shop/Growing')
+      },
+      {
+        path: '/emergency',
+        name: 'emergency',
+        component: () => import(/* webpackChunkName: "order" */ '../views/land-mark/Emergency')
       }
     ]
   }

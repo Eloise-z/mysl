@@ -47,6 +47,7 @@
               <ul class="dropdown-menu">
                 <li><router-link :to="{ path: '/shop', query: { typeId: '9' }}">农产品</router-link></li>
                 <li><router-link to="/landmark">地理标志</router-link></li>
+                <li><router-link to="/emergency">应急·滞销</router-link></li>
               </ul>
             </li>
             <li class="nav-item"><router-link class="nav-link" to="/tour">文·旅</router-link></li>
