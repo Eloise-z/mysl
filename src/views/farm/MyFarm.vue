@@ -38,7 +38,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img src="../../assets/images/gallery-img-01.jpg" style="max-width: 150px">
+                <img src="../../assets/images/gallery-img-01.jpg" style="max-width: 150px" alt="图片不见了">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
@@ -53,9 +53,14 @@
             </div>
             <hr>
             <div class="row w-75 text-center" style="margin: 0 auto">
-              <div class="col-md-4"><a href="orderreview.html">评价</a></div>
-              <div class="col-md-4"><a href="shop-detail.html">查看农场详情</a></div>
-              <div class="col-md-4"><a href="growing.html">查看农场动态</a>
+              <div class="col-md-4">
+                <router-link to="/order-review">评价</router-link>
+              </div>
+              <div class="col-md-4">
+                <router-link to="/shop-detail">查看农场详情</router-link>
+              </div>
+              <div class="col-md-4">
+                <router-link to="/growing">查看农场动态</router-link>
               </div>
             </div>
           </div>
@@ -71,7 +76,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img src="../../assets/images/gallery-img-01.jpg" style="max-width: 150px">
+                <img src="../../assets/images/gallery-img-01.jpg" style="max-width: 150px" alt="图片不见了">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
@@ -86,9 +91,14 @@
             </div>
             <hr>
             <div class="row w-75 text-center" style="margin: 0 auto">
-              <div class="col-md-4"><a href="orderreview.html">评价</a></div>
-              <div class="col-md-4"><a href="shop-detail.html">查看农场详情</a></div>
-              <div class="col-md-4"><a href="growing.html">查看农场动态</a>
+              <div class="col-md-4">
+                <router-link to="/order-review">评价</router-link>
+              </div>
+              <div class="col-md-4">
+                <router-link to="/shop-detail">查看农场详情</router-link>
+              </div>
+              <div class="col-md-4">
+                <router-link to="/growing">查看农场动态</router-link>
               </div>
             </div>
           </div>
@@ -104,7 +114,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img src="../../assets/images/gallery-img-01.jpg" style="max-width: 150px">
+                <img src="../../assets/images/gallery-img-01.jpg" style="max-width: 150px" alt="图片不见了">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
@@ -119,9 +129,14 @@
             </div>
             <hr>
             <div class="row w-75 text-center" style="margin: 0 auto">
-              <div class="col-md-4"><a href="orderreview.html">评价</a></div>
-              <div class="col-md-4"><a href="shop-detail.html">查看农场详情</a></div>
-              <div class="col-md-4"><a href="growing.html">查看农场动态</a>
+              <div class="col-md-4">
+                <router-link to="/order-review">评价</router-link>
+              </div>
+              <div class="col-md-4">
+                <router-link to="/shop-detail">查看农场详情</router-link>
+              </div>
+              <div class="col-md-4">
+                <router-link to="/growing">查看农场动态</router-link>
               </div>
             </div>
           </div>
