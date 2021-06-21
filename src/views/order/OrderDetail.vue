@@ -9,9 +9,15 @@
       <div class="row">
         <div class="col-lg-12">
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
-            <li class="breadcrumb-item"><router-link to="/my-account"> 用户中心 </router-link></li>
-            <li class="breadcrumb-item"><router-link to="/order-list"> 订单列表 </router-link></li>
+            <li class="breadcrumb-item">
+              <router-link to="/index">首页</router-link>
+            </li>
+            <li class="breadcrumb-item">
+              <router-link to="/my-account"> 用户中心 </router-link>
+            </li>
+            <li class="breadcrumb-item">
+              <router-link to="/order-list"> 订单列表 </router-link>
+            </li>
             <li class="breadcrumb-item active"> 订单详情</li>
           </ul>
           <h2>订单详情</h2>
@@ -32,41 +38,41 @@
             </div>
             <div class="col-4">
               <div class="row">
-                <h3>订单编号：<span>210520100010001</span></h3>
+                <h3>订单编号：210520100010001</h3>
               </div>
               <div class="row">
-                <h3>创建时间：<span>2021-5-27 18:53:13</span></h3>
+                <h3>创建时间：2021-5-27 18:53:13</h3>
               </div>
               <div class="row">
-                <h3>唯一产品码：<span>XXXXXXXXXX</span></h3>
+                <h3>唯一产品码：XXXXXXXXXX</h3>
               </div>
               <div class="row">
-                <h3>物流号：<span>XXXXXXXXXX</span></h3>
+                <h3>物流号：XXXXXXXXXX</h3>
               </div>
             </div>
             <div class="col-4">
               <div class="row">
-                <h3>状态：<span>已付款</span></h3>
+                <h3>状态：已付款</h3>
               </div>
               <div class="row">
-                <h3>支付方式：<span>支付宝</span></h3>
+                <h3>支付方式：支付宝</h3>
               </div>
               <div class="row">
-                <h3>支付订单编号：<span>XXXXXXXXXX</span></h3>
+                <h3>支付订单编号：XXXXXXXXXX</h3>
               </div>
               <div class="row">
-                <h3>支付时间：<span>2021-5-27 21:53:13</span></h3>
+                <h3>支付时间：2021-5-27 21:53:13</h3>
               </div>
             </div>
             <div class="col-3">
               <div class="row">
-                <h3>应付金额：<span>￥</span><span>20.55</span></h3>
+                <h3>应付金额：￥20.55</h3>
               </div>
               <div class="row">
-                <h3>优惠金额：<span>￥</span><span>10.55</span></h3>
+                <h3>优惠金额：￥10.55</h3>
               </div>
               <div class="row">
-                <h3>实付金额：<span>￥</span><span>10.00</span></h3>
+                <h3>实付金额：￥10.00</h3>
               </div>
             </div>
           </div>
@@ -78,21 +84,22 @@
             </div>
             <div class="col-5">
               <div class="form-group">
-                <h3><span>[现货]</span><span>[乡村振兴]</span></h3>
+                <h3>[现货][乡村振兴]</h3>
               </div>
               <div class="form-group">
                 <h3>红富士苹果水果10斤新鲜现摘斤新鲜现斤新鲜现脆甜摘斤新级当季整箱山东省烟........................</h3>
               </div>
               <div class="form-group">
-                <h3>商品单价：<span>￥</span><span>20.55</span></h3>
+                <h3>商品单价：￥20.55</h3>
               </div>
               <div class="form-group">
-                <h3>商品数量：<span>1</span></h3>
+                <h3>商品数量：1</h3>
               </div>
             </div>
             <div class="col-2">
               <div class="row justify-content-end">
-                <input type="button" class="btn btn-info" id="cancelPay" value="确认收货" onclick="window.location.href='orderreview.html'">
+                <input type="button" class="btn btn-info" id="cancelPay" value="确认收货"
+                       onclick="window.location.href='orderreview.html'">
               </div>
             </div>
             <div class="col-1"></div>
@@ -100,29 +107,18 @@
           <hr>
           <div class="row">
             <div class="col-1"></div>
-            <div class="col-6">
+            <div class="col-5">
               <div class="form-group">
                 <div class="row"><h3>收货信息：</h3></div>
-                <div class="row">
-                  <h3><span>李四</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>15509080002</span></h3>
-                </div>
-                <div class="row">
-                  <h3><span>四川省</span> / <span>成都市</span> / <span>双流区</span></h3>
-                </div>
-                <div class="row">
-                  <h3><span>成都信息工程大学（航空港校区）</span></h3>
-                </div>
+                <div class="row"><h3>张三 / 15509080002</h3></div>
+                <div class="row"><h3>四川省 / 成都市 / 双流区</h3></div>
+                <div class="row"><h3>成都信息工程大学（航空港校区）</h3></div>
               </div>
             </div>
-            <div class="col-4">
-              <div class="row">
-                <h3>状态：<span>商家处理中</span></h3>
-              </div>
-              <div class="row">
-                <h3>备注：<span>请速发货！！！请速发货！！！请速发货！！！请速发货！！！请速发货！！！请速发货！！！</span></h3>
-              </div>
+            <div class="col-6">
+              <div class="row"><h3>状态：商家处理中</h3></div>
+              <div class="row"><h3>备注：请速发货！！！请速发货！！！请速发货！！！请速发货！！！请速发货！！！请速发货！！！</h3></div>
             </div>
-            <div class="col-1"></div>
           </div>
         </form>
       </div>
