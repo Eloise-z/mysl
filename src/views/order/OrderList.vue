@@ -34,7 +34,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img src="../../assets/images/gallery-img-01.jpg" style="max-width: 150px" alt="图片不见了">
+                <img src="src/assets/images/gallery-img-01.jpg" style="max-width: 150px" alt="图片不见了">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
@@ -66,7 +66,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img src="../../assets/images/gallery-img-01.jpg" style="max-width: 150px">
+                <img src="src/assets/images/gallery-img-01.jpg" style="max-width: 150px">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
@@ -98,7 +98,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img src="../../assets/images/gallery-img-01.jpg" style="max-width: 150px">
+                <img src="src/assets/images/gallery-img-01.jpg" style="max-width: 150px">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
@@ -130,7 +130,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img src="../../assets/images/gallery-img-01.jpg" style="max-width: 150px">
+                <img src="src/assets/images/gallery-img-01.jpg" style="max-width: 150px">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">

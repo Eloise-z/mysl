@@ -8,7 +8,6 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-
           <ul class="breadcrumb">
             <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
             <li class="breadcrumb-item"><a href="#"> 商品列表 </a></li>
@@ -86,7 +85,7 @@
             <div class="col-xl-12">
               <div class="price-box-bar">
                 <div class="cart-and-bay-btn">
-                  <a class="btn hvr-hover" style="margin-right: 5px" data-fancybox-close="" href="order-generate.html">立即购买</a>
+                  <router-link class="btn hvr-hover" style="margin-right: 5px" data-fancybox-close="" to="/order-generate">立即购买</router-link>
                   <a class="btn hvr-hover" data-fancybox-close="" href="#">加入收藏</a>
                 </div>
               </div>

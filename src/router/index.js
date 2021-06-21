@@ -38,7 +38,7 @@ const routes = [
       {
         path: '/order-list',
         name: 'orderList',
-        component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/OrderList')
+        component: () => import(/* webpackChunkName: "my-account" */ '../views/order/OrderList')
       },
       {
         path: '/modifypwd',
@@ -104,6 +104,11 @@ const routes = [
         path: '/my-farm',
         name: 'my-farm',
         component: () => import(/* webpackChunkName: "tour" */ '../views/farm/MyFarm')
+      },
+      {
+        path: '/order-generate',
+        name: 'order-generate',
+        component: () => import(/* webpackChunkName: "tour" */ '../views/order/OrderGenerate')
       }
     ]
   }
