@@ -25,12 +25,12 @@
   <div class="#">
     <div class="container">
       <div class="introduce-landemark">
-        <div class="row">
+        <div class="row mt-5">
           <div class="col-md-12" style="text-align: center">
             <img style="max-width: 200px" src="../../assets/images/landmark.png" alt="图片不见了">
           </div>
           <div class="col-md-12" style="font-size: 16px; margin-top: 10px">
-            <p>
+            <p style="font-size: 18px">
               世界贸易组织在有关贸易的知识产权协议中，对地理标志的定义为：地理标志是鉴别原产于一成员国领土或该领土的一个地区或一地点的产品的标志，该标志产品的质量、声誉或其他确定的特性应主要决定于其原产地。因此，地理标志主要用于鉴别某一产品的产地，即是该产品的产地标志。地理标志也是知识产权的一种。</p>
           </div>
         </div>
