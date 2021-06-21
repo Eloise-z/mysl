@@ -9,8 +9,12 @@
       <div class="row">
         <div class="col-lg-12">
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
-            <li class="breadcrumb-item"><a href="#"> 商品列表 </a></li>
+            <li class="breadcrumb-item">
+              <router-link to="/index">首页</router-link>
+            </li>
+            <li class="breadcrumb-item">
+              <router-link to="/shop"> 商品列表</router-link>
+            </li>
             <li class="breadcrumb-item active"> 商品详情</li>
           </ul>
           <h2>XXX</h2>
@@ -85,7 +89,9 @@
             <div class="col-xl-12">
               <div class="price-box-bar">
                 <div class="cart-and-bay-btn">
-                  <router-link class="btn hvr-hover" style="margin-right: 5px" data-fancybox-close="" to="/order-generate">立即购买</router-link>
+                  <router-link class="btn hvr-hover" style="margin-right: 5px" data-fancybox-close=""
+                               to="/order-generate">立即购买
+                  </router-link>
                   <a class="btn hvr-hover" data-fancybox-close="" href="#">加入收藏</a>
                 </div>
               </div>
@@ -109,7 +115,7 @@
               </div>
             </div>
             <hr>
-            <a href="growing.html" class="btn hvr-hover">查看商品动态</a>
+            <router-link to="/growing" class="btn hvr-hover">查看商品动态</router-link>
           </div>
         </div>
       </div>
