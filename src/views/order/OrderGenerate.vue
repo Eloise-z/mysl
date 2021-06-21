@@ -133,8 +133,7 @@
                   <input type="button" class="btn btn-info" id="cancelPay" value="取消">
                 </div>
                 <div class="col-auto">
-                  <input type="button" class="btn btn-success" id="pay" value="支付"
-                         onclick="window.location.href='paycode.html'">
+                  <input type="button" class="btn btn-success" id="pay" value="支付" @click="$router.push('/pay-page')">
                 </div>
               </div>
             </div>
