@@ -172,6 +172,8 @@
 </template>
 
 <script>
+import '../../assets/css/aricommen.css'
+
 export default {
   name: 'Growing'
 }
