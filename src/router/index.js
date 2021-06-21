@@ -139,6 +139,11 @@ const routes = [
         path: '/emergency',
         name: 'emergency',
         component: () => import(/* webpackChunkName: "rural" */ '../views/rural/Emergency')
+      },
+      {
+        path: '/emeradd',
+        name: 'emeradd',
+        component: () => import(/* webpackChunkName: "rural" */ '../views/rural/EmerAdd')
       }
     ]
   }

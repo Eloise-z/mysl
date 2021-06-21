@@ -27,7 +27,7 @@
         <!--左侧发布-->
         <div class="col-lg-4" style="text-align: center;font-size: 40px">
           <div class="put-eminfo">
-            <a role="button" href="emeradd.html" class="btn btn-primary w-75">发布滞销信息</a>
+            <router-link to="/emeradd" class="btn btn-primary w-75">发布滞销信息</router-link>
           </div>
         </div>
         <div class="col-lg-8" style="text-align: center;">
