@@ -3,7 +3,7 @@
 *Date: 2021-06-21 01:33
 -->
 <template>
-  <!--页面标题-->
+  <!--面包屑开始-->
   <div class="all-title-box">
     <div class="container">
       <div class="row">
@@ -17,6 +17,7 @@
       </div>
     </div>
   </div>
+  <!--面包屑结束-->
 
   <!--主体部分-->
   <div class="datebody" style="margin: 100px">

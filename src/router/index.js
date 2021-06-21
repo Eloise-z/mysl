@@ -83,7 +83,12 @@ const routes = [
       {
         path: '/origin',
         name: 'origin',
-        component: () => import(/* webpackChunkName: "shop" */ '../views/origin/ProductOrigin')
+        component: () => import(/* webpackChunkName: "origin" */ '../views/origin/ProductOrigin')
+      },
+      {
+        path: '/origin-res',
+        name: 'origin-res',
+        component: () => import(/* webpackChunkName: "origin" */ '../views/origin/OriginRes')
       },
       {
         path: '/landmark',
@@ -126,7 +131,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "order" */ '../views/order/PayPage')
       },
       {
-        path: '/pay-result',
+        path: '/pay-res',
         name: 'pay-success',
         component: () => import(/* webpackChunkName: "order" */ '../views/order/PaySuccess')
       },

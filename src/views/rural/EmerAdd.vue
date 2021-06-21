@@ -63,11 +63,9 @@
               <button type="submit" class="btn btn-success mr-4">提交</button>
               <button type="button" class="btn">返回</button>
             </div>
-
           </form>
         </div>
       </div>
-
     </div>
   </div>
 </template>
