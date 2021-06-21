@@ -36,7 +36,8 @@
           <hr>
           <div class="row" style="margin-bottom: 50px; margin-top: 50px">
             <div class="paycode" style="margin: 0 auto">
-              <img src="../../assets/images/paycode.png">
+              <h3>测试阶段，点击图片即视为支付</h3>
+              <img src="../../assets/images/paycode.png" @click="$router.push('/pay-success')" alt="图片找不到了">
             </div>
           </div>
           <hr>
@@ -49,7 +50,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>

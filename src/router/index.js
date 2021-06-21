@@ -124,6 +124,11 @@ const routes = [
         path: '/pay-page',
         name: 'pay-page',
         component: () => import(/* webpackChunkName: "order" */ '../views/order/PayPage')
+      },
+      {
+        path: '/pay-success',
+        name: 'pay-success',
+        component: () => import(/* webpackChunkName: "order" */ '../views/order/PaySuccess')
       }
     ]
   }
