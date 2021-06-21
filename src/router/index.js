@@ -99,6 +99,11 @@ const routes = [
         path: '/wishlist',
         name: 'wishlist',
         component: () => import(/* webpackChunkName: "tour" */ '../views/order/WishList')
+      },
+      {
+        path: '/my-farm',
+        name: 'my-farm',
+        component: () => import(/* webpackChunkName: "tour" */ '../views/farm/MyFarm')
       }
     ]
   }

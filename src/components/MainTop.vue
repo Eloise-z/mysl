@@ -27,7 +27,7 @@
                 <a href="javascript:void(0);" title="退出" @click="logout()" class="ml5">退出</a>
               </li>
               <li>
-                <router-link to=""><i class="fas fa-file-alt"></i> 订单</router-link>
+                <router-link to="/order-list"><i class="fas fa-file-alt"></i> 订单</router-link>
               </li>
               <li>
                 <router-link to="/notice"><i class="fas fa-bell"></i> 系统消息</router-link>

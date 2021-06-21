@@ -38,7 +38,7 @@
               <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">在线农场</a>
               <ul class="dropdown-menu">
                 <li><router-link :to="{ path: '/shop', query: { typeId: '8' }}">农场集市</router-link></li>
-                <li><a href="shop-detail.html">我的农场</a></li>
+                <li><router-link to="/my-farm">我的农场</router-link></li>
               </ul>
             </li>
 
