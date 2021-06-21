@@ -78,12 +78,12 @@ const routes = [
       {
         path: '/search',
         name: 'search',
-        component: () => import(/* webpackChunkName: "search" */ '../views/search/Search')
+        component: () => import(/* webpackChunkName: "shop" */ '../views/shop/Search')
       },
       {
-        path: '/date-product',
-        name: 'date-product',
-        component: () => import(/* webpackChunkName: "shop" */ '../views/data-product/DateProduct')
+        path: '/origin',
+        name: 'origin',
+        component: () => import(/* webpackChunkName: "shop" */ '../views/origin/ProductOrigin')
       },
       {
         path: '/landmark',
@@ -126,7 +126,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "order" */ '../views/order/PayPage')
       },
       {
-        path: '/pay-success',
+        path: '/pay-result',
         name: 'pay-success',
         component: () => import(/* webpackChunkName: "order" */ '../views/order/PaySuccess')
       },

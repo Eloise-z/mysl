@@ -114,7 +114,7 @@
 
 <script>
 export default {
-  name: 'DateProduct'
+  name: 'ProductOrigin'
 }
 </script>
 
