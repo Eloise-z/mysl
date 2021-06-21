@@ -90,7 +90,7 @@
                           </div>
                           <img src="../../assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
                           <div class="mask-icon">
-                            <a class="cart" href="shop-detail.html">查看详情</a>
+                            <router-link class="cart" to="/shop-detail">查看详情</router-link>
                           </div>
                         </div>
                         <div class="why-text">
@@ -107,7 +107,7 @@
                           </div>
                           <img src="../../assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
                           <div class="mask-icon">
-                            <a class="cart" href="shop-detail.html">查看详情</a>
+                            <router-link class="cart" to="/shop-detail">查看详情</router-link>
                           </div>
                         </div>
                         <div class="why-text">
@@ -124,7 +124,7 @@
                           </div>
                           <img src="../../assets/images/img-pro-01.jpg" class="img-fluid" alt="Image">
                           <div class="mask-icon">
-                            <a class="cart" href="shop-detail.html">查看详情</a>
+                            <router-link class="cart" to="/shop-detail">查看详情</router-link>
                           </div>
                         </div>
                         <div class="why-text">
@@ -141,7 +141,7 @@
                           </div>
                           <img src="../../assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
                           <div class="mask-icon">
-                            <a class="cart" href="shop-detail.html">查看详情</a>
+                            <router-link class="cart" to="/shop-detail">查看详情</router-link>
                           </div>
                         </div>
                         <div class="why-text">
@@ -158,7 +158,7 @@
                           </div>
                           <img src="../../assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
                           <div class="mask-icon">
-                            <a class="cart" href="shop-detail.html">查看详情</a>
+                            <router-link class="cart" to="/shop-detail">查看详情</router-link>
                           </div>
                         </div>
                         <div class="why-text">
@@ -175,7 +175,7 @@
                           </div>
                           <img src="../../assets/images/img-pro-01.jpg" class="img-fluid" alt="Image">
                           <div class="mask-icon">
-                            <a class="cart" href="shop-detail.html">查看详情</a>
+                            <router-link class="cart" to="/shop-detail">查看详情</router-link>
                           </div>
                         </div>
                         <div class="why-text">
@@ -192,7 +192,7 @@
                           </div>
                           <img src="../../assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
                           <div class="mask-icon">
-                            <a class="cart" href="shop-detail.html">查看详情</a>
+                            <router-link class="cart" to="/shop-detail">查看详情</router-link>
                           </div>
                         </div>
                         <div class="why-text">
@@ -209,7 +209,7 @@
                           </div>
                           <img src="../../assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
                           <div class="mask-icon">
-                            <a class="cart" href="shop-detail.html">查看详情</a>
+                            <router-link class="cart" to="/shop-detail">查看详情</router-link>
                           </div>
                         </div>
                         <div class="why-text">
