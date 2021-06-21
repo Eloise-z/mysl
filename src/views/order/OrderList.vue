@@ -49,7 +49,7 @@
             </div>
             <hr>
             <div class="row w-75 text-center" style="margin: 0 auto">
-              <div class="col-md-3"><a href="orderreview.html">评价</a></div>
+              <div class="col-md-3"><router-link to="/order-review">评价</router-link></div>
               <div class="col-md-3"><a href="#">再次购买</a></div>
               <div class="col-md-3"><a href="#">删除订单</a></div>
               <div class="col-md-3"><a href="order-detail.html">查看详情</a></div>
@@ -66,7 +66,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img src="src/assets/images/gallery-img-01.jpg" style="max-width: 150px">
+                <img src="src/assets/images/gallery-img-01.jpg" style="max-width: 150px" alt="图片不见了">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
@@ -98,7 +98,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img src="src/assets/images/gallery-img-01.jpg" style="max-width: 150px">
+                <img src="src/assets/images/gallery-img-01.jpg" style="max-width: 150px" alt="图片不见了">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
@@ -130,7 +130,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img src="src/assets/images/gallery-img-01.jpg" style="max-width: 150px">
+                <img src="src/assets/images/gallery-img-01.jpg" style="max-width: 150px" alt="图片不见了">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
@@ -162,7 +162,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img src="src/assets/images/gallery-img-01.jpg" style="max-width: 150px">
+                <img src="src/assets/images/gallery-img-01.jpg" style="max-width: 150px" alt="图片不见了">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">

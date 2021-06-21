@@ -109,6 +109,11 @@ const routes = [
         path: '/order-generate',
         name: 'order-generate',
         component: () => import(/* webpackChunkName: "tour" */ '../views/order/OrderGenerate')
+      },
+      {
+        path: '/order-review',
+        name: 'order-review',
+        component: () => import(/* webpackChunkName: "tour" */ '../views/order/OrderReview')
       }
     ]
   }
