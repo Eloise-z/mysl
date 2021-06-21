@@ -407,8 +407,6 @@ export default {
       indexApi.getIndex().then((response) => {
         this.ruralList = response.data.rural
         this.bestSellersList = response.data.bestSellers
-        console.log('ruralList:' + this.ruralList)
-        console.log('bestSellersList:' + this.bestSellersList)
       })
     }
   }

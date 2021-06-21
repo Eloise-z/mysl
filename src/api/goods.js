@@ -1,11 +1,13 @@
 import request from '@/utils/request'
+
 export default {
 
   // 商品列表
-  getIndex() {
+  getGoodsList (searchObj) {
     return request({
       url: '/product/front/goodsinfo/list',
-      method: 'get'
+      method: 'post',
+      params: searchObj
     })
   }
 }

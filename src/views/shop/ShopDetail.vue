@@ -8,13 +8,10 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
+
           <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <router-link to="/index">首页</router-link>
-            </li>
-            <li class="breadcrumb-item">
-              <router-link to="/shop"> 商品列表</router-link>
-            </li>
+            <li class="breadcrumb-item"><a href="#">首页</a></li>
+            <li class="breadcrumb-item"><a href="#"> 商品列表 </a></li>
             <li class="breadcrumb-item active"> 商品详情</li>
           </ul>
           <h2>XXX</h2>
@@ -76,10 +73,10 @@
             <p class="goods-info-detail">服务支持：<span style="color: #bd1e22"><i
               class="fas fa-american-sign-language-interpreting"></i>放心购</span></p>
             <p style="font-size: 16px" class="goods-info-detail">付款支持：
-              <span><i class="fab fa-weixin"></i>微信支付 </span>
-              <span><i class="fab fa-alipay"></i>支付宝支付 </span>
-              <span><i class="fab fa-qq"></i>QQ支付 </span>
-              <span><i class="fab fa-cc-apple-pay"></i>苹果支付 </span>
+              <span><i class="fab fa-weixin"></i>微信支付</span>
+              <span><i class="fab fa-alipay"></i>支付宝支付</span>
+              <span><i class="fab fa-qq"></i>QQ支付</span>
+              <span><i class="fab fa-cc-apple-pay"></i>苹果支付</span>
               <span><i class="fas fa-credit-card"></i>银行卡支付</span>
             </p>
             <h4>所属分类</h4>
@@ -89,9 +86,7 @@
             <div class="col-xl-12">
               <div class="price-box-bar">
                 <div class="cart-and-bay-btn">
-                  <router-link class="btn hvr-hover" style="margin-right: 5px" data-fancybox-close=""
-                               to="/order-generate">立即购买
-                  </router-link>
+                  <router-link class="btn hvr-hover" style="margin-right: 5px" data-fancybox-close="" to="/order-generate">立即购买</router-link>
                   <a class="btn hvr-hover" data-fancybox-close="" href="#">加入收藏</a>
                 </div>
               </div>
@@ -100,7 +95,6 @@
         </div>
 
       </div>
-
       <!--商品详情-->
       <div class="row my-5">
         <div class="shop-detail-content card card-outline-secondary col-md-12">

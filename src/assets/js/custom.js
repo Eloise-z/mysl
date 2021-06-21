@@ -1,3 +1,4 @@
+import baguetteBox from './baguetteBox.min'
 (function ($) {
 	"use strict";
 

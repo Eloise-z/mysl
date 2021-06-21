@@ -9,20 +9,34 @@
       <div class="col-md-12">
         <div class="dowebok" id="dowebok" :class="{'right-panel-active' : isRegisterShow}">
           <div class="form-container sign-up-container">
-            <form action="#">
+            <form>
               <h1>注册</h1>
               <div class="social-container">
                 <a href="#" class="social"><i class="fab fa-weixin"></i></a>
                 <a href="#" class="social"><i class="fab fa-qq"></i></a>
-                <!--  <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                  <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>-->
               </div>
               <span>或使用邮箱注册</span>
-              <input type="text" placeholder="姓名">
-              <input type="email" placeholder="电子邮箱">
-              <input type="password" placeholder="密码">
-              <input type="password" placeholder="确认密码">
-              <button>注册</button>
+              <div class="row">
+                <div class="col-12">
+                  <input type="text" id="userName" v-model="user.userName" placeholder="用户名">
+                </div>
+                <div class="col-12">
+                  <input type="text" v-model="user.userMail" placeholder="电子邮箱">
+                </div>
+                <div class="col-6">
+                  <input v-show="showCode" type="text" id="code" v-model="user.code" placeholder="验证码">
+                </div>
+                <div class="col-6">
+                  <button type="button" class="btn btn-outline-success mt-2 " @click="sendMail();showCode=true">发送验证码
+                  </button>
+                </div>
+                <div class="col-12">
+                  <input type="password" v-model="user.userPwd" placeholder="密码">
+                </div>
+                <div class="col-12">
+                  <button type="button" @click="register()">注册</button>
+                </div>
+              </div>
             </form>
           </div>
           <div class="form-container sign-in-container">
@@ -31,10 +45,9 @@
               <div class="social-container">
                 <a href="#" class="social"><i class="fab fa-weixin"></i></a>
                 <a href="#" class="social"><i class="fab fa-qq"></i></a>
-                <!-- <a href="#" class="social"><i class="fab fa-alipay"></i></a>-->
               </div>
               <span>或使用您的帐号</span>
-              <input type="text" v-model="user.userTel" name="userTel" placeholder="用户名">
+              <input type="text" v-model="user.userMail" name="userMail" placeholder="邮箱">
               <input type="password" v-model="user.userPwd" name="userPwd" placeholder="密码">
               <router-link to="/findpwd">忘记密码？</router-link>
               <button type="button" @click="submitLogin()">登录</button>
@@ -65,20 +78,32 @@
 import cookie from 'js-cookie'
 // 引入调用login.js文件
 import loginApi from '@/api/login'
-
+// function checkCode(){
+//   var code = document.getElementById("code").nodeValue
+//   var syscode = this.user.sysCode;
+//   if(code != syscode){
+//     alert("验证码错误！")
+//     return;
+//   }
+// }
 export default {
   layout: 'sign',
 
   data () {
     return {
-      // 封装登录的手机号和密码对象
+      // 封装登录和注册对象
       user: {
-        userTel: '',
-        userPwd: ''
+        userMail: '', // 邮箱
+        userPwd: '', // 密码
+        userName: '', // 用户名
+        code: '', // 用户输入的验证码
+        sysCode: '' // 系统发送的验证码
       },
       // 获取到用户信息  用于显示头部
       loginInfo: {},
-      isRegisterShow: false
+      isRegisterShow: false,
+      sign: 0, // 表示这是注册
+      showCode: false // 注册-验证码展示
     }
   },
 
@@ -88,27 +113,40 @@ export default {
       // 调用登录接口 返回token字符串
       loginApi.userLogin(this.user)
         .then(response => {
-          // 获取到的token字符串放入cookie
-          // 1.cookie名称，2.token参数值，3.作用范围-在什么样的请求中
-          cookie.set('agriculture_token', response.data.token, { domain: 'localhost' })
-          // 调用接口 根据token解析出用户信息 给首页用
-          loginApi.getUserInfo()
-            .then(response => {
-              this.loginInfo = response.data.userInfo
-              // 获取返回的用户信息  放入cookie
-              cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
-              // 路由跳转 跳转守页面
-              this.$router.push({ path: '/' })
-            })
+          alert(response.data.msg)
+          if (response.data.code === 0) { // 登录成功
+            // 获取到的token字符串放入cookie
+            // 1.cookie名称，2.token参数值，3.作用范围-在什么样的请求中
+            cookie.set('agriculture_token', response.data.token, { domain: 'localhost' })
+            // 调用接口 根据token解析出用户信息 给首页用
+            loginApi.getUserInfo()
+              .then(response => {
+                this.loginInfo = response.data.userInfo
+                // 获取返回的用户信息  放入cookie
+                cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
+                // 路由跳转 跳转守页面
+                this.$router.push({ path: '/' })
+              })
+          } else { // 登录失败
+            // 路由跳转 跳转页面
+            // this.$router.push({ path: '/login' })
+          }
         })
     },
-
-    checkPhone (rule, value, callback) {
-      // debugger
-      if (!(/^1[34578]\d{9}$/.test(value))) {
-        return callback(new Error('手机号码格式不正确'))
-      }
-      return callback()
+    // 注册-发送邮件
+    sendMail () {
+      loginApi.sendEmail(this.user.userMail, this.sign).then((response) => {
+        alert(response.data.msg)
+        this.user.sysCode = response.data.code
+      })
+    },
+    // 注册
+    register () {
+      loginApi.userRegister(this.user).then((response) => {
+        // 路由跳转 跳转登录页面
+        alert(response.data.msg)
+        this.$router.push({ path: '/login' })
+      })
     }
   }
 }
