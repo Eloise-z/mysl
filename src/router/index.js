@@ -88,7 +88,7 @@ const routes = [
       {
         path: '/landmark',
         name: 'landmark',
-        component: () => import(/* webpackChunkName: "farm" */ '../views/land-mark/LandMark')
+        component: () => import(/* webpackChunkName: "rural" */ '../views/rural/LandMark')
       },
       {
         path: '/tour-detail',
@@ -138,7 +138,7 @@ const routes = [
       {
         path: '/emergency',
         name: 'emergency',
-        component: () => import(/* webpackChunkName: "order" */ '../views/land-mark/Emergency')
+        component: () => import(/* webpackChunkName: "rural" */ '../views/rural/Emergency')
       }
     ]
   }
