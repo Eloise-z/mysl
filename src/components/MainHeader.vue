@@ -23,29 +23,29 @@
           <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
             <li class="nav-item active"><router-link to="/index" class="nav-link">首页</router-link></li>
             <li class="dropdown">
-              <a class="nav-link dropdown-toggle arrow" data-toggle="dropdown" href="#">现货商品</a>
+              <router-link class="nav-link dropdown-toggle arrow" data-toggle="dropdown" :to="{path:'/shop',query: {goodState: 0}}">现货商品</router-link>
               <ul class="dropdown-menu">
-                <li><router-link :to="{ path: '/shop', query: { typeId: '1' }}">粮油</router-link></li>
-                <li><router-link :to="{ path: '/shop', query: { typeId: '2' }}">果蔬</router-link></li>
-                <li><router-link :to="{ path: '/shop', query: { typeId: '3' }}">花卉</router-link></li>
-                <li><router-link :to="{ path: '/shop', query: { typeId: '4' }}">稻谷</router-link></li>
-                <li><router-link :to="{ path: '/shop', query: { typeId: '5' }}">小麦</router-link></li>
-                <li><router-link :to="{ path: '/shop', query: { typeId: '6' }}">粮油</router-link></li>
-                <li><router-link :to="{ path: '/shop', query: { typeId: '7' }}">粮油</router-link></li>
+                <li><router-link :to="{path:'/shop',query: {typeId: 1,goodState: 0}}">粮油</router-link></li>
+                <li><router-link :to="{path:'/shop',query: {typeId: 2,goodState: 0}}">果蔬</router-link></li>
+                <li><router-link :to="{path:'/shop',query: {typeId: 3,goodState: 0}}">花卉</router-link></li>
+                <li><router-link :to="{path:'/shop',query: {typeId: 22,goodState: 0}}">林产品</router-link></li>
+                <li><router-link :to="{path:'/shop',query: {typeId: 25,goodState: 0}}">畜牧产品</router-link></li>
+                <li><router-link :to="{path:'/shop',query: {typeId: 26,goodState: 0}}">水产品</router-link></li>
+                <li><router-link :to="{path:'/shop',query: {typeId: 37,goodState: 0}}">其他农副产品</router-link></li>
               </ul>
             </li>
             <li class="dropdown">
               <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">在线农场</a>
               <ul class="dropdown-menu">
-                <li><router-link :to="{ path: '/shop', query: { typeId: '8' }}">农场集市</router-link></li>
-                <li><router-link to="/my-farm">我的农场</router-link></li>
+                <li><router-link :to="{path:'/shop',query: {goodState: 1}}">农场集市</router-link></li>
+                <li><router-link :to="{path:'/my-farm'}">我的农场</router-link></li>
               </ul>
             </li>
 
             <li class="dropdown">
               <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">乡村振兴</a>
               <ul class="dropdown-menu">
-                <li><router-link :to="{ path: '/shop', query: { typeId: '9' }}">农产品</router-link></li>
+                <li><router-link :to="{path:'/shop',query: {typeId: 13}}">农产品</router-link></li>
                 <li><router-link to="/landmark">地理标志</router-link></li>
                 <li><router-link to="/emergency">应急·滞销</router-link></li>
               </ul>

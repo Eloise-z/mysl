@@ -63,7 +63,8 @@
               </div>
               <div class="row p-3">
                 <div class="col-3"></div>
-                <div class="col-9"><textarea class="form-control" placeholder="具体收货地址"></textarea></div>
+                <div class="col-9"><textarea class="form-control" v-model="shipInfo.address"
+                                             placeholder="具体收货地址"></textarea></div>
               </div>
             </div>
             <hr>
@@ -76,19 +77,19 @@
                   <div class="col-md-2" style="text-align: right">
                     <p style="display: inline-block; line-height: 38px;margin: 0;font-size: 16px">收货人姓名</p>
                   </div>
-                  <div class="col-md-6"><input class="form-control address-input"></div>
+                  <div class="col-md-6"><input v-model="shipInfo.name" class="form-control address-input"></div>
                 </div>
                 <div class="row">
                   <div class="col-md-2" style="text-align: right">
                     <p style="display: inline-block; line-height: 38px;margin: 0;font-size: 16px">收货人手机号</p>
                   </div>
-                  <div class="col-md-6"><input class="form-control address-input"></div>
+                  <div class="col-md-6"><input v-model="shipInfo.tel" class="form-control address-input"></div>
                 </div>
               </div>
             </div>
             <div class="row form-group justify-content-center" style="margin-top: 20px;">
               <div class="col-auto">
-                <input type="button" class="btn btn-success" value="提交">
+                <input type="button" class="btn btn-success" value="提交" @click="submit()">
               </div>
               <div class="col-auto">
                 <input type="button" class="btn" @click="$router.back()" value="返回">
@@ -104,22 +105,44 @@
 
 <script>
 import { province as provinceData, city as cityData, area as areaData } from './addressData.json'
+import cookie from 'js-cookie'
+import shipApi from '@/api/ship'
 
 export default {
   name: 'AddressAdd',
   data () {
     return {
-      provinceCode: '510100000000',
-      cityCode: '510100000000',
-      areaCode: '510116000000',
+      // 用户信息
+      loginInfo: {},
 
       provinceSelectCode: '510100000000',
       citySelectCode: '510100000000',
       areaSelectCode: '510116000000',
 
+      shipInfo: {
+        shipId: '',
+        userId: '',
+        provinceCode: '510100000000',
+        cityCode: '510100000000',
+        areaCode: '510116000000',
+        address: '',
+        name: '',
+        tel: ''
+      },
+
       province: provinceData,
       city: cityData,
       area: areaData
+    }
+  },
+  created () {
+    var userStr = cookie.get('agriculture_ucenter')
+    if (userStr) {
+      this.shipInfo.userId = JSON.parse(userStr).userId
+    }
+    this.shipInfo.shipId = this.$route.query.shipId
+    if (this.shipInfo.shipId) {
+      this.getShipInfo(this.shipInfo.shipId)
     }
   },
   mounted: function () {
@@ -127,13 +150,47 @@ export default {
   },
   computed: {
     cityFilter () {
-      return this.city[this.provinceCode]
+      return this.city[this.shipInfo.provinceCode]
     },
     areaFilter () {
-      return this.area[this.cityCode]
+      return this.area[this.shipInfo.cityCode]
     }
   },
   methods: {
+    // 判断是添加还是修改
+    submit () {
+      if (this.shipInfo.shipId) {
+        alert('调用修改方法')
+        this.update()
+      } else {
+        alert('调用添加方法')
+        this.add()
+      }
+    },
+    // 添加地址信息
+    add () {
+      shipApi.addShipInfo(this.shipInfo).then((response) => {
+        alert(response.data.msg)
+        if (response.data.code === 0) {
+          this.$router.push({ path: '/addr' })
+        }
+      })
+    },
+    // 根据shipId获取地址信息
+    getShipInfo () {
+      shipApi.getInfoById(this.shipInfo.shipId).then((response) => {
+        this.shipInfo = response.data.ship
+      })
+    },
+    // 修改地址信息
+    update () {
+      shipApi.updateInfoById(this.shipInfo).then((response) => {
+        alert(response.data.msg)
+        if (response.data.code === 0) {
+          this.$router.push({ path: '/addr' })
+        }
+      })
+    },
     loadAllInfo () {
       /* 停止使用此方法获取源数据了，直接import就可以了
       var that = this
@@ -148,33 +205,33 @@ export default {
         }) */
     },
     provinceSelected: function () {
-      this.provinceCode = this.provinceSelectCode
-      this.cityCode = this.city['' + this.provinceCode + ''][0].code
-      this.areaCode = this.area['' + this.cityCode + ''][0].code
+      this.shipInfo.provinceCode = this.provinceSelectCode
+      this.shipInfo.cityCode = this.city['' + this.shipInfo.provinceCode + ''][0].code
+      this.shipInfo.areaCode = this.area['' + this.shipInfo.cityCode + ''][0].code
 
-      this.citySelectCode = this.cityCode
-      this.areaSelectCode = this.areaCode
+      this.citySelectCode = this.shipInfo.cityCode
+      this.areaSelectCode = this.shipInfo.areaCode
 
-      console.log('provinceCode = ' + this.provinceCode)
-      console.log('cityCode = ' + this.cityCode)
-      console.log('areaCode = ' + this.areaCode)
+      console.log('provinceCode = ' + this.shipInfo.provinceCode)
+      console.log('cityCode = ' + this.shipInfo.cityCode)
+      console.log('areaCode = ' + this.shipInfo.areaCode)
     },
     citySelected: function () {
-      this.cityCode = this.citySelectCode
-      this.areaCode = this.area['' + this.cityCode + ''][0].code
+      this.shipInfo.cityCode = this.citySelectCode
+      this.shipInfo.areaCode = this.area['' + this.shipInfo.cityCode + ''][0].code
 
-      this.areaSelectCode = this.areaCode
+      this.areaSelectCode = this.shipInfo.areaCode
 
-      console.log('provinceCode = ' + this.provinceCode)
-      console.log('cityCode = ' + this.cityCode)
-      console.log('areaCode = ' + this.areaCode)
+      console.log('provinceCode = ' + this.shipInfo.provinceCode)
+      console.log('cityCode = ' + this.shipInfo.cityCode)
+      console.log('areaCode = ' + this.shipInfo.areaCode)
     },
     areaSelected: function () {
-      this.areaCode = this.areaSelectCode
+      this.shipInfo.areaCode = this.areaSelectCode
 
-      console.log('provinceCode = ' + this.provinceCode)
-      console.log('cityCode = ' + this.cityCode)
-      console.log('areaCode = ' + this.areaCode)
+      console.log('provinceCode = ' + this.shipInfo.provinceCode)
+      console.log('cityCode = ' + this.shipInfo.cityCode)
+      console.log('areaCode = ' + this.shipInfo.areaCode)
     }
   }
 }

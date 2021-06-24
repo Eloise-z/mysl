@@ -64,10 +64,11 @@
                     <div v-for="list in dataList" :key="list.goodId" class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                       <div class="products-single fix">
                         <div class="box-img-hover">
-                          <div class="type-lb-out">
-                            <p class="sale">热销中</p>
+                          <div class="type-lb">
+                            <p class="hot">热卖</p>
+                            <p class="new">正品保证</p>
                           </div>
-                          <img :src="list.goodPicture" class="img-fluid" alt="Image">
+                          <img :src="list.goodPicture" class="img-fluid" alt="Image" style="height: 300px;object-fit: cover">
                           <div class="mask-icon">
                             <router-link class="cart" :to="{ path: '/shop-detail', query: { goodId: list.goodId } }">
                               查看详情
@@ -108,7 +109,7 @@
               <div class="price-box-slider">
                 <div id="slider-range"></div>
                 <p>
-                  <input type="text" @click="changePrice" id="amount" readonly
+                  <input type="text" @click="changePrice();flag=false" id="amount" readonly
                          v-model="eloisePrice" style="border:0; color:#fbb714; font-weight:bold;">
                   <button class="btn hvr-hover" type="submit">筛选</button>
                 </p>
@@ -148,9 +149,10 @@ export default {
         page: 0, // 当前页
         limit: 3, // 每页显示数据数
         typeId: '', // 当前商品类型id
+        goodState: '', // 0 现货 1预售
         goodName: '', // 商品名称模糊查询
-        Topprice: 0, // 最高价
-        Lowprice: 0, // 最低价
+        Topprice: '', // 最高价
+        Lowprice: '', // 最低价
         option: '' // 1 最新商品 2价格从高到低  3价格从低到高 4最多售卖
       },
       // 封装数据
@@ -160,6 +162,9 @@ export default {
     }
   },
   created () {
+    this.params.typeId = this.$route.query.typeId
+    this.params.goodState = this.$route.query.goodState
+    this.params.goodName = this.$route.query.goodName
     this.getDataList()
   },
 
@@ -167,6 +172,8 @@ export default {
   watch: {
     '$route' (to, from) {
       // 路由发生变化页面刷新
+      this.params.typeId = this.$route.query.typeId
+      this.params.goodState = this.$route.query.goodState
       this.getDataList()
     }
   },
@@ -176,7 +183,6 @@ export default {
       if (this.flag === true) {
         this.params.limit += 3
       }
-      this.params.typeId = this.$route.query.typeId
       goodsApi.getGoodsList(this.params).then((response) => {
         this.dataList = response.data.page
       })
@@ -185,6 +191,7 @@ export default {
       this.eloisePrice = $('#amount').val() // ￥457 - ￥995
       this.params.Topprice = this.eloisePrice.split(' - ')[1].slice(1) // 最高价
       this.params.Lowprice = this.eloisePrice.split(' - ')[0].slice(1) // 最低价
+      this.getDataList()
     }
   }
 }

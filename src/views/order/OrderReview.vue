@@ -9,9 +9,15 @@
       <div class="row">
         <div class="col-lg-12">
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
-            <li class="breadcrumb-item"><router-link to="/my-account"> 用户中心 </router-link></li>
-            <li class="breadcrumb-item"><router-link to="/order-list"> 订单列表 </router-link></li>
+            <li class="breadcrumb-item">
+              <router-link to="/index">首页</router-link>
+            </li>
+            <li class="breadcrumb-item">
+              <router-link to="/my-account"> 用户中心</router-link>
+            </li>
+            <li class="breadcrumb-item">
+              <router-link to="/order-list"> 订单列表</router-link>
+            </li>
             <li class="breadcrumb-item"> 评价订单</li>
           </ul>
           <h2>评价订单</h2>
@@ -33,18 +39,18 @@
           <form>
             <div class="form-group">
               <label for="review-star">请对商品进行评价</label>
-              <select class="form-control w-25" id="review-star">
-                <option>好评</option>
-                <option>中评</option>
-                <option>差评</option>
+              <select class="form-control w-25" id="review-star" v-model="reviewInfo.crDegree">
+                <option :value="1">好评</option>
+                <option :value="2">中评</option>
+                <option :value="3">差评</option>
               </select>
             </div>
             <div class="form-group">
               <label for="review-text">评价内容</label>
-              <textarea class="form-control" id="review-text" rows="3"></textarea>
+              <textarea v-model="reviewInfo.crText" class="form-control" id="review-text" rows="3"></textarea>
             </div>
             <div class="form-group mt-5">
-              <button type="submit" class="btn btn-primary mr-3">提交评价</button>
+              <button type="button" class="btn btn-primary mr-3" @click="submit()">提交评价</button>
               <button type="button" class="btn" onclick="window.location.href='orderlist.html'">跳过评价</button>
             </div>
           </form>
@@ -55,8 +61,45 @@
 </template>
 
 <script>
+import goodsApi from '@/api/goods'
+
 export default {
-  name: 'OrderReview'
+  name: 'OrderReview',
+  data () {
+    return {
+      reviewInfo: {
+        userId: '', // 用户编号
+        orderId: '', // 订单编号
+        crDegree: '', // 1好评 2中评 3差评
+        crText: '' // 评论内容
+      }
+    }
+  },
+  created () {
+    this.reviewInfo.userId = this.$route.query.userId
+    this.reviewInfo.orderId = this.$route.query.orderId
+  },
+  methods: {
+    submit () {
+      alert('评价程度:' + this.reviewInfo.crDegree)
+      alert('crText:' + this.reviewInfo.crText)
+      alert('orderId:' + this.reviewInfo.orderId)
+      alert('userId:' + this.reviewInfo.userId)
+      goodsApi.addReview(this.reviewInfo).then((response) => {
+        alert(response.data.msg)
+        if (this.$route.query.flag) {
+          // 跳转到个人中心
+          this.$router.push({
+            path: '/my-account',
+            query: { userId: this.reviewInfo.userId }
+          })
+        } else {
+          // 跳转到我的农场
+          this.$router.push({ path: '/my-farm' })
+        }
+      })
+    }
+  }
 }
 </script>
 

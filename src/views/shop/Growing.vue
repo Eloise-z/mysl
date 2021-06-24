@@ -37,7 +37,7 @@
                   <p>当前批次</p>
                 </div>
                 <div class="col-lg-8">
-                  <p>2020春季</p>
+                  <p>{{tracklist.twName}}</p>
                 </div>
               </div>
               <div class="row">
@@ -45,7 +45,7 @@
                   <p>溯源批次码</p>
                 </div>
                 <div class="col-lg-8">
-                  <p>SAJDKJK1203</p>
+                  <p>{{tracklist.twCode}}</p>
                 </div>
               </div>
             </div>
@@ -104,66 +104,29 @@
 
           <!--动态主体开始-->
           <div class="col-lg-8 col-sm-12">
-            <div class="growing-content">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="growing-item">
-                    <p class="item-time"><i class="far fa-clock"></i> 2021年5月26日19:58:12</p>
-                    <div>
-                      <p class="item-content">这是一段描述文字；这是一段描述文字；这是一段描述文字；
-                        这是一段描述文字；这是一段描述文字；这是一段描述文字；
-                        这是一段描述文字；这是一段描述文字；这是一段描述文字；</p>
-                      <div class="row">
-                        <div class="col-lg-12">
-                          <img class="item-img" src="../../assets/images/banner-01.jpg" alt="图片不见了">
-                          <img class="item-img" src="../../assets/images/banner-01.jpg" alt="图片不见了">
+            <template v-for="dynlist in dynlist" :key="dynlist.gdId">
+              <div class="growing-content">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="growing-item">
+                      <p class="item-time"><i class="far fa-clock"></i> {{dynlist.createTime}}</p>
+                      <div>
+                        <p class="item-content">
+                          {{dynlist.gdText}}
+                        </p>
+                        <div class="row">
+                          <div class="col-lg-12"  v-for="urllist in dynpicturl" :key="urllist.gdId">
+                            <template v-if="urllist.gdId === dynlist.gdId">
+                                <img class="item-img" :src="urllist.url" alt="图片不见了">
+                            </template>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-12">
-                  <div class="growing-item">
-                    <p class="item-time"><i class="far fa-clock"></i> 2021年5月26日19:58:12</p>
-                    <div>
-                      <p class="item-content">这是一段描述文字；这是一段描述文字；这是一段描述文字；
-                        这是一段描述文字；这是一段描述文字；这是一段描述文字；
-                        这是一段描述文字；这是一段描述文字；这是一段描述文字；</p>
-                      <div class="row">
-                        <div class="col-lg-12">
-                          <img class="item-img" src="../../assets/images/banner-01.jpg" alt="图片不见了">
-                          <img class="item-img" src="../../assets/images/banner-01.jpg" alt="图片不见了">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-12">
-                  <div class="growing-item">
-                    <p class="item-time"><i class="far fa-clock"></i> 2021年5月26日19:58:12</p>
-                    <div>
-                      <p class="item-content">这是一段描述文字；这是一段描述文字；这是一段描述文字；
-                        这是一段描述文字；这是一段描述文字；这是一段描述文字；
-                        这是一段描述文字；这是一段描述文字；这是一段描述文字；</p>
-                      <div class="row">
-                        <div class="col-lg-12">
-                          <img class="item-img" src="../../assets/images/banner-01.jpg" alt="图片不见了">
-                          <img class="item-img" src="../../assets/images/banner-01.jpg" alt="图片不见了">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-12">
-                  <div class="growing-item text-center">
-                    <a href="#"><i class="fas fa-angle-down"></i> 点击加载更多</a>
                   </div>
                 </div>
               </div>
-            </div>
+             </template>
           </div>
         </div>
       </div>
@@ -173,9 +136,46 @@
 
 <script>
 import '../../assets/css/aricommen.css'
-
+import goodsApi from '@/api/goods'
 export default {
-  name: 'Growing'
+  name: 'Growing',
+  data() {
+    return {
+      goodId: '',
+      tracklist: {}, // 批次信息
+      dynlist: [], // 动态文本信息
+      dynpicturl: []// 动态图片
+    }
+  },
+  created() {
+    this.goodId = this.$route.query.goodId
+    // 获取批次信息
+    this.getTrackInfo()
+    // 获取动态文本信息
+    this.getDynInfo()
+    // 获取动态图片
+    this.getDynPictureInfo()
+  },
+  methods: {
+    // 获取批次信息
+    getTrackInfo() {
+      goodsApi.getTrackInfo(this.goodId).then((response) => {
+        this.tracklist = response.data.frontTrackInfo
+      })
+    },
+    // 获取动态文本信息
+    getDynInfo() {
+      goodsApi.getDynInfo(this.goodId).then((response) => {
+        this.dynlist = response.data.frontDynVoList
+      })
+    },
+    // 获取动态图片
+    getDynPictureInfo() {
+      goodsApi.getDynPictureInfo(this.goodId).then((response) => {
+        this.dynpicturl = response.data.frontDynPictureVos
+      })
+    }
+  }
 }
 </script>
 

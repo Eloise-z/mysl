@@ -9,7 +9,9 @@
       <div class="row">
         <div class="col-lg-12">
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
+            <li class="breadcrumb-item">
+              <router-link to="/index">首页</router-link>
+            </li>
             <li class="breadcrumb-item active"> 支付结果</li>
           </ul>
           <h2>支付结果</h2>
@@ -27,7 +29,8 @@
           <div class="top-tip">
             <div class="pay-info">
               <p class="ml-2 font-weight-bold" style="font-size: 25px;color: #b0b435">支付成功！</p>
-              <p class="ml-2">本次支付金额<span class="font-weight-bold" style="color: #e31613;font-size: 18px">100.00</span>元</p>
+              <p class="ml-2">本次支付金额<span class="font-weight-bold"
+                                          style="color: #e31613;font-size: 18px">{{ totalpay }}</span>元</p>
             </div>
           </div>
           <hr>
@@ -44,7 +47,15 @@
 
 <script>
 export default {
-  name: 'PaySuccess'
+  name: 'PaySuccess',
+  data () {
+    return {
+      totalpay: ''
+    }
+  },
+  created () {
+    this.totalpay = this.$route.query.totalpay
+  }
 }
 </script>
 

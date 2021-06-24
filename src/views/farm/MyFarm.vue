@@ -28,122 +28,65 @@
   <div class="land-list">
     <div class="container mt-5">
       <div class="row">
-        <!--一个农场块开始-->
-        <div class="col-lg-6">
+        <!--一个农场块的开始-->
+        <div v-for="list in farmlist" :key="list.orderId" class="col-lg-6">
           <div class="land-item shadow p-3 mb-4">
             <div class="row">
-              <div class="col-md-6 text-left"><p>新疆在线农场</p></div>
-              <div class="col-md-6 text-right"><p>支付成功</p></div>
+              <div class="col-md-6 text-left"><p>{{ list.goodFarm }}</p></div>
+              <div class="col-md-6 text-right">
+                <p v-if="list.status ===  1">未支付</p>
+                <p v-if="list.status ===  2">未接单</p>
+                <p v-if="list.status ===  3">未发货</p>
+                <p v-if="list.status ===  4">未签收</p>
+                <p v-if="list.status ===  5">已完成</p>
+                <p v-if="list.status ===  6">取消订单</p>
+              </div>
             </div>
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img src="../../assets/images/gallery-img-01.jpg" style="max-width: 150px" alt="图片不见了">
+                <img :src="list.goodPicture" style="max-width: 150px" alt="图片不见了">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
-                  <div class="col-md-8"><p>新疆在线农场-在线农场1233</p></div>
-                  <div class="col-md-4"><p>￥100.00</p></div>
+                  <div class="col-md-8">
+                    <p>{{ list.goodName }}</p>
+                  </div>
                 </div>
                 <div class="row mt-3">
-                  <div class="col-md-6"><p>总价：<span class="font-weight-bold">￥100.00</span></p></div>
-                  <div class="col-md-6"><p>实付：<span class="font-weight-bold">￥100.00</span></p></div>
+                  <div class="col-md-6"><p>优惠：<span class="font-weight-bold">￥{{ list.discount }}</span></p></div>
+                  <div class="col-md-6"><p>实付：<span class="font-weight-bold">￥{{ list.totalpay }}</span></p></div>
                 </div>
               </div>
             </div>
             <hr>
             <div class="row w-75 text-center" style="margin: 0 auto">
               <div class="col-md-4">
-                <router-link to="/order-review">评价</router-link>
+                <P v-if="list.status === 5" style="display: inline;">
+                  <router-link :to="{ path: '/order-review', query: { orderId: list.orderId, userId: list.userId} }">
+                    评价
+                  </router-link>
+                </P>
+                <P v-if="list.status !== 5" style="display: inline;">
+                  不可评价
+                </P>
               </div>
               <div class="col-md-4">
-                <router-link to="/shop-detail">查看农场详情</router-link>
+                <router-link class="cart" :to="{ path: '/shop-detail', query: { goodId: list.goodId } }">
+                  查看商品详情
+                </router-link>
               </div>
               <div class="col-md-4">
-                <router-link to="/growing">查看农场动态</router-link>
+                <router-link :to="{ path: '/growing', query: { goodId: list.goodId} }">
+                  查看农场动态
+                </router-link>
               </div>
             </div>
           </div>
         </div>
-        <!--一个农场块结束-->
-        <!--一个农场块开始-->
-        <div class="col-lg-6">
-          <div class="land-item shadow p-3 mb-4">
-            <div class="row">
-              <div class="col-md-6 text-left"><p>新疆在线农场</p></div>
-              <div class="col-md-6 text-right"><p>支付成功</p></div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-md-4 text-left">
-                <img src="../../assets/images/gallery-img-01.jpg" style="max-width: 150px" alt="图片不见了">
-              </div>
-              <div class="col-md-8 text-left">
-                <div class="row">
-                  <div class="col-md-8"><p>新疆在线农场-在线农场1233</p></div>
-                  <div class="col-md-4"><p>￥100.00</p></div>
-                </div>
-                <div class="row mt-3">
-                  <div class="col-md-6"><p>总价：<span class="font-weight-bold">￥100.00</span></p></div>
-                  <div class="col-md-6"><p>实付：<span class="font-weight-bold">￥100.00</span></p></div>
-                </div>
-              </div>
-            </div>
-            <hr>
-            <div class="row w-75 text-center" style="margin: 0 auto">
-              <div class="col-md-4">
-                <router-link to="/order-review">评价</router-link>
-              </div>
-              <div class="col-md-4">
-                <router-link to="/shop-detail">查看农场详情</router-link>
-              </div>
-              <div class="col-md-4">
-                <router-link to="/growing">查看农场动态</router-link>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--一个农场块结束-->
-        <!--一个农场块开始-->
-        <div class="col-lg-6">
-          <div class="land-item shadow p-3 mb-4">
-            <div class="row">
-              <div class="col-md-6 text-left"><p>新疆在线农场</p></div>
-              <div class="col-md-6 text-right"><p>支付成功</p></div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-md-4 text-left">
-                <img src="../../assets/images/gallery-img-01.jpg" style="max-width: 150px" alt="图片不见了">
-              </div>
-              <div class="col-md-8 text-left">
-                <div class="row">
-                  <div class="col-md-8"><p>新疆在线农场-在线农场1233</p></div>
-                  <div class="col-md-4"><p>￥100.00</p></div>
-                </div>
-                <div class="row mt-3">
-                  <div class="col-md-6"><p>总价：<span class="font-weight-bold">￥100.00</span></p></div>
-                  <div class="col-md-6"><p>实付：<span class="font-weight-bold">￥100.00</span></p></div>
-                </div>
-              </div>
-            </div>
-            <hr>
-            <div class="row w-75 text-center" style="margin: 0 auto">
-              <div class="col-md-4">
-                <router-link to="/order-review">评价</router-link>
-              </div>
-              <div class="col-md-4">
-                <router-link to="/shop-detail">查看农场详情</router-link>
-              </div>
-              <div class="col-md-4">
-                <router-link to="/growing">查看农场动态</router-link>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--一个农场块结束-->
+        <!--一个农场块的结束-->
         <div class="col-lg-12 text-center mt-3 mb-5">
-          <a role="button" class="btn btn-outline-primary w-100" href="#">加载更多</a>
+          <a role="button" class="btn btn-outline-primary w-100" @click="flag=true;getMyfarmList()">加载更多</a>
         </div>
       </div>
 
@@ -152,8 +95,41 @@
 </template>
 
 <script>
+// 引入调用js-cookie
+import cookie from 'js-cookie'
+import orderApi from '@/api/order'
+
 export default {
-  name: 'MyFarm'
+  name: 'MyFarm',
+  data () {
+    return {
+      userId: '',
+      farmlist: [],
+      limit: 2, // 每页显示数量
+      flag: false // 点击加载更多时变为true
+    }
+  },
+  created () {
+    var userStr = cookie.get('agriculture_ucenter')
+    if (userStr) { // 已登录
+      this.userId = JSON.parse(userStr).userId
+    } else { // 未登录
+      // 跳转到登录页面
+      this.$router.push({ path: '/login' })
+    }
+    // 获取我的农场
+    this.getMyfarmList()
+  },
+  methods: {
+    getMyfarmList () {
+      if (this.flag) {
+        this.limit += 4
+      }
+      orderApi.getPreOrderByUserId(this.userId, this.limit).then((response) => {
+        this.farmlist = response.data.order
+      })
+    }
+  }
 }
 </script>
 

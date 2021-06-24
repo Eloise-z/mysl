@@ -21,7 +21,7 @@ const routes = [
       {
         path: '/shop',
         name: 'shop',
-        props: route => ({ query: route.query.typeId }),
+        props: route => ({ query: route.query }),
         component: () => import(/* webpackChunkName: "shop" */ '../views/shop/Shop')
       },
       {
@@ -33,36 +33,43 @@ const routes = [
       {
         path: '/my-account',
         name: 'my-account',
+        props: route => ({ query: route.query.userId }),
         component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/MyAccount')
       },
       {
         path: '/order-list',
         name: 'orderList',
+        props: route => ({ query: route.query.userId }),
         component: () => import(/* webpackChunkName: "my-account" */ '../views/order/OrderList')
       },
       {
         path: '/modifypwd',
         name: 'modifypwd',
+        props: route => ({ query: route.query.userId }),
         component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/ModifyPwd')
       },
       {
         path: '/addr',
         name: 'addr',
+        props: route => ({ query: route.query.userId }),
         component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/AddressManage')
       },
       {
         path: '/userinfo',
         name: 'userinfo',
+        props: route => ({ query: route.query.userId }),
         component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/UserInfo')
       },
       {
         path: '/notice',
         name: 'notice',
+        props: route => ({ query: route.query.userId }),
         component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/Notice')
       },
       {
         path: '/add-addr',
         name: 'add-addr',
+        props: route => ({ query: route.query.shipId }),
         component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/AddAddress')
       },
       {
@@ -88,6 +95,7 @@ const routes = [
       {
         path: '/origin-res',
         name: 'origin-res',
+        props: route => ({ query: route.query.tgCode }),
         component: () => import(/* webpackChunkName: "origin" */ '../views/origin/OriginRes')
       },
       {
@@ -118,26 +126,31 @@ const routes = [
       {
         path: '/order-review',
         name: 'order-review',
+        props: route => ({ query: route.query }),
         component: () => import(/* webpackChunkName: "order" */ '../views/order/OrderReview')
       },
       {
         path: '/order-detail',
         name: 'order-detail',
+        props: route => ({ query: route.query.orderId }),
         component: () => import(/* webpackChunkName: "order" */ '../views/order/OrderDetail')
       },
       {
         path: '/pay-page',
         name: 'pay-page',
+        props: route => ({ query: route.query }),
         component: () => import(/* webpackChunkName: "order" */ '../views/order/PayPage')
       },
       {
         path: '/pay-res',
         name: 'pay-success',
+        props: route => ({ query: route.query.totalpay }),
         component: () => import(/* webpackChunkName: "order" */ '../views/order/PaySuccess')
       },
       {
         path: '/growing',
         name: 'growing',
+        props: route => ({ query: route.query.goodId }),
         component: () => import(/* webpackChunkName: "shop" */ '../views/shop/Growing')
       },
       {

@@ -71,7 +71,7 @@
               <form id="dateform">
                 <div class="col-md-8">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="产品码" required
+                    <input v-model="tgCode" type="text" class="form-control" id="name" name="name" placeholder="产品码" required
                            data-error="请输入产品码">
                     <div class="help-block with-errors"></div>
                   </div>
@@ -97,7 +97,7 @@
                     <div class="form-group">
                       <div class="submit-button text-center">
                         <!--<button class="btn hvr-hover" id="submit" type="submit">查询</button>-->
-                        <button class="btn hvr-hover" @click="$router.push('/origin-res')">查询</button>
+                        <button class="btn hvr-hover" @click="query()">查询</button>
                         <div id="msgSubmit" class="h3 text-center hidden"></div>
                         <div class="clearfix"></div>
                       </div>
@@ -114,8 +114,19 @@
 </template>
 
 <script>
+
 export default {
-  name: 'ProductOrigin'
+  name: 'ProductOrigin',
+  data() {
+    return {
+      tgCode: ''
+    }
+  },
+  methods: {
+    query() {
+      this.$router.push({ path: '/origin-res', query: { tgCode: this.tgCode } })
+    }
+  }
 }
 </script>
 

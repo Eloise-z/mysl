@@ -28,9 +28,15 @@
             <div class="form-row justify-content-center mx-5">
               <div class="col-8">
                 <label class="sr-only" for="searchInput">Name</label>
-                <input type="text" class="form-control mb-2" id="searchInput" placeholder="输入商品名称搜索">
+                <input type="text" v-model="goodName" class="form-control mb-2" id="searchInput" placeholder="输入商品名称搜索">
               </div>
-              <button type="submit" style="background-color: rgb(176 180 53); border: #1c7430" class="btn btn-danger ml-2 mb-2 col-2">搜索</button>
+              <button type="submit"
+                style="background-color: rgb(176 180 53); border: #1c7430"
+                class="btn btn-danger ml-2 mb-2 col-2"
+                @click="search()"
+              >
+                搜索
+              </button>
             </div>
           </form>
         </div>
@@ -41,7 +47,17 @@
 
 <script>
 export default {
-  name: 'Search'
+  name: 'Search',
+  data() {
+    return {
+      goodName: ''
+    }
+  },
+  methods: {
+    search() {
+      this.$router.push({ path: '/shop', query: { goodName: this.goodName } })
+    }
+  }
 }
 </script>
 

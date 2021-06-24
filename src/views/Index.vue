@@ -3,15 +3,17 @@
 *Date: 2021-06-13 20:12
 -->
 <template>
-<!--新轮播图开始-->
+  <!--新轮播图开始-->
   <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" style="padding: 0" data-interval="2500">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
-      <div class="carousel-item active" style="background-color: rgba(0, 0, 0, 0.4);">
-        <img src="../assets/images/ylp.jpg" class="d-block w-100" style="width: 100%;height: 80vh;object-fit:cover" alt="">
+      <div class="carousel-item" style="background-color: rgba(0, 0, 0, 0.4);">
+        <img src="../assets/images/ylp.jpg" class="d-block w-100" style="width: 100%;height: 80vh;object-fit:cover"
+             alt="">
         <div class="cover w-100"
              style="position: absolute ;right:0;top: 0;height:80vh;background-color: rgba(0, 0, 0, 0.4);"></div>
         <div class="carousel-caption d-none d-md-block" style="bottom:25% ">
@@ -19,13 +21,30 @@
           <p><i class="fas fa-at" style="padding-right: 5px;"></i>缅怀袁隆平院士</p>
         </div>
       </div>
+      <div class="carousel-item" style="background-color: rgba(0, 0, 0, 0.4);">
+        <img src="http://images.wenming.cn/web_wenming/images/rlqzxzgcl20210406-11.jpg" class="d-block w-100"
+             style="width: 100%;height: 80vh;object-fit:cover" alt="">
+        <div class="carousel-caption d-none d-md-block" style="bottom:0">
+          <p><i class="fas fa-at" style="padding-right: 5px;"></i>庆祝中国共产党成立100周年</p>
+        </div>
+      </div>
       <div class="carousel-item">
-        <img src="../assets/images/banner-02.jpg" style="width: 100%;height: 80vh;object-fit:cover" class="d-block w-100" alt="">
+        <img src="../assets/images/banner-02.jpg" style="width: 100%;height: 80vh;object-fit:cover"
+             class="d-block w-100" alt="">
         <div class="cover w-100"
              style="position: absolute ;right:0;top: 0;height:80vh;background-color: rgba(0, 0, 0, 0.4);"></div>
         <div class="carousel-caption d-none d-md-block" style="bottom:25% ">
           <h5><i class="fas fa-broadcast-tower" style="padding-right: 5px;"></i><strong>全面小康 <br> 乡村振兴</strong></h5>
           <p>助力乡村振兴 <br><br> 加快农业农村现代化</p>
+        </div>
+      </div>
+      <div v-for="(list, index) in bannerlist" class="carousel-item" :key="list.adId" :class="{'active' : index === 0}">
+        <img :src="list.picUrl" style="width: 100%;height: 80vh;object-fit:cover" class="d-block w-100" alt="">
+        <div class="cover w-100"
+             style="position: absolute ;right:0;top: 0;height:80vh;background-color: rgba(0, 0, 0, 0.4);"></div>
+        <div class="carousel-caption d-none d-md-block" style="bottom:25% ">
+          <h5><i class="fas fa-broadcast-tower" style="padding-right: 5px;"></i><strong>测试 <br> 测试测试</strong></h5>
+          <p>测试</p>
         </div>
       </div>
     </div>
@@ -101,12 +120,14 @@
           class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
           :key="list.goodId"
         >
-          <div class="shop-cat-box">
+          <div class="shop-cat-box" style="height: 250px;object-fit: contain">
             <div class="type-lb">
-              <p class="new">2列特推商品</p>
+              <p class="hot">乡村振兴</p>
             </div>
-            <img class="img-fluid" :src="list.goodPicture" alt="" />
-            <a class="btn hvr-hover" href="#">{{ list.goodName }}</a>
+            <img class="img-fluid" :src="list.goodPicture" alt=""/>
+            <router-link class="btn hvr-hover" :to="{ path: '/shop-detail', query: { goodId: list.goodId } }">
+              {{ list.goodName }}
+            </router-link>
           </div>
         </div>
       </div>
@@ -136,49 +157,50 @@
       <div class="row special-list">
         <div
           v-for="list in bestSellersList"
-          class="col-lg-3 col-md-6 special-grid sale best-seller"
+          class="col-lg-3 col-md-6 special-grid sale best-seller mb-2" style="height:400px;"
           :key="list.goodId"
         >
           <div class="products-single fix">
             <div class="box-img-hover">
               <div class="type-lb">
-                <p class="sale">Sale</p>
+                <p class="new">推荐</p>
               </div>
-              <img :src="list.goodPicture" class="img-fluid" alt="Image" />
+              <img :src="list.goodPicture" class="img-fluid" style="height:300px;object-fit:cover" alt="Image"/>
               <div class="mask-icon">
-                <ul>
-                  <li>
-                    <a
-                      href="#"
-                      data-toggle="tooltip"
-                      data-placement="right"
-                      title="View"
-                      >
-                      <i class="fas fa-eye"></i>
-                      </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      data-toggle="tooltip"
-                      data-placement="right"
-                      title="Compare"
-                      >
-                      <i class="fas fa-sync-alt"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      data-toggle="tooltip"
-                      data-placement="right"
-                      title="Add to Wishlist"
-                      >
-                      <i class="far fa-heart"></i>
-                      </a>
-                  </li>
-                </ul>
-                <a class="cart" href="#">Add to Cart</a>
+                <!-- <ul>
+                   <li>
+                     <a
+                       href="#"
+                       data-toggle="tooltip"
+                       data-placement="right"
+                       title="View"
+                       >
+                       <i class="fas fa-eye"></i>
+                       </a>
+                   </li>
+                   <li>
+                     <a
+                       href="#"
+                       data-toggle="tooltip"
+                       data-placement="right"
+                       title="Compare"
+                       >
+                       <i class="fas fa-sync-alt"></i>
+                     </a>
+                   </li>
+                   <li>
+                     <a
+                       href="#"
+                       data-toggle="tooltip"
+                       data-placement="right"
+                       title="Add to Wishlist"
+                       >
+                       <i class="far fa-heart"></i>
+                       </a>
+                   </li>
+                 </ul>-->
+                <router-link class="cart" :to="{ path: '/shop-detail', query: { goodId: list.goodId } }">查看商品
+                </router-link>
               </div>
             </div>
             <div class="why-text">
@@ -221,15 +243,9 @@
                 <h3>这是标题</h3>
                 <p>这是简介这是简介这是简介这是简介这是简介这是简介这是简介</p>
               </div>
-              <ul class="option-blog">
-                <li>
-                  <a href="#"><i class="far fa-heart"></i></a>
-                </li>
+              <ul class="option-blog" style="position: relative">
                 <li>
                   <a href="#"><i class="fas fa-eye"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="far fa-comments"></i></a>
                 </li>
               </ul>
             </div>
@@ -249,15 +265,9 @@
                 <h3>这是标题</h3>
                 <p>这是简介这是简介这是简介这是简介这是简介这是简介这是简介</p>
               </div>
-              <ul class="option-blog">
-                <li>
-                  <a href="#"><i class="far fa-heart"></i></a>
-                </li>
+              <ul class="option-blog" style="position: relative">
                 <li>
                   <a href="#"><i class="fas fa-eye"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="far fa-comments"></i></a>
                 </li>
               </ul>
             </div>
@@ -277,15 +287,9 @@
                 <h3>这是标题</h3>
                 <p>这是简介这是简介这是简介这是简介这是简介这是简介这是简介</p>
               </div>
-              <ul class="option-blog">
-                <li>
-                  <a href="#"><i class="far fa-heart"></i></a>
-                </li>
+              <ul class="option-blog" style="position: relative">
                 <li>
                   <a href="#"><i class="fas fa-eye"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="far fa-comments"></i></a>
                 </li>
               </ul>
             </div>
@@ -296,117 +300,38 @@
   </div>
   <!-- End Blog  -->
   <!--商品简介结束-->
-  <!--图片滚动开始-->
-  <!-- Start Instagram Feed  -->
-  <div class="instagram-box">
-    <div class="main-instagram owl-carousel owl-theme">
-      <div class="item">
-        <div class="ins-inner-box">
-          <img src="../assets/images/instagram-img-01.jpg" alt="" />
-          <div class="hov-in">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="ins-inner-box">
-          <img src="../assets/images/instagram-img-02.jpg" alt="" />
-          <div class="hov-in">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="ins-inner-box">
-          <img src="../assets/images/instagram-img-03.jpg" alt="" />
-          <div class="hov-in">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="ins-inner-box">
-          <img src="../assets/images/instagram-img-04.jpg" alt="" />
-          <div class="hov-in">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="ins-inner-box">
-          <img src="../assets/images/instagram-img-05.jpg" alt="" />
-          <div class="hov-in">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="ins-inner-box">
-          <img src="../assets/images/instagram-img-06.jpg" alt="" />
-          <div class="hov-in">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="ins-inner-box">
-          <img src="../assets/images/instagram-img-07.jpg" alt="" />
-          <div class="hov-in">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="ins-inner-box">
-          <img src="../assets/images/instagram-img-08.jpg" alt="" />
-          <div class="hov-in">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="ins-inner-box">
-          <img src="../assets/images/instagram-img-09.jpg" alt="" />
-          <div class="hov-in">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="ins-inner-box">
-          <img src="../assets/images/instagram-img-05.jpg" alt="" />
-          <div class="hov-in">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Instagram Feed  -->
-  <!--图片滚动结束-->
 </template>
 
 <script>
 // index.js文件
 import indexApi from '@/api/index'
+import bannerApi from '@/api/banner'
+
 export default {
   name: 'Index',
-  data() {
+  data () {
     return {
       // 封装乡村振兴专区数据
       ruralList: [],
       // 封装热卖推荐数据
-      bestSellersList: []
+      bestSellersList: [],
+      bannerlist: []
     }
   },
-  created() {
+  created () {
     this.getIndexList()
+    this.getBannerList()
   },
   methods: {
-    getIndexList() {
+    getIndexList () {
       indexApi.getIndex().then((response) => {
         this.ruralList = response.data.rural
         this.bestSellersList = response.data.bestSellers
+      })
+    },
+    getBannerList () {
+      bannerApi.getBannerList().then((response) => {
+        this.bannerlist = response.data.adlist
       })
     }
   }

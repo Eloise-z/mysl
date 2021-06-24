@@ -13,10 +13,10 @@
               <router-link to="/index">首页</router-link>
             </li>
             <li class="breadcrumb-item">
-              <router-link to="/my-account"> 用户中心 </router-link>
+              <router-link to="/my-account"> 用户中心</router-link>
             </li>
             <li class="breadcrumb-item">
-              <router-link to="/order-list"> 订单列表 </router-link>
+              <router-link to="/order-list"> 订单列表</router-link>
             </li>
             <li class="breadcrumb-item active"> 订单详情</li>
           </ul>
@@ -38,41 +38,59 @@
             </div>
             <div class="col-4">
               <div class="row">
-                <h3>订单编号：210520100010001</h3>
+                <h3>订单编号：{{ dataList.orderId }}</h3>
               </div>
               <div class="row">
-                <h3>创建时间：2021-5-27 18:53:13</h3>
+                <h3>创建时间：{{ dataList.createtime }}</h3>
               </div>
               <div class="row">
-                <h3>唯一产品码：XXXXXXXXXX</h3>
-              </div>
-              <div class="row">
-                <h3>物流号：XXXXXXXXXX</h3>
+                <h3>唯一产品码：{{ dataList.tgcode }}</h3>
               </div>
             </div>
             <div class="col-4">
-              <div class="row">
-                <h3>状态：已付款</h3>
+              <div class="row" v-if="dataList.status===1">
+                <h3>状态：未支付</h3>
               </div>
-              <div class="row">
+              <div class="row" v-if="dataList.status===2">
+                <h3>状态：已支付</h3>
+              </div>
+              <div class="row" v-if="dataList.status===3">
+                <h3>状态：已接单</h3>
+              </div>
+              <div class="row" v-if="dataList.status===4">
+                <h3>状态：未签收</h3>
+              </div>
+              <div class="row" v-if="dataList.status===5">
+                <h3>状态：已签收</h3>
+              </div>
+              <div class="row" v-if="dataList.status===6">
+                <h3>状态：取消订单</h3>
+              </div>
+              <div class="row" v-if="dataList.payway===1">
                 <h3>支付方式：支付宝</h3>
               </div>
-              <div class="row">
-                <h3>支付订单编号：XXXXXXXXXX</h3>
+              <div class="row" v-if="dataList.payway===2">
+                <h3>支付方式：微信</h3>
               </div>
-              <div class="row">
-                <h3>支付时间：2021-5-27 21:53:13</h3>
+              <div class="row" v-if="dataList.payway===3">
+                <h3>支付方式：QQ</h3>
+              </div>
+              <div class="row" v-if="dataList.payway===4">
+                <h3>支付方式：其他</h3>
+              </div>
+              <div class="row" v-if="dataList.paytime!=null">
+                <h3>支付时间：{{ dataList.paytime }}</h3>
               </div>
             </div>
             <div class="col-3">
               <div class="row">
-                <h3>应付金额：￥20.55</h3>
+                <h3>应付金额：￥{{ dataList.goodprice }}</h3>
               </div>
               <div class="row">
-                <h3>优惠金额：￥10.55</h3>
+                <h3>优惠金额：￥{{ dataList.discount }}</h3>
               </div>
               <div class="row">
-                <h3>实付金额：￥10.00</h3>
+                <h3>实付金额：￥{{ dataList.totalpay }}</h3>
               </div>
             </div>
           </div>
@@ -80,26 +98,28 @@
           <div class="row" style="margin-bottom: 50px; margin-top: 50px">
             <div class="col-1"></div>
             <div class="col-3">
-              <img src="../../assets/images/img-pro-03.jpg" style="width: 200px; height: 200px;" alt="图片找不到了">
+              <img :src="dataList.goodpicture" style="width: 200px; height: 200px;" alt="图片找不到了">
             </div>
             <div class="col-5">
-              <div class="form-group">
+              <div class="form-group" v-if="dataList.goodstate===0">
                 <h3>[现货][乡村振兴]</h3>
               </div>
-              <div class="form-group">
-                <h3>红富士苹果水果10斤新鲜现摘斤新鲜现斤新鲜现脆甜摘斤新级当季整箱山东省烟........................</h3>
+              <div class="form-group" v-if="dataList.goodstate===1">
+                <h3>[预售][乡村振兴]</h3>
               </div>
               <div class="form-group">
-                <h3>商品单价：￥20.55</h3>
+                <h3>{{ dataList.goodname }}</h3>
               </div>
               <div class="form-group">
-                <h3>商品数量：1</h3>
+                <h3>商品单价：￥{{ dataList.goodprice }}</h3>
+              </div>
+              <div class="form-group">
+                <h3>商品数量：{{ dataList.goodsnum }}</h3>
               </div>
             </div>
             <div class="col-2">
-              <div class="row justify-content-end">
-                <input type="button" class="btn btn-info" id="cancelPay" value="确认收货"
-                       onclick="window.location.href='orderreview.html'">
+              <div class="row justify-content-end" v-if="dataList.status===4">
+                <input type="button" class="btn btn-info" id="cancelPay" value="确认收货" @click="confirmGet()">
               </div>
             </div>
             <div class="col-1"></div>
@@ -110,14 +130,19 @@
             <div class="col-5">
               <div class="form-group">
                 <div class="row"><h3>收货信息：</h3></div>
-                <div class="row"><h3>张三 / 15509080002</h3></div>
-                <div class="row"><h3>四川省 / 成都市 / 双流区</h3></div>
-                <div class="row"><h3>成都信息工程大学（航空港校区）</h3></div>
+                <div class="row"><h3>{{ dataList.name }} / {{ dataList.tel }}</h3></div>
+                <div class="row"><h3>{{ dataList.provinceCode }} / {{ dataList.cityCode }} /
+                  {{ dataList.areaCode }}</h3></div>
+                <div class="row"><h3>{{ dataList.address }}</h3></div>
               </div>
             </div>
             <div class="col-6">
-              <div class="row"><h3>状态：商家处理中</h3></div>
-              <div class="row"><h3>备注：请速发货！！！请速发货！！！请速发货！！！请速发货！！！请速发货！！！请速发货！！！</h3></div>
+              <div class="row" v-if="dataList.status===1"><h3>商家状态：未支付</h3></div>
+              <div class="row" v-if="dataList.status===2"><h3>商家状态：未接单</h3></div>
+              <div class="row" v-if="dataList.status===3"><h3>商家状态：未发货</h3></div>
+              <div class="row" v-if="dataList.status===4"><h3>商家状态：已发货</h3></div>
+              <div class="row" v-if="dataList.status===5"><h3>商家状态：已签收</h3></div>
+              <div class="row"><h3>备注：{{ dataList.remark }}</h3></div>
             </div>
           </div>
         </form>
@@ -127,9 +152,51 @@
 </template>
 
 <script>
+import centerApi from '@/api/center'
+
 export default {
-  name: 'OrderDetail'
+  name: 'OrderDetail',
+  data () {
+    return {
+      dataList: {
+        orderId: ''
+      },
+      orderId: ''
+    }
+  },
+  created () {
+    this.getorderId()
+    this.getDataList()
+  },
+  methods: {
+    getorderId () {
+      this.orderId = this.$route.query.orderId
+    },
+    getDataList () {
+      centerApi.getOrderDetail(this.orderId).then((response) => {
+        this.dataList = response.data.orderDetail
+      })
+    },
+    confirmGet () {
+      if (confirm('是否确定收货？')) {
+        centerApi.confirmGet(this.orderId).then((response) => {
+          if (response.data.code === 0) { // 收货成功
+            alert(response.data.msg)
+            this.getDataList()
+          } else { // 删除失败
+            alert(response.data.msg)
+            this.$router.push({
+              path: '/orderdetail',
+              query: { orderId: this.orderId }
+            })
+          }
+        })
+      }
+    }
+  }
+
 }
+
 </script>
 
 <style scoped>

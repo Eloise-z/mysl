@@ -18,19 +18,18 @@
                 <router-link to="/login"><i class="fa fa-user s_color"></i> 登录注册</router-link>
               </li>
               <li v-if="loginInfo.userId" id="is-login-two" class="h-r-user">
-                <router-link to="/ucenter" title>
-                  <img :src="loginInfo.userAvatar" width="30" height="30" class="vam picImg" alt/>
-                  <span id="userName" class="vam disIb">
-                    {{ loginInfo.userName }}
-                  </span>
+                <router-link class="mr-3" :to="{ path: '/my-account', query: { userId: loginInfo.userId} }">
+                  <img :src="loginInfo.userAvatar" style="width: 25px;height: 25px;border-radius: 50%;object-fit: cover"
+                       class="vam picImg mr-2" alt/>
+                  <span id="userName" class="vam disIb">{{ loginInfo.userName }}</span>
                 </router-link>
                 <a href="javascript:void(0);" title="退出" @click="logout()" class="ml5">退出</a>
               </li>
               <li>
-                <router-link to="/order-list"><i class="fas fa-file-alt"></i> 订单</router-link>
+                <router-link to=""><i class="fas fa-file-alt"></i> 订单</router-link>
               </li>
               <li>
-                <router-link to="/notice"><i class="fas fa-bell"></i> 系统消息</router-link>
+                <router-link to=""><i class="fas fa-bell"></i> 系统消息</router-link>
               </li>
             </ul>
           </div>
@@ -143,5 +142,7 @@ export default {
 </script>
 
 <style scoped>
-
+.our-link ul li {
+  border: 0;
+}
 </style>

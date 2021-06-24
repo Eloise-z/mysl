@@ -28,8 +28,10 @@
         <form class="form-horizontal" role="form">
           <div class="top-tip">
             <div class="border-green">
-              <p class="ml-2">订单提交成功，请尽快付款！订单编号：7</p>
-              <p class="ml-2">应付金额<span class="font-weight-bold" style="color: #e31613;font-size: 18px">100.00</span>元
+              <p class="ml-2">订单提交成功，请尽快付款！订单编号：{{ orderInfo.orderId }}</p>
+              <p class="ml-2">应付金额
+                <span class="font-weight-bold" style="color: #e31613;font-size: 18px">{{ orderInfo.totalpay }}
+                </span>元
               </p>
             </div>
           </div>
@@ -37,7 +39,7 @@
           <div class="row" style="margin-bottom: 50px; margin-top: 50px">
             <div class="paycode" style="margin: 0 auto">
               <h3>测试阶段，点击图片即视为支付</h3>
-              <img src="../../assets/images/paycode.png" @click="$router.push('/pay-res')" alt="图片找不到了">
+              <img src="../../assets/images/paycode.png" @click="payment()" alt="图片找不到了">
             </div>
           </div>
           <hr>
@@ -53,8 +55,51 @@
 </template>
 
 <script>
+import orderApi from '@/api/order'
+import goodsApi from '@/api/goods'
+
 export default {
-  name: 'PayPage'
+  name: 'PayPage',
+  data () {
+    return {
+      orderId: '', // 订单编号
+      goodState: '', // 商品销售类型 0现货 1预售
+      orderInfo: {} // 订单信息
+    }
+  },
+  created () {
+    this.orderId = this.$route.query.orderId
+    this.goodState = this.$route.query.goodState
+    this.getOrderInfo()
+  },
+  methods: {
+    // 获取订单信息
+    getOrderInfo () {
+      orderApi.getOrderById(this.orderId).then((response) => {
+        this.orderInfo = response.data.order
+      })
+    },
+    // 支付
+    payment () {
+      orderApi.orderPayment(this.orderId).then((response) => {
+        alert(response.data.msg)
+        if (response.data.code === 0) { // 支付成功
+          this.$router.push({
+            path: '/pay-res',
+            query: { totalpay: response.data.totalpay }
+          })
+          // 支付成功后生成产品码
+          this.generateTgCode()
+        }
+      })
+    },
+    // 生成产品码
+    generateTgCode () {
+      goodsApi.addTrackgoods(this.orderId).then((response) => {
+        alert('产品码生成成功！')
+      })
+    }
+  }
 }
 </script>
 
