@@ -206,4 +206,10 @@ const router = createRouter({
   }
 })
 
+/* 让页面切换时滚动到顶部 */
+router.afterEach(() => {
+  document.body.scrollTop = 0
+  document.documentElement.scrollTop = 0
+})
+
 export default router
