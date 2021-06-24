@@ -56,7 +56,7 @@
               <td>2021-6-23 22:15:28</td>
               <td>审核未通过</td>
               <td>
-                <a class="mr-3 btn-outline-info" href="#">修改</a>
+                <router-link class="mr-3 btn-outline-info" to="/sale-add">修改</router-link>
                 <router-link class="mr-3 btn-outline-info" to="/shop-detail">查看评论</router-link>
                 <router-link class="mr-3 btn-outline-info" to="/sale-class">管理类别</router-link>
                 <router-link class="mr-3 btn-outline-info" to="/sale-growing">动态管理</router-link>
@@ -71,7 +71,7 @@
               <td>2021-6-23 22:15:28</td>
               <td>审核未通过</td>
               <td>
-                <a class="mr-3 btn-outline-info" href="#">修改</a>
+                <router-link class="mr-3 btn-outline-info" to="/sale-add">修改</router-link>
                 <router-link class="mr-3 btn-outline-info" to="/shop-detail">查看评论</router-link>
                 <router-link class="mr-3 btn-outline-info" to="/sale-class">管理类别</router-link>
                 <a class="btn-outline-danger" href="#">删除</a>
@@ -85,7 +85,7 @@
               <td>2021-6-23 22:15:28</td>
               <td>审核未通过</td>
               <td>
-                <a class="mr-3 btn-outline-info" href="#">修改</a>
+                <router-link class="mr-3 btn-outline-info" to="/sale-add">修改</router-link>
                 <router-link class="mr-3 btn-outline-info" to="/shop-detail">查看评论</router-link>
                 <router-link class="mr-3 btn-outline-info" to="/sale-class">管理类别</router-link>
                 <a class="btn-outline-danger" href="#">删除</a>
@@ -99,7 +99,7 @@
               <td>2021-6-23 22:15:28</td>
               <td>审核未通过</td>
               <td>
-                <a class="mr-3 btn-outline-info" href="#">修改</a>
+                <router-link class="mr-3 btn-outline-info" to="/sale-add">修改</router-link>
                 <router-link class="mr-3 btn-outline-info" to="/shop-detail">查看评论</router-link>
                 <router-link class="mr-3 btn-outline-info" to="/sale-class">管理类别</router-link>
                 <router-link class="mr-3 btn-outline-info" to="/sale-growing">动态管理</router-link>

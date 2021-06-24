@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="col-lg-12 mb-2 text-right">
-          <a href="growing.html" class="btn btn-primary">查看本产品全部动态</a>
+          <router-link to="/growing" class="btn btn-primary">查看本产品全部动态</router-link>
         </div>
         <div class="col-md-12 mb-5">
           <form>
@@ -54,7 +54,7 @@
                   <input type="file" class="form-control form-control-file" id="goodsImg" accept="image/*">
                 </div>
                 <div class="col-lg-6">
-                  <img style="max-width: 300px" src="" id="uploadImgView">
+                  <img style="max-width: 300px" src="" id="uploadImgView" alt="">
                 </div>
               </div>
             </div>
