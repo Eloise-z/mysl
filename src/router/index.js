@@ -153,7 +153,32 @@ const routes = [
       {
         path: '/sale-list',
         name: 'sale-list',
-        component: () => import(/* webpackChunkName: "shop" */ '../views/sale/SaleList')
+        component: () => import(/* webpackChunkName: "sale" */ '../views/sale/SaleList')
+      },
+      {
+        path: '/sale-add',
+        name: 'sale-add',
+        component: () => import(/* webpackChunkName: "sale" */ '../views/sale/SaleAdd')
+      },
+      {
+        path: '/sale-class',
+        name: 'sale-class',
+        component: () => import(/* webpackChunkName: "sale" */ '../views/sale/SaleClass')
+      },
+      {
+        path: '/sale-growing',
+        name: 'sale-growing',
+        component: () => import(/* webpackChunkName: "sale" */ '../views/sale/SaleGrowing')
+      },
+      {
+        path: '/sale-order',
+        name: 'sale-order',
+        component: () => import(/* webpackChunkName: "sale" */ '../views/sale/SaleOrder')
+      },
+      {
+        path: '/sale-order-detail',
+        name: 'sale-order-detail',
+        component: () => import(/* webpackChunkName: "sale" */ '../views/sale/SaleOrderDetail')
       }
     ]
   }

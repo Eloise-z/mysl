@@ -9,8 +9,12 @@
       <div class="row">
         <div class="col-lg-12">
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
-            <li class="breadcrumb-item"><router-link to="/my-account"> 个人中心 </router-link></li>
+            <li class="breadcrumb-item">
+              <router-link to="/index">首页</router-link>
+            </li>
+            <li class="breadcrumb-item">
+              <router-link to="/my-account"> 个人中心</router-link>
+            </li>
             <li class="breadcrumb-item active"> 营销管理</li>
           </ul>
           <h2>营销管理</h2>
@@ -25,8 +29,8 @@
     <div class="container">
       <div class="row mt-5">
         <div class="col-md-12 text-right">
-          <a class="btn btn-primary" role="button" href="usersale-add.html">新增商品</a>
-          <a class="btn btn-primary" role="button" href="usersale-order.html">商品订单管理</a>
+          <router-link class="btn btn-primary" role="button" to="/sale-add">新增商品</router-link>
+          <router-link class="btn btn-primary" role="button" to="/sale-order">商品订单管理</router-link>
         </div>
       </div>
       <div class="row mt-2">
@@ -53,9 +57,9 @@
               <td>审核未通过</td>
               <td>
                 <a class="mr-3 btn-outline-info" href="#">修改</a>
-                <a class="mr-3 btn-outline-info" href="shop-detail.html">查看评论</a>
-                <a class="mr-3 btn-outline-info" href="usersale-class.html">管理类别</a>
-                <a class="mr-3 btn-outline-info" href="usersale-growing.html">动态管理</a>
+                <router-link class="mr-3 btn-outline-info" to="/shop-detail">查看评论</router-link>
+                <router-link class="mr-3 btn-outline-info" to="/sale-class">管理类别</router-link>
+                <router-link class="mr-3 btn-outline-info" to="/sale-growing">动态管理</router-link>
                 <a class="btn-outline-danger" href="#">删除</a>
               </td>
             </tr>
@@ -68,8 +72,8 @@
               <td>审核未通过</td>
               <td>
                 <a class="mr-3 btn-outline-info" href="#">修改</a>
-                <a class="mr-3 btn-outline-info" href="shop-detail.html">查看评论</a>
-                <a class="mr-3 btn-outline-info" href="usersale-class.html">管理类别</a>
+                <router-link class="mr-3 btn-outline-info" to="/shop-detail">查看评论</router-link>
+                <router-link class="mr-3 btn-outline-info" to="/sale-class">管理类别</router-link>
                 <a class="btn-outline-danger" href="#">删除</a>
               </td>
             </tr>
@@ -82,8 +86,8 @@
               <td>审核未通过</td>
               <td>
                 <a class="mr-3 btn-outline-info" href="#">修改</a>
-                <a class="mr-3 btn-outline-info" href="shop-detail.html">查看评论</a>
-                <a class="mr-3 btn-outline-info" href="usersale-class.html">管理类别</a>
+                <router-link class="mr-3 btn-outline-info" to="/shop-detail">查看评论</router-link>
+                <router-link class="mr-3 btn-outline-info" to="/sale-class">管理类别</router-link>
                 <a class="btn-outline-danger" href="#">删除</a>
               </td>
             </tr>
@@ -96,9 +100,9 @@
               <td>审核未通过</td>
               <td>
                 <a class="mr-3 btn-outline-info" href="#">修改</a>
-                <a class="mr-3 btn-outline-info" href="shop-detail.html">查看评论</a>
-                <a class="mr-3 btn-outline-info" href="usersale-class.html">管理类别</a>
-                <a class="mr-3 btn-outline-info" href="usersale-growing.html">动态管理</a>
+                <router-link class="mr-3 btn-outline-info" to="/shop-detail">查看评论</router-link>
+                <router-link class="mr-3 btn-outline-info" to="/sale-class">管理类别</router-link>
+                <router-link class="mr-3 btn-outline-info" to="/sale-growing">动态管理</router-link>
                 <a class="btn-outline-danger" href="#">删除</a>
               </td>
             </tr>
