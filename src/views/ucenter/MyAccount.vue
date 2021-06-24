@@ -86,7 +86,7 @@
             <div class="account-box">
               <div class="service-box">
                 <div class="service-icon">
-                  <router-link :to="{ path: '/userinfo', query: { userId: userId} }">
+                  <router-link :to="{ path: '/sale-list', query: { userId: userId} }">
                     <i class="fas fa-store"></i>
                   </router-link>
                 </div>
