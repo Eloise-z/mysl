@@ -124,38 +124,38 @@ export default {
       })
     },
     provinceName (provinceCode) {
-      for (var i in this.province) {
-        if (this.province[i].code === provinceCode) {
-          return this.province[i].name
+      for (const p of this.province) {
+        if (p.code === provinceCode) {
+          return p.name
         }
       }
-      return '默认四川'
+      return { name: 'now error happened' }
     },
     cityName (provinceCode, cityCode) {
-      for (var k in this.city) {
+      for (const k in this.city) {
         if (k === provinceCode) {
-          for (var c in this.city[k]) {
-            if (this.city[k][c].code === cityCode) {
-              return this.city[k][c].name
+          for (const c of this.city[provinceCode]) {
+            if (c.code === cityCode) {
+              return c.name
             }
           }
           break
         }
       }
-      return '默认成都'
+      return { name: 'now error happened' }
     },
     areaName (cityCode, areaCode) {
-      for (var k in this.area) {
+      for (const k in this.area) {
         if (k === cityCode) {
-          for (var a in this.area[k]) {
-            if (this.area[k][a].code === areaCode) {
-              return this.area[k][a].name
+          for (const a of this.area[cityCode]) {
+            if (a.code === areaCode) {
+              return a.name
             }
           }
           break
         }
       }
-      return '默认双流'
+      return { name: 'now error happened' }
     }
   }
 }

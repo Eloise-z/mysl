@@ -131,8 +131,8 @@
               <div class="form-group">
                 <div class="row"><h3>收货信息：</h3></div>
                 <div class="row"><h3>{{ dataList.name }} / {{ dataList.tel }}</h3></div>
-                <div class="row"><h3>{{ dataList.provinceCode }} / {{ dataList.cityCode }} /
-                  {{ dataList.areaCode }}</h3></div>
+                <div class="row"><h3>{{ shipInfo.provinceName }} / {{ shipInfo.cityName }} /
+                  {{ shipInfo.areaName }}</h3></div>
                 <div class="row"><h3>{{ dataList.address }}</h3></div>
               </div>
             </div>
@@ -153,6 +153,7 @@
 
 <script>
 import centerApi from '@/api/center'
+import { area as areaData, city as cityData, province as provinceData } from '../ucenter/addressData.json'
 
 export default {
   name: 'OrderDetail',
@@ -161,7 +162,17 @@ export default {
       dataList: {
         orderId: ''
       },
-      orderId: ''
+      orderId: '',
+
+      province: provinceData,
+      city: cityData,
+      area: areaData,
+
+      shipInfo: {
+        provinceName: '',
+        cityName: '',
+        areaName: ''
+      }
     }
   },
   created () {
@@ -175,6 +186,22 @@ export default {
     getDataList () {
       centerApi.getOrderDetail(this.orderId).then((response) => {
         this.dataList = response.data.orderDetail
+        /* 获取地址具体名字 */
+        for (const p of this.province) {
+          if (p.code === this.dataList.provinceCode) {
+            this.shipInfo.provinceName = p.name
+            for (const c of this.city[p.code]) {
+              if (c.code === this.dataList.cityCode) {
+                this.shipInfo.cityName = c.name
+                for (const a of this.area[c.code]) {
+                  if (a.code === this.dataList.areaCode) {
+                    this.shipInfo.areaName = a.name
+                  }
+                }
+              }
+            }
+          }
+        }
       })
     },
     confirmGet () {
@@ -194,7 +221,6 @@ export default {
       }
     }
   }
-
 }
 
 </script>

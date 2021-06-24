@@ -33,20 +33,16 @@
             <div class="product-item-filter row">
               <div class="col-12 col-sm-8 text-center text-sm-left">
                 <div class="toolbar-sorter-right">
-                  <span>排序 </span>
-                  <select id="basic"
-                          v-model="params.option"
-                          class="selectpicker show-tick form-control"
-                          data-placeholder="$ USD"
-                          @change="getDataList();flag=false">
-                    <option data-display="Select" value="0">默认</option>
+                  <span class="col-3">排序 </span>
+                  <select v-model="params.option" class="form-control col-6" @change="getDataList();flag=false">
+                    <option value="0">默认</option>
                     <option value="1">最新商品</option>
                     <option value="2">价格从高到低</option>
                     <option value="3">价格从低到高</option>
                     <option value="4">最多售卖</option>
                   </select>
                 </div>
-                <p>展示了所有 4 个结果</p>
+                <span class="col-3 align-middle">展示了 {{ dataList.length }} 个结果</span>
               </div>
               <div class="col-12 col-sm-4 text-center text-sm-right">
                 <ul class="nav nav-tabs ml-auto">
@@ -68,7 +64,8 @@
                             <p class="hot">热卖</p>
                             <p class="new">正品保证</p>
                           </div>
-                          <img :src="list.goodPicture" class="img-fluid" alt="Image" style="height: 300px;object-fit: cover">
+                          <img :src="list.goodPicture" class="img-fluid" alt="Image"
+                               style="height: 300px;object-fit: cover">
                           <div class="mask-icon">
                             <router-link class="cart" :to="{ path: '/shop-detail', query: { goodId: list.goodId } }">
                               查看详情
@@ -153,7 +150,7 @@ export default {
         goodName: '', // 商品名称模糊查询
         Topprice: '', // 最高价
         Lowprice: '', // 最低价
-        option: '' // 1 最新商品 2价格从高到低  3价格从低到高 4最多售卖
+        option: '0' // 1 最新商品 2价格从高到低  3价格从低到高 4最多售卖
       },
       // 封装数据
       dataList: [],
@@ -167,7 +164,6 @@ export default {
     this.params.goodName = this.$route.query.goodName
     this.getDataList()
   },
-
   // 监听路由变化
   watch: {
     '$route' (to, from) {

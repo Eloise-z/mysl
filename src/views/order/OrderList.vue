@@ -136,7 +136,7 @@ export default {
     },
     orderDetail (orderId) {
       this.$router.push({
-        path: '/orderdetail',
+        path: '/order-detail',
         query: { orderId: orderId }
       })
     }

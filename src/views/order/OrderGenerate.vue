@@ -34,27 +34,27 @@
         <form class="form-horizontal" role="form">
           <div class="form-group" style="margin-left: 30px">
             <div class="row">
-              <h3>张三 / 15509080002</h3>
+              <h3>{{ currShip.name }} {{ currShip.tel }}</h3>
             </div>
             <div class="row">
-              <h3>四川省 / 成都市 / 双流区</h3>
+              <h3>{{ currShip.provinceName }} / {{ currShip.cityName }} / {{ currShip.areaName }}</h3>
             </div>
             <div class="row">
-              <h3>成都信息工程大学（航空港校区）</h3>
+              <h3>{{ currShip.address }}</h3>
             </div>
             <div class="row">
               <select class="form-control" v-model="orderInfo.shipId">
                 <option v-for="list in shipList" :value="list.shipId" :key="list.shipId">
-                  {{ list.name }} / {{ list.tel }} / {{ list.provinceCode }}
-                  / {{ list.cityCode }} / {{ list.areaCode }} / {{ list.address }}
+                  {{ list.name }} {{ list.tel }}
+                  {{ currShip.provinceName }} / {{ currShip.cityName }} / {{ currShip.areaName }} /
+                  {{ list.address }}
                 </option>
               </select>
             </div>
             <div class="row" style="margin-top: 20px;">
               <label for="remark"><b>备注：</b></label>
-              <textarea class="form-control" v-model="orderInfo.remark" id="remark" cols="300" style="width: 600px"
-                        rows="2"
-                        placeholder="请输入备注"></textarea>
+              <textarea class="form-control" v-model="orderInfo.remark" id="remark" cols="300" rows="2"
+                        style="width: 600px" placeholder="请输入备注"></textarea>
             </div>
           </div>
         </form>
@@ -132,6 +132,8 @@ import goodsApi from '@/api/goods'
 import orderApi from '@/api/order'
 import wishApi from '@/api/wish'
 
+import { area as areaData, city as cityData, province as provinceData } from '../ucenter/addressData.json'
+
 export default {
   name: 'Review',
   data () {
@@ -152,7 +154,11 @@ export default {
         remark: '', // 备注
         goodStatus: ''// 商品状态(0现货 1预售)
       },
-      goodState: ''// 记录商品是现货还是预售
+      goodState: '', // 记录商品是现货还是预售
+
+      province: provinceData,
+      city: cityData,
+      area: areaData
     }
   },
   created () {
@@ -170,11 +176,37 @@ export default {
       this.$router.push({ path: '/login' })
     }
   },
+  computed: {
+    currShip () {
+      for (const i of this.shipList) {
+        if (i.shipId === this.orderInfo.shipId) {
+          for (const p of this.province) {
+            if (p.code === i.provinceCode) {
+              i.provinceName = p.name
+              for (const c of this.city[p.code]) {
+                if (c.code === i.cityCode) {
+                  i.cityName = c.name
+                  for (const a of this.area[c.code]) {
+                    if (a.code === i.areaCode) {
+                      i.areaName = a.name
+                      return i
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      return { name: 'now error happened' }
+    }
+  },
   methods: {
     // 获取用户地址信息列表
     getShipList () {
       shipApi.getShipList(this.page, this.limit, this.orderInfo.userId).then((response) => {
         this.shipList = response.data.shiplist
+        this.orderInfo.shipId = this.shipList[0].shipId
       })
     },
     // 根据goodid获取商品信息
@@ -217,7 +249,7 @@ export default {
   },
   watch: {
     payway () {
-      console.log('hello2')
+      console.log('watching payway')
       $('#payway1').css('border', '2px solid white')
       $('#payway2').css('border', '2px solid white')
       $('#payway3').css('border', '2px solid white')

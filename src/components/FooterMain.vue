@@ -57,7 +57,7 @@
   <!-- 版权结束  -->
 
   <!-- 返回顶部 -->
-  <span title="返回顶部" id="back-to-top" style="display: none" @click="scrollTop"><i class="fas fa-angle-double-up"></i></span>
+  <span title="返回顶部" id="back-to-top" style="display: none" @click="scrollTop"><i style="padding-top: 2px" class="fas fa-angle-double-up"></i></span>
 </template>
 
 <script>
