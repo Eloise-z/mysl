@@ -230,7 +230,6 @@ export default {
         alert('请先登录！')
       }
     }
-
   }
 }
 </script>

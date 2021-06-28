@@ -16,9 +16,9 @@ export default {
     })
   },
   // 根据userId获取所有收藏信息
-  getWishByUserId (userId, limit) {
+  getWishByUserId (userId, page, limit) {
     return request({
-      url: `/user/wish/front/getWishByUserId/${userId}/${limit}`,
+      url: `/user/wish/front/getWishByUserId/${userId}/${page}/${limit}`,
       method: 'get'
     })
   },

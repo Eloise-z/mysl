@@ -99,6 +99,7 @@ export default {
   data () {
     return {
       userId: '',
+      page: 0,
       limit: 3,
       datalist: [],
       flag: false
@@ -121,7 +122,7 @@ export default {
       if (this.flag) {
         this.limit += 3
       }
-      wishApi.getWishByUserId(this.userId, this.limit).then((response) => {
+      wishApi.getWishByUserId(this.userId, this.page, this.limit).then((response) => {
         this.datalist = response.data.wishlist
       })
     },
