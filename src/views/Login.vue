@@ -21,13 +21,13 @@
                   <input type="text" id="userName" v-model="user.userName" placeholder="用户名">
                 </div>
                 <div class="col-12">
-                  <input type="text" v-model="user.userMail" placeholder="电子邮箱">
+                  <input type="text" v-model="user.userMail" @change="checkMail" placeholder="电子邮箱">
                 </div>
                 <div class="col-6">
                   <input v-show="showCode" type="text" id="code" v-model="user.code" placeholder="验证码">
                 </div>
                 <div class="col-6">
-                  <button type="button" class="btn btn-outline-success mt-2 " @click="sendMail();showCode=true">发送验证码
+                  <button type="button" class="btn btn-outline-success mt-2 " @click="showCode=true; sendMail()">发送验证码
                   </button>
                 </div>
                 <div class="col-12">
@@ -47,7 +47,7 @@
                 <a href="#" class="social"><i class="fab fa-qq"></i></a>
               </div>
               <span>或使用您的帐号</span>
-              <input type="text" v-model="user.userMail" name="userMail" placeholder="邮箱">
+              <input type="text" v-model="user.userMail" name="userMail" @change="checkMail" placeholder="邮箱">
               <input type="password" v-model="user.userPwd" name="userPwd" placeholder="密码">
               <router-link to="/findpwd">忘记密码？</router-link>
               <button type="button" @click="submitLogin()">登录</button>
@@ -111,60 +111,80 @@ export default {
   methods: {
     // 登录的方法
     submitLogin () {
-      // 调用登录接口 返回token字符串
-      loginApi.userLogin(this.user)
-        .then(response => {
-          // alert(response.data.msg)
-          if (response.data.code === 0) { // 登录成功
-            ElMessage({
-              showClose: true,
-              message: '登录成功！',
-              type: 'success'
-            })
-            // 获取到的token字符串放入cookie
-            // 1.cookie名称，2.token参数值，3.作用范围-在什么样的请求中
-            cookie.set('agriculture_token', response.data.token, { domain: 'localhost' })
-            // 调用接口 根据token解析出用户信息 给首页用
-            loginApi.getUserInfo()
-              .then(response => {
-                this.loginInfo = response.data.userInfo
-                // 获取返回的用户信息  放入cookie
-                cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
-                // 路由跳转 跳转守页面
-                this.$router.push({ path: '/' })
+      if (this.checkMail()) {
+        // 调用登录接口 返回token字符串
+        loginApi.userLogin(this.user)
+          .then(response => {
+            // alert(response.data.msg)
+            if (response.data.code === 0) { // 登录成功
+              ElMessage({
+                showClose: true,
+                message: '登录成功！',
+                type: 'success'
               })
-          } else { // 登录失败
-            ElMessage({
-              showClose: true,
-              message: '邮箱或密码错误，登录失败!',
-              type: 'error'
-            })
-            // 路由跳转 跳转页面
-            // this.$router.push({ path: '/login' })
-          }
-        })
+              // 获取到的token字符串放入cookie
+              // 1.cookie名称，2.token参数值，3.作用范围-在什么样的请求中
+              cookie.set('agriculture_token', response.data.token, { domain: 'localhost' })
+              // 调用接口 根据token解析出用户信息 给首页用
+              loginApi.getUserInfo()
+                .then(response => {
+                  this.loginInfo = response.data.userInfo
+                  // 获取返回的用户信息  放入cookie
+                  cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
+                  // 路由跳转 跳转守页面
+                  this.$router.push({ path: '/' })
+                })
+            } else { // 登录失败
+              ElMessage({
+                showClose: true,
+                message: '邮箱或密码错误，登录失败!',
+                type: 'error'
+              })
+              // 路由跳转 跳转页面
+              // this.$router.push({ path: '/login' })
+            }
+          })
+      }
     },
     // 注册-发送邮件
     sendMail () {
-      loginApi.sendEmail(this.user.userMail, this.sign).then((response) => {
-        ElMessage({
-          showClose: true,
-          message: response.data.msg
+      if (this.checkMail()) {
+        loginApi.sendEmail(this.user.userMail, this.sign).then((response) => {
+          ElMessage({
+            showClose: true,
+            message: response.data.msg
+          })
+          this.user.sysCode = response.data.code
         })
-        this.user.sysCode = response.data.code
-      })
+      } else {
+        this.showCode = false
+      }
     },
     // 注册
     register () {
-      loginApi.userRegister(this.user).then((response) => {
-        // 路由跳转 跳转登录页面
+      if (this.checkMail()) {
+        loginApi.userRegister(this.user).then((response) => {
+          // 路由跳转 跳转登录页面
+          ElMessage({
+            showClose: true,
+            message: response.data.msg,
+            type: 'success'
+          })
+          this.$router.push({ path: '/index' })
+        })
+      }
+    },
+    checkMail () {
+      if (/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(this.user.userMail)) {
+        return true
+      } else {
         ElMessage({
           showClose: true,
-          message: response.data.msg,
-          type: 'success'
+          message: '邮箱格式不对!',
+          type: 'error'
         })
-        this.$router.push({ path: '/index' })
-      })
+        return false
+      }
     }
   }
 }

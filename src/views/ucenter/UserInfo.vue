@@ -69,7 +69,7 @@
           <div class="form-group row">
             <label for="userEmail" class="col-sm-2 col-form-label">电子邮箱</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" id="userEmail" v-model="loginInfo.userMail">
+              <input type="email" class="form-control" id="userEmail" @change="checkMail" v-model="loginInfo.userMail">
             </div>
           </div>
           <div class="form-group row">
@@ -92,42 +92,13 @@
 import centerApi from '@/api/center'
 // 引入调用js-cookie
 import cookie from 'js-cookie'
+import { ElMessage } from 'element-plus'
 
 export default {
   name: 'UserInfo',
   data () {
     return {
-      loginInfo: {}, // 用户信息
-      dataRule: {
-        gender: [
-          {
-            required: true,
-            message: '性别不能为空',
-            trigger: 'blur'
-          }
-        ],
-        userName: [
-          {
-            required: true,
-            message: '用户名不能为空',
-            trigger: 'blur'
-          }
-        ],
-        userEmail: [
-          {
-            required: true,
-            message: '邮箱不能为空',
-            trigger: 'blur'
-          }
-        ],
-        userTel: [
-          {
-            required: true,
-            message: '电话不能为空',
-            trigger: 'blur'
-          }
-        ]
-      }
+      loginInfo: {} // 用户信息
     }
   },
   created () {
@@ -139,20 +110,34 @@ export default {
   methods: {
     // 修改用户信息
     modifyUserInfo () {
-      // 调用修改用户信息接口
-      centerApi.ModifyUserInfo(this.loginInfo)
-        .then(response => {
-          alert(response.data.msg)
-          if (response.data.code === 0) { // 修改成功
-            cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
-            this.$router.push({ path: '/my-account' })
-          } else {
-          }
-        })
+      if (this.checkMail()) {
+        // 调用修改用户信息接口
+        centerApi.ModifyUserInfo(this.loginInfo)
+          .then(response => {
+            alert(response.data.msg)
+            if (response.data.code === 0) { // 修改成功
+              cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
+              this.$router.push({ path: '/my-account' })
+            } else {
+            }
+          })
+      }
     },
     // 返回
     goOff () {
       this.$router.go(-1)
+    },
+    checkMail () {
+      if (/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(this.loginInfo.userMail)) {
+        return true
+      } else {
+        ElMessage({
+          showClose: true,
+          message: '邮箱格式不对!',
+          type: 'error'
+        })
+        return false
+      }
     }
   }
 
