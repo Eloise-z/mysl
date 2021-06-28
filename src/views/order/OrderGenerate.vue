@@ -198,7 +198,7 @@ export default {
           }
         }
       }
-      return { name: 'now error happened' }
+      return { name: '你应该先去个人中心页面添加收货地址，' }
     }
   },
   methods: {
