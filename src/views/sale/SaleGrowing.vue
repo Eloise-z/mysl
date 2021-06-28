@@ -9,9 +9,15 @@
       <div class="row">
         <div class="col-lg-12">
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
-            <li class="breadcrumb-item"><router-link to="/my-account"> 个人中心 </router-link></li>
-            <li class="breadcrumb-item"><router-link to="/sale-list"> 营销管理 </router-link></li>
+            <li class="breadcrumb-item">
+              <router-link to="/index">首页</router-link>
+            </li>
+            <li class="breadcrumb-item">
+              <router-link to="/my-account"> 个人中心</router-link>
+            </li>
+            <li class="breadcrumb-item">
+              <router-link to="/sale-list"> 营销管理</router-link>
+            </li>
             <li class="breadcrumb-item active"> 添加动态</li>
           </ul>
           <h2>添加动态</h2>
@@ -41,11 +47,11 @@
           <form>
             <div class="form-group">
               <label for="goodsDateCode">当前批次码</label>
-              <input type="text" readonly class="form-control" id="goodsDateCode" value="101122">
+              <input type="text" readonly class="form-control" id="goodsDateCode" v-model="dataList.twCode">
             </div>
             <div class="form-group">
               <label for="goodsDateName">当前批次名称</label>
-              <input type="text" readonly class="form-control" id="goodsDateName" value="2020春季">
+              <input type="text" readonly class="form-control" id="goodsDateName" v-model="dataList.twName">
             </div>
             <div class="form-group">
               <label for="goodsImg">动态图片</label>
@@ -60,10 +66,10 @@
             </div>
             <div class="form-group">
               <label for="goodContent">动态内容</label>
-              <textarea cols="3" class="form-control" id="goodContent"></textarea>
+              <textarea cols="3" class="form-control" id="goodContent" v-model="dataList.gdText"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary mr-3">提交</button>
-            <button type="button" class="btn">返回</button>
+            <button type="submit" class="btn btn-primary mr-3" @click="adddyn()">提交</button>
+            <button type="button" class="btn" @click="goOff()">返回</button>
           </form>
         </div>
       </div>
@@ -75,8 +81,49 @@
 </template>
 
 <script>
+import centerApi from '@/api/center'
+
 export default {
-  name: 'SaleGrowing'
+  name: 'SaleGrowing',
+  data () {
+    return {
+      dataForm: {
+        goodId: ''
+      },
+      // 封装数据
+      dataList: []
+    }
+  },
+  created () {
+    this.getgoodId()
+    this.getDataList()
+  },
+  methods: {
+    // 获取数据
+    getDataList () {
+      centerApi.selectdynById(this.dataForm.goodId).then((response) => {
+        this.dataList = response.data.frontDynInfo
+      })
+    },
+    // 获取商品ID
+    getgoodId () {
+      this.dataForm.goodId = this.$route.query.goodId
+    },
+    goOff () {
+      this.$router.go(-1)
+    },
+    adddyn () {
+      centerApi.adddyn(this.dataList).then((response) => {
+        if (response.data.code === 0) { // 增加成功
+          alert(response.data.msg)
+          this.$router.push({ path: '/sale-list' })
+        } else { // 增加失败
+          alert(response.data.msg)
+          this.$router.push({ path: '/sale-list' })
+        }
+      })
+    }
+  }
 }
 </script>
 

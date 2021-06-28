@@ -9,10 +9,20 @@ export default {
     })
   },
 
-  getFirstType () {
+  // 获取系统顶部公告
+  getTopClaim () {
     return request({
-      url: '/product/typeinfo/firstTypeInfo',
+      url: '/product/claim/front/getTopClaim',
       method: 'get'
+    })
+  },
+
+  // 分页获取系统公告
+  getClaim (params) {
+    return request({
+      url: '/product/claim/front/getClaim',
+      method: 'get',
+      params: params
     })
   }
 }

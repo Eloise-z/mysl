@@ -31,7 +31,7 @@
         <form>
           <div class="row">
             <div class="userImg" style="margin: 0 auto">
-              <img src="../../assets/images/banner-01.jpg" style="width: 150px;height: 150px;object-fit: cover"
+              <img :src="loginInfo.userAvatar" style="width: 150px;height: 150px;object-fit: cover"
                    class="border border-light rounded-circle text-center" alt="">
             </div>
           </div>
@@ -41,6 +41,7 @@
               <input type="file" class="form-control-file" id="updateImg">
             </div>
           </div>
+
           <div class="form-group row">
             <label for="userName" class="col-sm-2 col-form-label">用户名</label>
             <div class="col-sm-10">
@@ -149,13 +150,40 @@ export default {
           }
         })
     },
+    // 返回
     goOff () {
       this.$router.go(-1)
     }
   }
+
 }
 </script>
 
-<style scoped>
+<style>
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
 
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
 </style>

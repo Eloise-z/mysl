@@ -78,6 +78,7 @@
 import cookie from 'js-cookie'
 // 引入调用login.js文件
 import loginApi from '@/api/login'
+import { ElMessage } from 'element-plus'
 // function checkCode(){
 //   var code = document.getElementById("code").nodeValue
 //   var syscode = this.user.sysCode;
@@ -113,8 +114,13 @@ export default {
       // 调用登录接口 返回token字符串
       loginApi.userLogin(this.user)
         .then(response => {
-          alert(response.data.msg)
+          // alert(response.data.msg)
           if (response.data.code === 0) { // 登录成功
+            ElMessage({
+              showClose: true,
+              message: '登录成功！',
+              type: 'success'
+            })
             // 获取到的token字符串放入cookie
             // 1.cookie名称，2.token参数值，3.作用范围-在什么样的请求中
             cookie.set('agriculture_token', response.data.token, { domain: 'localhost' })
@@ -128,6 +134,11 @@ export default {
                 this.$router.push({ path: '/' })
               })
           } else { // 登录失败
+            ElMessage({
+              showClose: true,
+              message: '邮箱或密码错误，登录失败!',
+              type: 'error'
+            })
             // 路由跳转 跳转页面
             // this.$router.push({ path: '/login' })
           }
@@ -136,7 +147,10 @@ export default {
     // 注册-发送邮件
     sendMail () {
       loginApi.sendEmail(this.user.userMail, this.sign).then((response) => {
-        alert(response.data.msg)
+        ElMessage({
+          showClose: true,
+          message: response.data.msg
+        })
         this.user.sysCode = response.data.code
       })
     },
@@ -144,7 +158,11 @@ export default {
     register () {
       loginApi.userRegister(this.user).then((response) => {
         // 路由跳转 跳转登录页面
-        alert(response.data.msg)
+        ElMessage({
+          showClose: true,
+          message: response.data.msg,
+          type: 'success'
+        })
         this.$router.push({ path: '/login' })
       })
     }

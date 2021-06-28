@@ -60,6 +60,13 @@ export default {
       method: 'get'
     })
   },
+  // 根据商品id查询该当前处于哪个成长期
+  getMaxPhasId (goodId) {
+    return request({
+      url: `/product/goodsdyn/front/getMaxPhasId/${goodId}`,
+      method: 'get'
+    })
+  },
   // 根据商品id查询该商品所有动态信息
   getDynInfo (goodId) {
     return request({
@@ -71,6 +78,13 @@ export default {
   getDynPictureInfo (goodId) {
     return request({
       url: `/product/goodsdyn/front/getDynPictureInfo/${goodId}`,
+      method: 'get'
+    })
+  },
+  // 根据商品id获取该商品所有图片
+  getGoodspicByGoodId (goodId) {
+    return request({
+      url: `/product/goodspic/front/getGoodspicByGoodId/${goodId}`,
       method: 'get'
     })
   }

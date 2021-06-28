@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+// import cookie from 'js-cookie'
 
 const Common = () => import(/* webpackChunkName: "Common" */ '../components/Common')
 
@@ -63,7 +64,6 @@ const routes = [
       {
         path: '/notice',
         name: 'notice',
-        props: route => ({ query: route.query.userId }),
         component: () => import(/* webpackChunkName: "my-account" */ '../views/ucenter/Notice')
       },
       {
@@ -106,6 +106,7 @@ const routes = [
       {
         path: '/tour-detail',
         name: 'tour-detail',
+        props: route => ({ query: route.query.toId }),
         component: () => import(/* webpackChunkName: "tour" */ '../views/tour/TourDetail')
       },
       {
@@ -224,5 +225,19 @@ router.afterEach(() => {
   document.body.scrollTop = 0
   document.documentElement.scrollTop = 0
 })
+
+/* router.beforeEach((to, from, next) => {
+  // 从cookie中获取用户信息
+  var userStr = cookie.get('agriculture_ucenter')
+  // userStr是字符串   需要转换为json对象
+  if (userStr) {
+    this.userId = JSON.parse(userStr).userId
+    this.getDataList()
+  } else {
+    next({
+      path: '/login'
+    })
+  }
+}) */
 
 export default router

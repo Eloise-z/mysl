@@ -33,13 +33,11 @@
         <div class="col-xl-5 col-lg-5 col-md-6">
           <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
-              <div class="carousel-item active"><img class="d-block w-100" src="../../assets/images/big-img-01.jpg"
-                                                     alt="First slide"></div>
-              <!--      <div class="carousel-item"><img class="d-block w-100" src="../../assets/images/big-img-02.jpg"
-                                                    alt="Second slide">
-                    </div>
-                    <div class="carousel-item"><img class="d-block w-100" src="../../assets/images/big-img-03.jpg"
-                                                    alt="Third slide"></div>-->
+              <div v-for="(list,index) in goodspicList" :key="list.picId" class="carousel-item"
+                   :class="{'active': index===0}">
+                <img class="d-block w-100" :src="list.url"
+                     alt="First slide">
+              </div>
             </div>
             <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev">
               <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -50,15 +48,16 @@
               <span class="sr-only">Next</span>
             </a>
             <ol class="carousel-indicators">
-              <li data-target="#carousel-example-1" data-slide-to="0" class="active">
-                <img class="d-block w-100 img-fluid" src="../../assets/images/smp-img-01.jpg" alt=""/>
+              <li v-for="(list,index) in goodspicList" :key="list.picId"
+                  data-target="#carousel-example-1" data-slide-to="index" :class="{'active':index===0}">
+                <img class="d-block w-100 img-fluid" :src="list.url" alt=""/>
               </li>
-              <li data-target="#carousel-example-1" data-slide-to="1">
+              <!-- <li data-target="#carousel-example-1" data-slide-to="1">
                 <img class="d-block w-100 img-fluid" src="../../assets/images/smp-img-02.jpg" alt=""/>
               </li>
               <li data-target="#carousel-example-1" data-slide-to="2">
                 <img class="d-block w-100 img-fluid" src="../../assets/images/smp-img-03.jpg" alt=""/>
-              </li>
+              </li> -->
             </ol>
           </div>
         </div>
@@ -172,7 +171,7 @@ export default {
       goodId: '',
       goodsDetail: {}, // 封装右侧商品信息
       goodstypeList: [], // 封装商品类别信息
-      dynpicList: [], // 封装左侧商品图片信息
+      goodspicList: [], // 封装左侧商品图片信息
       gcriticList: [], // 封装商品评论信息
       page: 0, // 当前页
       limit: 3, // 每页显示数据数
@@ -180,7 +179,7 @@ export default {
     }
   },
   created () {
-    this.getDetail()
+    this.getDetail() // 获取商品信息
   },
   methods: {
     // 获取数据
@@ -190,35 +189,46 @@ export default {
       }
       this.goodId = this.$route.query.goodId
       // eslint-disable-next-line no-unused-expressions
+      // 获取商品文本信息
       goodsApi.getGoodDetail(this.goodId).then((response) => {
         this.goodsDetail = response.data.goodsDetail
         this.dynpicList = response.data.dynpicList
         this.goodId = response.data.goodsDetail.goodId
       })
+      // 获取商品评论列表
       goodsApi.getgcriticList(this.page, this.limit, this.goodId).then((response) => {
         this.gcriticList = response.data.gcriticList
       })
+      // 获取商品类别列表
       goodsApi.getGoodsTypeList(this.goodId).then((response) => {
         this.goodstypeList = response.data.goodstypeList
+      })
+      // 获取商品所有图片
+      goodsApi.getGoodspicByGoodId(this.goodId).then((response) => {
+        this.goodspicList = response.data.goodsPicList
       })
     },
 
     // 点击收藏
     clickWish () {
       var userStr = cookie.get('agriculture_ucenter')
-      this.userId = JSON.parse(userStr).userId
-      wishApi.getWishByUserIdAndGoodId(this.userId, this.goodId).then((response) => {
-        if (response.data.tag === 1) {
-          alert('该商品已在您的收藏中！您可在[我的收藏]中查看')
-        } else {
-          // 加入收藏
-          wishApi.addWish(this.userId, this.goodId).then((response) => {
-            if (response.data.code === 0) {
-              alert('加入成功！您可在[我的收藏]中查看')
-            }
-          })
-        }
-      })
+      if (userStr) {
+        this.userId = JSON.parse(userStr).userId
+        wishApi.getWishByUserIdAndGoodId(this.userId, this.goodId).then((response) => {
+          if (response.data.tag === 1) {
+            alert('该商品已在您的收藏中！您可在[我的收藏]中查看')
+          } else {
+            // 加入收藏
+            wishApi.addWish(this.userId, this.goodId).then((response) => {
+              if (response.data.code === 0) {
+                alert('加入成功！您可在[我的收藏]中查看')
+              }
+            })
+          }
+        })
+      } else {
+        alert('请先登录！')
+      }
     }
 
   }

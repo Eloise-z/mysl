@@ -38,15 +38,17 @@
           <form>
             <div class="form-group">
               <label for="orderId">订单编号</label>
-              <input type="text" readonly class="form-control" id="orderId" required value="101122">
+              <input type="text" readonly class="form-control" id="orderId" required v-model="dataList.orderId">
             </div>
             <div class="form-group">
               <label for="goodsID">商品ID</label>
-              <input type="text" readonly step="0.01" min="0" class="form-control" id="goodsID" required value="112">
+              <input type="text" readonly step="0.01" min="0" class="form-control" id="goodsID" required
+                     v-model="dataList.goodId">
             </div>
             <div class="form-group">
               <label for="goodsName">商品名称</label>
-              <input type="text" readonly step="0.01" min="0" class="form-control" id="goodsName" required value="新疆棉花">
+              <input type="text" readonly step="0.01" min="0" class="form-control" id="goodsName" required
+                     v-model="dataList.goodname">
             </div>
             <div class="form-group">
               <div class="row p-3">
@@ -55,21 +57,15 @@
                 </div>
                 <div class="col-md-9">
                   <select disabled class="form-control mb-3 address-select">
-                    <option>四川省</option>
-                    <option>重庆市</option>
-                    <option>湖南省</option>
+                    <option>{{ shipInfo.provinceName }}</option>
                   </select>
                   <select disabled class="form-control mb-3 address-select">
-                    <option>成都市</option>
-                    <option>宜宾市</option>
-                    <option>广安市</option>
+                    <option>{{ shipInfo.cityName }}</option>
                   </select>
                   <select disabled class="form-control  mb-3 address-select">
-                    <option>双流区</option>
-                    <option>成华区</option>
-                    <option>高新区</option>
+                    <option>{{ shipInfo.areaName }}</option>
                   </select>
-                  <textarea readonly class="form-control" placeholder="具体收货地址"></textarea>
+                  <textarea readonly class="form-control" placeholder="具体收货地址" v-model="dataList.address"></textarea>
                 </div>
               </div>
             </div>
@@ -82,33 +78,34 @@
                   <div class="col-md-2" style="text-align: right">
                     <p style="display: inline-block; line-height: 48px">收货人姓名</p>
                   </div>
-                  <div class="col-md-6"><input readonly class="form-control address-input"></div>
+                  <div class="col-md-6"><input readonly class="form-control address-input" v-model="dataList.name">
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-md-2" style="text-align: right">
                     <p style="display: inline-block; line-height: 48px">收货人手机号</p>
                   </div>
-                  <div class="col-md-6"><input readonly class="form-control address-input"></div>
+                  <div class="col-md-6"><input readonly class="form-control address-input" v-model="dataList.tel"></div>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <label for="createTime">订单创建时间</label>
-              <input type="text" class="form-control" id="createTime" readonly>
+              <input type="text" class="form-control" id="createTime" readonly v-model="dataList.createtime">
             </div>
             <div class="form-group">
               <label for="totalPay">支付金额</label>
-              <input type="text" class="form-control" id="totalPay" readonly>
+              <input type="text" class="form-control" id="totalPay" readonly v-model="dataList.totalpay">
             </div>
             <div class="form-group">
               <label for="goodsNum">购买数量</label>
-              <input type="text" class="form-control" id="goodsNum" readonly>
+              <input type="text" class="form-control" id="goodsNum" readonly v-model="dataList.goodsnum">
             </div>
             <div class="form-group">
               <label for="remark">备注</label>
-              <textarea cols="3" class="form-control" id="remark" readonly></textarea>
+              <textarea cols="3" class="form-control" id="remark" readonly v-model="dataList.remark"></textarea>
             </div>
-            <button type="button" class="btn">返回</button>
+            <button type="button" class="btn" @click="goOff()">返回</button>
           </form>
         </div>
       </div>
@@ -117,8 +114,62 @@
 </template>
 
 <script>
+import centerApi from '@/api/center'
+import { area as areaData, city as cityData, province as provinceData } from '../ucenter/addressData.json'
+
 export default {
-  name: 'SaleOrderDetail'
+  name: 'SaleOrderDetail',
+  data () {
+    return {
+      dataList: {
+        orderId: ''
+      },
+      orderId: '',
+
+      province: provinceData,
+      city: cityData,
+      area: areaData,
+
+      shipInfo: {
+        provinceName: '',
+        cityName: '',
+        areaName: ''
+      }
+    }
+  },
+  created () {
+    this.getorderId()
+    this.getDataList()
+  },
+  methods: {
+    getorderId () {
+      this.orderId = this.$route.query.orderId
+    },
+    getDataList () {
+      centerApi.getOrderDetail(this.orderId).then((response) => {
+        this.dataList = response.data.orderDetail
+        /* 获取地址具体名字 */
+        for (const p of this.province) {
+          if (p.code === this.dataList.provinceCode) {
+            this.shipInfo.provinceName = p.name
+            for (const c of this.city[p.code]) {
+              if (c.code === this.dataList.cityCode) {
+                this.shipInfo.cityName = c.name
+                for (const a of this.area[c.code]) {
+                  if (a.code === this.dataList.areaCode) {
+                    this.shipInfo.areaName = a.name
+                  }
+                }
+              }
+            }
+          }
+        }
+      })
+    },
+    goOff () {
+      this.$router.go(-1)
+    }
+  }
 }
 </script>
 

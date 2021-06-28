@@ -37,7 +37,7 @@
                   <p>当前批次</p>
                 </div>
                 <div class="col-lg-8">
-                  <p>{{tracklist.twName}}</p>
+                  <p>{{ tracklist.twName }}</p>
                 </div>
               </div>
               <div class="row">
@@ -45,7 +45,7 @@
                   <p>溯源批次码</p>
                 </div>
                 <div class="col-lg-8">
-                  <p>{{tracklist.twCode}}</p>
+                  <p>{{ tracklist.twCode }}</p>
                 </div>
               </div>
             </div>
@@ -57,43 +57,43 @@
                 <h3 class="ari-subtitle">生长过程</h3>
               </div>
               <div class="row text-center" style="font-size: 18px">
-                <div class="col-lg-12  content-green">
+                <div class="col-lg-12" :class="[MaxPhaseId>=1?'content-green':'content-grey']">
                   <p><i class="far fa-check-circle"></i>众筹期</p>
                 </div>
                 <div class="col-lg-12">
                   <p><i class="fas fa-angle-double-down"></i></p>
                 </div>
-                <div class="col-lg-12 content-grey">
+                <div class="col-lg-12" :class="[MaxPhaseId>=2?'content-green':'content-grey']">
                   <p><i class="far fa-times-circle"></i>准备期</p>
                 </div>
                 <div class="col-lg-12">
                   <p><i class="fas fa-angle-double-down"></i></p>
                 </div>
-                <div class="col-lg-12 content-grey">
+                <div class="col-lg-12" :class="[MaxPhaseId>=3?'content-green':'content-grey']">
                   <p><i class="far fa-times-circle"></i>育苗期</p>
                 </div>
                 <div class="col-lg-12">
                   <p><i class="fas fa-angle-double-down"></i></p>
                 </div>
-                <div class="col-lg-12 content-grey">
+                <div class="col-lg-12" :class="[MaxPhaseId>=4?'content-green':'content-grey']">
                   <p><i class="far fa-times-circle"></i>生长期</p>
                 </div>
                 <div class="col-lg-12">
                   <p><i class="fas fa-angle-double-down"></i></p>
                 </div>
-                <div class="col-lg-12 content-grey">
+                <div class="col-lg-12" :class="[MaxPhaseId>=5?'content-green':'content-grey']">
                   <p><i class="far fa-times-circle"></i>成熟期</p>
                 </div>
                 <div class="col-lg-12">
                   <p><i class="fas fa-angle-double-down"></i></p>
                 </div>
-                <div class="col-lg-12 content-grey">
+                <div class="col-lg-12" :class="[MaxPhaseId>=6?'content-green':'content-grey']">
                   <p><i class="far fa-times-circle"></i>结果</p>
                 </div>
                 <div class="col-lg-12">
                   <p><i class="fas fa-angle-double-down"></i></p>
                 </div>
-                <div class="col-lg-12 content-grey">
+                <div class="col-lg-12" :class="[MaxPhaseId>=7?'content-green':'content-grey']">
                   <p><i class="far fa-times-circle"></i>本轮农场结束</p>
                 </div>
               </div>
@@ -109,15 +109,15 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="growing-item">
-                      <p class="item-time"><i class="far fa-clock"></i> {{dynlist.createTime}}</p>
+                      <p class="item-time"><i class="far fa-clock"></i> {{ dynlist.createTime }}</p>
                       <div>
                         <p class="item-content">
-                          {{dynlist.gdText}}
+                          {{ dynlist.gdText }}
                         </p>
                         <div class="row">
-                          <div class="col-lg-12"  v-for="urllist in dynpicturl" :key="urllist.gdId">
+                          <div class="col-lg-12" v-for="urllist in dynpicturl" :key="urllist.gdId">
                             <template v-if="urllist.gdId === dynlist.gdId">
-                                <img class="item-img" :src="urllist.url" alt="图片不见了">
+                              <img class="item-img" :src="urllist.url" alt="图片不见了">
                             </template>
                           </div>
                         </div>
@@ -126,7 +126,7 @@
                   </div>
                 </div>
               </div>
-             </template>
+            </template>
           </div>
         </div>
       </div>
@@ -137,20 +137,24 @@
 <script>
 import '../../assets/css/aricommen.css'
 import goodsApi from '@/api/goods'
+
 export default {
   name: 'Growing',
-  data() {
+  data () {
     return {
       goodId: '',
       tracklist: {}, // 批次信息
       dynlist: [], // 动态文本信息
-      dynpicturl: []// 动态图片
+      dynpicturl: [], // 动态图片
+      MaxPhaseId: '' // 当前产品处于哪个期
     }
   },
-  created() {
+  created () {
     this.goodId = this.$route.query.goodId
     // 获取批次信息
     this.getTrackInfo()
+    // 根据商品id查询该当前处于哪个成长期
+    this.getPhaseInfo()
     // 获取动态文本信息
     this.getDynInfo()
     // 获取动态图片
@@ -158,19 +162,25 @@ export default {
   },
   methods: {
     // 获取批次信息
-    getTrackInfo() {
+    getTrackInfo () {
       goodsApi.getTrackInfo(this.goodId).then((response) => {
         this.tracklist = response.data.frontTrackInfo
       })
     },
     // 获取动态文本信息
-    getDynInfo() {
+    getDynInfo () {
       goodsApi.getDynInfo(this.goodId).then((response) => {
         this.dynlist = response.data.frontDynVoList
       })
     },
+    // 根据商品id查询该当前处于哪个成长期
+    getPhaseInfo () {
+      goodsApi.getMaxPhasId(this.goodId).then((response) => {
+        this.MaxPhaseId = response.data.MaxPhaseId
+      })
+    },
     // 获取动态图片
-    getDynPictureInfo() {
+    getDynPictureInfo () {
       goodsApi.getDynPictureInfo(this.goodId).then((response) => {
         this.dynpicturl = response.data.frontDynPictureVos
       })

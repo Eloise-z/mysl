@@ -6,6 +6,9 @@ import store from './store'
 import $ from 'jquery'
 import axios from 'axios'
 
+import ElementUI from 'element-plus'
+import 'element-plus/lib/theme-chalk/index.css'
+
 // import 'popper.js'
 // import 'bootstrap'
 // import '@popperjs/core'
@@ -47,8 +50,9 @@ console.log('测试Jquery : main.js调用了 ' + $)
 console.log('测试axios : main.js调用了 ' + axios)
 
 const app = createApp(App)
-app.use(store).use(router)
+app.use(store).use(router).use(ElementUI)
 app.config.globalProperties.$ = $
 app.config.globalProperties.jQuery = $
 app.config.globalProperties.axios = axios
+
 app.mount('#app')

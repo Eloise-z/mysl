@@ -29,7 +29,7 @@
     <div class="container">
       <div class="row mt-5">
         <div class="col-md-12 text-right">
-          <router-link class="btn btn-primary" role="button" to="/sale-add">新增商品</router-link>
+          <router-link :to="{path:'/sale-add'}" class="btn btn-primary" role="button">新增商品</router-link>
           <router-link class="btn btn-primary" role="button" to="/sale-order">商品订单管理</router-link>
         </div>
       </div>
@@ -47,70 +47,37 @@
               <th scope="col">操作</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody v-for="list in dataList" :key="list.goodId">
             <tr>
-              <th>1</th>
-              <td>新疆棉花</td>
-              <td>1000</td>
-              <td>￥99.9</td>
-              <td>2021-6-23 22:15:28</td>
-              <td>审核未通过</td>
+              <th>{{ list.goodId }}</th>
+              <td>{{ list.goodName }}</td>
+              <td>{{ list.goodNum }}</td>
+              <td>￥{{ list.goodPrice }}</td>
+              <td>{{ list.createTime }}</td>
+              <td v-if="list.goodStatus===1">未审核</td>
+              <td v-if="list.goodStatus===2">审核通过</td>
+              <td v-if="list.goodStatus===3">审核未通过</td>
               <td>
-                <router-link class="mr-3 btn-outline-info" to="/sale-add">修改</router-link>
-                <router-link class="mr-3 btn-outline-info" to="/shop-detail">查看评论</router-link>
-                <router-link class="mr-3 btn-outline-info" to="/sale-class">管理类别</router-link>
-                <router-link class="mr-3 btn-outline-info" to="/sale-growing">动态管理</router-link>
-                <a class="btn-outline-danger" href="#">删除</a>
-              </td>
-            </tr>
-            <tr>
-              <th>1</th>
-              <td>这是现货商品，没有动态管理</td>
-              <td>1000</td>
-              <td>￥99.9</td>
-              <td>2021-6-23 22:15:28</td>
-              <td>审核未通过</td>
-              <td>
-                <router-link class="mr-3 btn-outline-info" to="/sale-add">修改</router-link>
-                <router-link class="mr-3 btn-outline-info" to="/shop-detail">查看评论</router-link>
-                <router-link class="mr-3 btn-outline-info" to="/sale-class">管理类别</router-link>
-                <a class="btn-outline-danger" href="#">删除</a>
-              </td>
-            </tr>
-            <tr>
-              <th>1</th>
-              <td>新疆棉花</td>
-              <td>1000</td>
-              <td>￥99.9</td>
-              <td>2021-6-23 22:15:28</td>
-              <td>审核未通过</td>
-              <td>
-                <router-link class="mr-3 btn-outline-info" to="/sale-add">修改</router-link>
-                <router-link class="mr-3 btn-outline-info" to="/shop-detail">查看评论</router-link>
-                <router-link class="mr-3 btn-outline-info" to="/sale-class">管理类别</router-link>
-                <a class="btn-outline-danger" href="#">删除</a>
-              </td>
-            </tr>
-            <tr>
-              <th>1</th>
-              <td>新疆棉花</td>
-              <td>1000</td>
-              <td>￥99.9</td>
-              <td>2021-6-23 22:15:28</td>
-              <td>审核未通过</td>
-              <td>
-                <router-link class="mr-3 btn-outline-info" to="/sale-add">修改</router-link>
-                <router-link class="mr-3 btn-outline-info" to="/shop-detail">查看评论</router-link>
-                <router-link class="mr-3 btn-outline-info" to="/sale-class">管理类别</router-link>
-                <router-link class="mr-3 btn-outline-info" to="/sale-growing">动态管理</router-link>
-                <a class="btn-outline-danger" href="#">删除</a>
+                <router-link :to="{path:'/sale-add',query:{goodId:list.goodId}}" class="mr-3 btn-outline-info">修改
+                </router-link>
+
+                <router-link class="mr-3 btn-outline-info"
+                             :to="{ path: '/shop-detail', query: { goodId: list.goodId } }">查看评论
+                </router-link>
+                <router-link :to="{path:'/sale-class',query:{goodid:list.goodId,goodName:list.goodName}}"
+                             class="mr-3 btn-outline-info">管理类别
+                </router-link>
+                <router-link :to="{path:'/sale-growing',query:{goodId:list.goodId}}" class="mr-3 btn-outline-info">
+                  动态管理
+                </router-link>
+                <a class="btn-outline-danger" @click="deleteUserGoods(list.goodId)">删除</a>
               </td>
             </tr>
             </tbody>
           </table>
         </div>
         <div class="col-lg-12 text-center mb-5">
-          <a class="btn btn-outline-primary w-100" role="button" href="#">展示更多</a>
+          <a class="btn btn-outline-primary w-100" role="button" @click="flag=true;getDataList()">展示更多</a>
         </div>
       </div>
     </div>
@@ -118,8 +85,61 @@
 </template>
 
 <script>
+import centerApi from '@/api/center'
+// 引入调用js-cookie
+import cookie from 'js-cookie'
+
 export default {
-  name: 'SaleList'
+  name: 'SaleList',
+  data () {
+    return {
+      // 条件查询参数
+      params: {
+        page: 0, // 当前页
+        limit: 4, // 每页显示数据数
+        userId: ''
+      },
+      loginInfo: {}, // 用户信息
+      // 封装数据
+      dataList: [],
+      flag: false // 点击加载更多变为true
+    }
+  },
+  created () {
+    var userStr = cookie.get('agriculture_ucenter')
+    if (userStr) {
+      this.loginInfo = JSON.parse(userStr)
+    }
+    this.params.userId = this.loginInfo.userId
+    this.getDataList()
+  },
+  methods: {
+    // 获取数据
+    getDataList () {
+      if (this.flag === true) {
+        this.params.limit += 4
+      }
+      centerApi.getUsersaleList(this.params).then((response) => {
+        this.dataList = response.data.page
+      })
+    },
+    //
+    deleteUserGoods (goodId) {
+      if (confirm('是否对此订单进行删除？')) {
+        centerApi.deletUserGoods(goodId).then((response) => {
+          if (response.data.code === 0) { // 删除成功
+            alert(response.data.msg)
+            this.getDataList()
+          } else { // 删除失败
+            alert(response.data.msg)
+            this.getDataList()
+          }
+        })
+      } else {
+        this.getDataList()
+      }
+    }
+  }
 }
 </script>
 

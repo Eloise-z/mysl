@@ -106,9 +106,9 @@
               <div class="price-box-slider">
                 <div id="slider-range"></div>
                 <p>
-                  <input type="text" @click="changePrice();flag=false" id="amount" readonly
+                  <input type="text" @keyup.enter="changePrice" @click="changePrice();flag=false" id="amount" readonly
                          v-model="eloisePrice" style="border:0; color:#fbb714; font-weight:bold;">
-                  <button class="btn hvr-hover" type="submit">筛选</button>
+<!--                  <button class="btn hvr-hover" type="submit">筛选</button>-->
                 </p>
               </div>
             </div>

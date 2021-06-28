@@ -19,17 +19,17 @@
               </li>
               <li v-if="loginInfo.userId" id="is-login-two" class="h-r-user">
                 <router-link class="mr-3" :to="{ path: '/my-account', query: { userId: loginInfo.userId} }">
-                  <img :src="loginInfo.userAvatar" style="width: 25px;height: 25px;border-radius: 50%;object-fit: cover"
+                  <img v-show="loginInfo.userAvatar != null" :src="loginInfo.userAvatar" style="width: 25px;height: 25px;border-radius: 50%;object-fit: cover"
                        class="vam picImg mr-2" alt/>
                   <span id="userName" class="vam disIb">{{ loginInfo.userName }}</span>
                 </router-link>
                 <a href="javascript:void(0);" title="退出" @click="logout()" class="ml5">退出</a>
               </li>
               <li>
-                <router-link to=""><i class="fas fa-file-alt"></i> 订单</router-link>
+                <router-link to="/order-list"><i class="fas fa-file-alt"></i> 订单</router-link>
               </li>
               <li>
-                <router-link to=""><i class="fas fa-bell"></i> 系统消息</router-link>
+                <router-link to="/notice"><i class="fas fa-bell"></i> 系统消息</router-link>
               </li>
             </ul>
           </div>
@@ -47,22 +47,11 @@
           <div>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
               <div class="carousel-inner">
-                <div class="carousel-item active">
+                <div v-for="(list, index) in claimList" :key="list.clId" :class="{'active' : index === 0}"
+                     class="carousel-item">
                   <span style="font-size: 14px" class="font-weight-bold">
                     <i style="color: rgb(176 180 53)" class="fab fa-slack-hash"></i>
-                    助力乡村振兴，加快农业农村现代化
-                  </span>
-                </div>
-                <div class="carousel-item">
-                  <span style="font-size: 14px" class="font-weight-bold">
-                    <i style="color: rgb(176 180 53)" class="fab fa-slack-hash"></i>
-                    全面建成小康社会
-                  </span>
-                </div>
-                <div class="carousel-item">
-                  <span style="font-size: 14px" class="font-weight-bold">
-                    <i style="color: rgb(176 180 53)" class="fab fa-slack-hash"></i>
-                    乡村振兴
+                    {{ list.clTitle }}
                   </span>
                 </div>
               </div>
@@ -80,6 +69,7 @@
 import cookie from 'js-cookie'
 // 引入调用login.js文件
 import loginApi from '@/api/login'
+import indexApi from '@/api/index'
 
 export default {
   data () {
@@ -92,7 +82,8 @@ export default {
         userAvatar: '',
         userTel: '',
         userName: ''
-      }
+      },
+      claimList: ''// 系统消息
     }
   },
   created () {
@@ -102,8 +93,10 @@ export default {
       // 判断路径是否有token值
       this.wxLogin()
     }
-
+    // 从cookie中获取用户信息
     this.showInfoFromCookie()
+    // 获取公告消息
+    this.getClaimList()
   },
   methods: {
     // 从cookie中获取用户信息
@@ -114,6 +107,13 @@ export default {
       if (userStr) {
         this.loginInfo = JSON.parse(userStr)
       }
+    },
+
+    // 获取公告消息
+    getClaimList () {
+      indexApi.getTopClaim().then((response) => {
+        this.claimList = response.data.claimList
+      })
     },
 
     // 退出  cookie清空

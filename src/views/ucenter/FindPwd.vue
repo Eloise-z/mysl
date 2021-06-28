@@ -50,6 +50,7 @@
             </div>
             <div class="text-center">
               <button type="button" class="btn btn-success" @click="submit()">提交</button>
+              <button type="button" class="btn" style="margin-left: 10px" @click="goOff()">返回</button>
             </div>
           </form>
         </div>
@@ -92,6 +93,9 @@ export default {
           this.$router.push({ path: '/login' })
         }
       })
+    },
+    goOff () {
+      this.$router.go(-1)
     }
   }
 }

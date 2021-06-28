@@ -10,7 +10,9 @@
         <div class="col-lg-12">
 
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
+            <li class="breadcrumb-item">
+              <router-link to="/index">首页</router-link>
+            </li>
             <li class="breadcrumb-item active"> 应急·滞销</li>
           </ul>
           <h2>应急·滞销</h2>
@@ -42,7 +44,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-12 shadow p-3 mb-3">
+              <div v-for="list in datalist" :key="list.emId" class="col-lg-12 shadow p-3 mb-3">
                 <table class="table  table-hover">
                   <thead>
                   <tr>
@@ -53,105 +55,37 @@
                   <tr>
                     <!--<th scope="row">1</th>-->
                     <td style="min-width: 150px">滞销产品</td>
-                    <td>苹果</td>
+                    <td>{{ list.emName }}</td>
                   </tr>
                   <tr>
                     <td>数量</td>
-                    <td>25吨</td>
+                    <td>{{ list.emNum }}</td>
                   </tr>
                   <tr>
                     <td>地点</td>
-                    <td>四川省成都市</td>
+                    <td>{{ list.emPlace }}</td>
                   </tr>
                   <tr>
                     <td>联系人</td>
-                    <td>张三三</td>
+                    <td>{{ list.emMan }}</td>
                   </tr>
                   <tr>
                     <td>联系方式</td>
-                    <td>微信 121132xa</td>
+                    <td>{{ list.emContact }}</td>
                   </tr>
                   <tr>
                     <td>其他信息</td>
-                    <td>看看我吧，我们真的卖不出去了，帮帮忙看看我吧，我们真的卖不出去了，帮帮忙吧吧看看我吧，我们真的卖不出去了，帮帮忙吧</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="col-lg-12 shadow p-3 mb-3">
-                <table class="table  table-hover">
-                  <thead>
-                  <tr>
-                    <th colspan="3">滞销信息</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <!--<th scope="row">1</th>-->
-                    <td style="min-width: 150px">滞销产品</td>
-                    <td>苹果</td>
+                    <td>{{ list.emOth }}</td>
                   </tr>
                   <tr>
-                    <td>数量</td>
-                    <td>25吨</td>
-                  </tr>
-                  <tr>
-                    <td>地点</td>
-                    <td>四川省成都市</td>
-                  </tr>
-                  <tr>
-                    <td>联系人</td>
-                    <td>张三三</td>
-                  </tr>
-                  <tr>
-                    <td>联系方式</td>
-                    <td>微信 121132xa</td>
-                  </tr>
-                  <tr>
-                    <td>其他信息</td>
-                    <td>看看我吧，我们真的卖不出去了，帮帮忙看看我吧，我们真的卖不出去了，帮帮忙吧吧看看我吧，我们真的卖不出去了，帮帮忙吧</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="col-lg-12 shadow p-3 mb-3">
-                <table class="table  table-hover">
-                  <thead>
-                  <tr>
-                    <th colspan="3">滞销信息</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <!--<th scope="row">1</th>-->
-                    <td style="min-width: 150px">滞销产品</td>
-                    <td>苹果</td>
-                  </tr>
-                  <tr>
-                    <td>数量</td>
-                    <td>25吨</td>
-                  </tr>
-                  <tr>
-                    <td>地点</td>
-                    <td>四川省成都市</td>
-                  </tr>
-                  <tr>
-                    <td>联系人</td>
-                    <td>张三三</td>
-                  </tr>
-                  <tr>
-                    <td>联系方式</td>
-                    <td>微信 121132xa</td>
-                  </tr>
-                  <tr>
-                    <td>其他信息</td>
-                    <td>看看我吧，我们真的卖不出去了，帮帮忙看看我吧，我们真的卖不出去了，帮帮忙吧吧看看我吧，我们真的卖不出去了，帮帮忙吧</td>
+                    <td>发布时间</td>
+                    <td>{{ list.createTime }}</td>
                   </tr>
                   </tbody>
                 </table>
               </div>
               <div class="col-lg-12 text-center mt-3 mb-5">
-                <a role="button" class="btn btn-outline-primary w-100" href="#">加载更多</a>
+                <a role="button" class="btn btn-outline-primary w-100" @click="flag=true;getDataList()">加载更多</a>
               </div>
             </div>
           </div>
@@ -163,8 +97,33 @@
 </template>
 
 <script>
+import emerApi from '@/api/emer'
+
 export default {
-  name: 'Emergency'
+  name: 'Emergency',
+  data () {
+    return {
+      params: {
+        page: 0, // 当前页
+        limit: 2 // 每页显示数量
+      },
+      datalist: [], // 封装数据
+      flag: false // 单击加载更多时变为true
+    }
+  },
+  created () {
+    this.getDataList()
+  },
+  methods: {
+    getDataList () {
+      if (this.flag) {
+        this.params.limit += 3
+      }
+      emerApi.getEmerList(this.params).then((response) => {
+        this.datalist = response.data.emerlist
+      })
+    }
+  }
 }
 </script>
 

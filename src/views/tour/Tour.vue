@@ -11,36 +11,15 @@
       <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
-      <div class="carousel-item active" style="background-color: rgba(0, 0, 0, 0.4);">
+      <div v-for="(list, index) in bannerlist" class="carousel-item" :key="list.adId" :class="{'active' : index === 0}"
+           style="background-color: rgba(0, 0, 0, 0.4);">
         <img
-          src="https://n1-q.mafengwo.net/s18/M00/30/5D/CoUBYGCrgl6AKA0AACiF5UeTDzY091.png?imageView2%2F2%2Fw%2F1920%2Fq%2F90%2Fformat%2Fjpeg"
+          :src="list.picUrl"
           class="d-block w-100" style="width: 100%;height: 100vh;object-fit:cover" alt="">
         <div class="cover w-100"
              style="position: absolute ;right:0;top: 0;height:100vh;background-color: rgba(0, 0, 0, 0.3);"></div>
         <div class="carousel-caption d-none d-md-block" style="bottom:35vh;right:0 ">
-          <p style="font-size: 22px"><i class="fab fa-slack-hash" style="padding-right: 5px;"></i>飞入心中的梦幻岛：圣托里尼！（圣岛小镇全记录+完美日落+写真大片）
-          </p>
-        </div>
-      </div>
-      <div class="carousel-item" style="background-color: rgba(0, 0, 0, 0.4);">
-        <img
-          src="https://b1-q.mafengwo.net/s18/M00/80/23/CoUBYGCn27yAaYeBAC6QTEPDmSA585.png?imageView2%2F2%2Fw%2F1920%2Fq%2F90%2Fformat%2Fjpeg"
-          class="d-block w-100" style="width: 100%;height: 100vh;object-fit:cover" alt="">
-        <div class="cover w-100"
-             style="position: absolute ;right:0;top: 0;height:100vh;background-color: rgba(0, 0, 0, 0.3);"></div>
-        <div class="carousel-caption d-none d-md-block" style="bottom:35vh;right:0 ">
-          <p style="font-size: 22px"><i class="fab fa-slack-hash" style="padding-right: 5px;"></i>开着房车去新疆，独库公路+南疆20天自驾
-          </p>
-        </div>
-      </div>
-      <div class="carousel-item" style="background-color: rgba(0, 0, 0, 0.4);">
-        <img
-          src="https://n1-q.mafengwo.net/s18/M00/73/11/CoUBYGDJ7e-AXKKvACEqUm69j8o791.png?imageView2%2F2%2Fw%2F1920%2Fq%2F90%2Fformat%2Fjpeg"
-          class="d-block w-100" style="width: 100%;height: 100vh;object-fit:cover" alt="">
-        <div class="cover w-100"
-             style="position: absolute ;right:0;top: 0;height:100vh;background-color: rgba(0, 0, 0, 0.3);"></div>
-        <div class="carousel-caption d-none d-md-block" style="bottom:35vh;right:0 ">
-          <p style="font-size: 22px"><i class="fab fa-slack-hash" style="padding-right: 5px;"></i>「带妈妈去旅行」在玉龙雪山下过几天悠哉慢生活
+          <p style="font-size: 22px"><i class="fab fa-slack-hash" style="padding-right: 5px;"></i>{{ list.adName }}
           </p>
         </div>
       </div>
@@ -73,39 +52,17 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div v-for="list in dataList.revolutionaryList" :key="list.toId" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
           <div class="shop-cat-box">
             <div class="type-lb">
               <p class="new">新线路</p>
             </div>
             <img class="img-fluid"
-                 src="https://b1-q.mafengwo.net/s10/M00/64/D1/wKgBZ1i_vHCAK5gMAA9i-gEH7iM94.jpeg?imageMogr2%2Fthumbnail%2F%21690x450r%2Fgravity%2FCenter%2Fcrop%2F%21690x450%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cHM6Ly9iMS1xLm1hZmVuZ3dvLm5ldC9zMTEvTTAwLzQ0LzlCL3dLZ0JFRnNQNVJ5QUR2N3BBQUFIWlpVUFJsUTk5MC5wbmc%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11"
+                 :src="list.toMainpic"
                  alt=""/>
-            <router-link class="btn hvr-hover" to="/tour-detail">重庆渣滓洞</router-link>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-          <div class="shop-cat-box">
-            <img class="img-fluid"
-                 src="https://b1-q.mafengwo.net/s5/M00/77/80/wKgB21ASPsmU6cjvABuIA31sx4A28.jpeg?imageMogr2%2Fthumbnail%2F%21690x370r%2Fgravity%2FCenter%2Fcrop%2F%21690x370%2Fquality%2F100"
-                 alt=""/>
-            <router-link class="btn hvr-hover" to="/tour-detail">红岩村革命纪念馆</router-link>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-          <div class="shop-cat-box">
-            <img class="img-fluid"
-                 src="https://p1-q.mafengwo.net/s11/M00/F7/0C/wKgBEFtP7_SALTYvAA4GOR25Lk408.jpeg?imageMogr2%2Fthumbnail%2F%21690x370r%2Fgravity%2FCenter%2Fcrop%2F%21690x370%2Fquality%2F100"
-                 alt=""/>
-            <router-link class="btn hvr-hover" to="/tour-detail">井冈山革命博物馆</router-link>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-          <div class="shop-cat-box">
-            <img class="img-fluid"
-                 src="https://p1-q.mafengwo.net/s6/M00/EF/B9/wKgB4lNl_O6AdnrTAAEjlmH__Jc56.jpeg?imageMogr2%2Fthumbnail%2F%21690x370r%2Fgravity%2FCenter%2Fcrop%2F%21690x370%2Fquality%2F100"
-                 alt=""/>
-            <router-link class="btn hvr-hover" to="/tour-detail">赵一曼纪念馆</router-link>
+            <router-link class="btn hvr-hover" :to="{ path: '/tour-detail', query: { toId: list.toId } }">
+              {{ list.toName }}
+            </router-link>
           </div>
         </div>
       </div>
@@ -118,29 +75,24 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="title-all text-center">
-            <h1>乡村振兴</h1>
-            <p>共护诗画万丈湖,同筑百年乡村梦。</p>
+            <div class="border-red">
+              <h1 class="content-red" style="margin-left: -940px;color: #bd1e22">乡村振兴</h1>
+            </div>
+            <p style="margin-left: -830px">共护诗画万丈湖,同筑百年乡村梦。</p>
+            <!-- <h1>乡村振兴</h1>
+            <p>共护诗画万丈湖,同筑百年乡村梦。</p> -->
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
+        <div v-for="list in dataList.ruralVitalizationList" :key="list.toId"
+             class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
           <div class="offer-box-products" style="text-align: center;height: 360px;">
-            <router-link to="/tour-detail">
+            <router-link :to="{ path: '/tour-detail', query: { toId: list.toId } }">
               <img style="max-width: 100%"
-                   src="https://b1-q.mafengwo.net/s18/M00/62/E8/CoUBYGBd1BiAXakuAA6MFnA66Jk647.jpg?imageMogr2%2Fthumbnail%2F1360x%2Fstrip%2Fquality%2F90"
+                   :src="list.toMainpic"
                    alt="">
-              <p style="font-size: 20px;margin-top: 5px;">株洲攸县</p>
-            </router-link>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
-          <div class="offer-box-products" style="text-align: center;height: 360px">
-            <router-link to="/tour-detail">
-              <img style="max-width: 100%"
-                   src="http://b1-q.mafengwo.net/s11/M00/EC/7F/wKgBEFxboPqAC5spAA8iGx9NlPk80.jpeg?imageMogr2%2Fthumbnail%2F1360x%2Fstrip%2Fquality%2F90"
-                   alt="">
-              <p style="font-size: 20px;margin-top: 5px;">宜宾屏山</p>
+              <p style="font-size: 20px;margin-top: 5px;">{{ list.toName }}</p>
             </router-link>
           </div>
         </div>
@@ -164,48 +116,18 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div v-for="list in dataList.ruralVitalizationList" :key="list.toId"
+             class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
           <div class="shop-cat-box">
             <div class="type-lb">
               <p class="new">新线路</p>
             </div>
             <img class="img-fluid"
-                 src="https://b1-q.mafengwo.net/s18/M00/83/EA/CoUBYGCn4ciAfLDDABkIOyciOPU502.jpg?imageMogr2%2Fthumbnail%2F%21310x175r%2Fgravity%2FCenter%2Fcrop%2F%21310x175%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cHM6Ly9iMS1xLm1hZmVuZ3dvLm5ldC9zMTEvTTAwLzQ0LzlCL3dLZ0JFRnNQNVJ5QUR2N3BBQUFIWlpVUFJsUTk5MC5wbmc%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11"
+                 :src="list.toMainpic"
                  alt=""/>
-            <router-link class="btn hvr-hover" to="/tour-detail">湘西十八洞村</router-link>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-          <div class="shop-cat-box">
-            <div class="type-lb">
-              <p class="new">新线路</p>
-            </div>
-            <img class="img-fluid"
-                 src="https://b1-q.mafengwo.net/s18/M00/83/EA/CoUBYGCn4ciAfLDDABkIOyciOPU502.jpg?imageMogr2%2Fthumbnail%2F%21310x175r%2Fgravity%2FCenter%2Fcrop%2F%21310x175%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cHM6Ly9iMS1xLm1hZmVuZ3dvLm5ldC9zMTEvTTAwLzQ0LzlCL3dLZ0JFRnNQNVJ5QUR2N3BBQUFIWlpVUFJsUTk5MC5wbmc%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11"
-                 alt=""/>
-            <router-link class="btn hvr-hover" to="/tour-detail">湘西十八洞村</router-link>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-          <div class="shop-cat-box">
-            <div class="type-lb">
-              <p class="new">新线路</p>
-            </div>
-            <img class="img-fluid"
-                 src="https://b1-q.mafengwo.net/s18/M00/83/EA/CoUBYGCn4ciAfLDDABkIOyciOPU502.jpg?imageMogr2%2Fthumbnail%2F%21310x175r%2Fgravity%2FCenter%2Fcrop%2F%21310x175%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cHM6Ly9iMS1xLm1hZmVuZ3dvLm5ldC9zMTEvTTAwLzQ0LzlCL3dLZ0JFRnNQNVJ5QUR2N3BBQUFIWlpVUFJsUTk5MC5wbmc%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11"
-                 alt=""/>
-            <router-link class="btn hvr-hover" to="/tour-detail">湘西十八洞村</router-link>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-          <div class="shop-cat-box">
-            <div class="type-lb">
-              <p class="new">新线路</p>
-            </div>
-            <img class="img-fluid"
-                 src="https://b1-q.mafengwo.net/s18/M00/83/EA/CoUBYGCn4ciAfLDDABkIOyciOPU502.jpg?imageMogr2%2Fthumbnail%2F%21310x175r%2Fgravity%2FCenter%2Fcrop%2F%21310x175%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cHM6Ly9iMS1xLm1hZmVuZ3dvLm5ldC9zMTEvTTAwLzQ0LzlCL3dLZ0JFRnNQNVJ5QUR2N3BBQUFIWlpVUFJsUTk5MC5wbmc%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11"
-                 alt=""/>
-            <router-link class="btn hvr-hover" to="/tour-detail">湘西十八洞村</router-link>
+            <router-link class="btn hvr-hover" :to="{ path: '/tour-detail', query: { toId: list.toId } }">
+              {{ list.toName }}
+            </router-link>
           </div>
         </div>
       </div>
@@ -299,8 +221,35 @@
 </template>
 
 <script>
+import tourApi from '@/api/tour'
+import bannerApi from '@/api/banner'
+
 export default {
-  name: 'Tour'
+  name: 'Tour',
+  data () {
+    return {
+      dataList: {}, // 数据列表
+      bannerlist: []// 轮播广告
+    }
+  },
+  created () {
+    this.getDataList()
+    this.getBannerList()
+  },
+  methods: {
+    // 获取数据列表
+    getDataList () {
+      tourApi.getIndex().then((response) => {
+        this.dataList = response.data.indexList
+      })
+    },
+    // 获取轮播广告
+    getBannerList () {
+      bannerApi.getBannerList(2).then((response) => {
+        this.bannerlist = response.data.adlist
+      })
+    }
+  }
 }
 </script>
 

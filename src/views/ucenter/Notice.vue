@@ -9,7 +9,9 @@
       <div class="row">
         <div class="col-lg-12">
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
+            <li class="breadcrumb-item">
+              <router-link to="/index">首页</router-link>
+            </li>
             <li class="breadcrumb-item active"> 系统消息</li>
           </ul>
           <h2>系统消息</h2>
@@ -23,28 +25,12 @@
   <div class="notice">
     <div class="container mt-5">
       <div class="row">
-        <div class="col-lg-12 shadow mb-3 p-3">
-          <p style="font-size: 18px">您购买的 ”特色苹果“ 商品状态发生改变。<span
-            style="float: right;font-size: 12px">2021-6-19 20:07:18</span></p>
-        </div>
-        <div class="col-lg-12 shadow mb-2 p-3">
-          <p style="font-size: 18px">您购买的 ”特色苹果“ 商品状态发生改变。<span
-            style="float: right;font-size: 12px">2021-6-19 20:07:18</span></p>
-        </div>
-        <div class="col-lg-12 shadow mb-2 p-3">
-          <p style="font-size: 18px">您购买的 ”特色苹果“ 商品状态发生改变。<span
-            style="float: right;font-size: 12px">2021-6-19 20:07:18</span></p>
-        </div>
-        <div class="col-lg-12 shadow mb-2 p-3">
-          <p style="font-size: 18px">您购买的 ”特色苹果“ 商品状态发生改变。<span
-            style="float: right;font-size: 12px">2021-6-19 20:07:18</span></p>
-        </div>
-        <div class="col-lg-12 shadow mb-2 p-3">
-          <p style="font-size: 18px">您购买的 ”特色苹果“ 商品状态发生改变。<span
-            style="float: right;font-size: 12px">2021-6-19 20:07:18</span></p>
+        <div v-for="list in dataList" :key="list.clId" class="col-lg-12 shadow mb-3 p-3">
+          <p style="font-size: 18px">{{ list.clTitle }}<span
+            style="float: right;font-size: 12px">{{ list.createTime }}</span></p>
         </div>
         <div class="col-lg-12 text-center mt-3 mb-5">
-          <a role="button" class="btn btn-outline-primary w-100" href="#">加载更多</a>
+          <a role="button" class="btn btn-outline-primary w-100" @click="flag=true;getDataList()">加载更多</a>
         </div>
       </div>
     </div>
@@ -52,8 +38,34 @@
 </template>
 
 <script>
+import indexApi from '@/api/index'
+
 export default {
-  name: 'Notice'
+  name: 'Notice',
+  data () {
+    return {
+      // 查询参数
+      params: {
+        page: 0,
+        limit: 3
+      },
+      flag: false, // 点击加载更多变为true
+      dataList: [] // 数据列表
+    }
+  },
+  created () {
+    this.getDataList()
+  },
+  methods: {
+    getDataList () {
+      if (this.flag) {
+        this.params.limit += 3
+      }
+      indexApi.getClaim(this.params).then((response) => {
+        this.dataList = response.data.claimList
+      })
+    }
+  }
 }
 </script>
 

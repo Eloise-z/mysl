@@ -42,24 +42,10 @@
   <div class="box-add-products">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12">
+        <div v-for="list in bannerlist" :key="list.adId" class="col-lg-6 col-md-6 col-sm-12">
           <div class="offer-box-products">
             <img class="img-fluid"
-                 src="https://img14.360buyimg.com/pop/s1180x940_jfs/t1/179481/27/5650/97458/60ab16c8E8dab80d4/d15ababeebbaa6c8.jpg.webp"
-                 alt=""/>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12">
-          <div class="offer-box-products">
-            <img class="img-fluid"
-                 src="https://img30.360buyimg.com/babel/s1180x940_jfs/t1/183807/18/5717/133726/60ac5c43E8b59e8e7/2891a14fde501fbc.jpg.webp"
-                 alt=""/>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12" style="padding-top: 30px">
-          <div class="offer-box-products">
-            <img class="img-fluid"
-                 src="https://imgcps.jd.com/img-cubic/creative_server_cia/v2/2000366/100012241666/FocusFullshop/CkJqZnMvdDEvMTIyNTMyLzcvMTYwMjIvOTIyNjUvNWY5Mzk3NTZFNzFiYTQyZGYvOGE1NzEwNTc3ZmI1M2U5MC5qcGcSCjk5OS10eV8wXzEwATjui3o/cr/s/q.jpg"
+                 :src="list.picUrl"
                  alt=""/>
           </div>
         </div>
@@ -70,8 +56,26 @@
 </template>
 
 <script>
+import bannerApi from '@/api/banner'
+
 export default {
-  name: 'LandMark'
+  name: 'LandMark',
+  data () {
+    return {
+      bannerlist: []// 轮播广告
+    }
+  },
+  created () {
+    this.getBannerList()
+  },
+  methods: {
+    // 获取广告
+    getBannerList () {
+      bannerApi.getBannerList(3).then((response) => {
+        this.bannerlist = response.data.adlist
+      })
+    }
+  }
 }
 </script>
 

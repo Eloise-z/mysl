@@ -11,40 +11,16 @@
       <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
-      <div class="carousel-item" style="background-color: rgba(0, 0, 0, 0.4);">
-        <img src="../assets/images/ylp.jpg" class="d-block w-100" style="width: 100%;height: 80vh;object-fit:cover"
-             alt="">
-        <div class="cover w-100"
-             style="position: absolute ;right:0;top: 0;height:80vh;background-color: rgba(0, 0, 0, 0.4);"></div>
-        <div class="carousel-caption d-none d-md-block" style="bottom:25% ">
-          <h5><strong>爱农助农<br>服务三农</strong></h5>
-          <p><i class="fas fa-at" style="padding-right: 5px;"></i>缅怀袁隆平院士</p>
-        </div>
-      </div>
-      <div class="carousel-item" style="background-color: rgba(0, 0, 0, 0.4);">
-        <img src="http://images.wenming.cn/web_wenming/images/rlqzxzgcl20210406-11.jpg" class="d-block w-100"
-             style="width: 100%;height: 80vh;object-fit:cover" alt="">
-        <div class="carousel-caption d-none d-md-block" style="bottom:0">
-          <p><i class="fas fa-at" style="padding-right: 5px;"></i>庆祝中国共产党成立100周年</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="../assets/images/banner-02.jpg" style="width: 100%;height: 80vh;object-fit:cover"
-             class="d-block w-100" alt="">
-        <div class="cover w-100"
-             style="position: absolute ;right:0;top: 0;height:80vh;background-color: rgba(0, 0, 0, 0.4);"></div>
-        <div class="carousel-caption d-none d-md-block" style="bottom:25% ">
-          <h5><i class="fas fa-broadcast-tower" style="padding-right: 5px;"></i><strong>全面小康 <br> 乡村振兴</strong></h5>
-          <p>助力乡村振兴 <br><br> 加快农业农村现代化</p>
-        </div>
-      </div>
       <div v-for="(list, index) in bannerlist" class="carousel-item" :key="list.adId" :class="{'active' : index === 0}">
         <img :src="list.picUrl" style="width: 100%;height: 80vh;object-fit:cover" class="d-block w-100" alt="">
         <div class="cover w-100"
              style="position: absolute ;right:0;top: 0;height:80vh;background-color: rgba(0, 0, 0, 0.4);"></div>
         <div class="carousel-caption d-none d-md-block" style="bottom:25% ">
-          <h5><i class="fas fa-broadcast-tower" style="padding-right: 5px;"></i><strong>测试 <br> 测试测试</strong></h5>
-          <p>测试</p>
+          <h5>
+            <i class="fas fa-broadcast-tower" style="padding-right: 5px;"></i>
+            <strong>{{ list.adName }} <br>{{ list.adTitle }}</strong>
+          </h5>
+          <p>{{ list.adSubtitle }}</p>
         </div>
       </div>
     </div>
@@ -167,38 +143,6 @@
               </div>
               <img :src="list.goodPicture" class="img-fluid" style="height:300px;object-fit:cover" alt="Image"/>
               <div class="mask-icon">
-                <!-- <ul>
-                   <li>
-                     <a
-                       href="#"
-                       data-toggle="tooltip"
-                       data-placement="right"
-                       title="View"
-                       >
-                       <i class="fas fa-eye"></i>
-                       </a>
-                   </li>
-                   <li>
-                     <a
-                       href="#"
-                       data-toggle="tooltip"
-                       data-placement="right"
-                       title="Compare"
-                       >
-                       <i class="fas fa-sync-alt"></i>
-                     </a>
-                   </li>
-                   <li>
-                     <a
-                       href="#"
-                       data-toggle="tooltip"
-                       data-placement="right"
-                       title="Add to Wishlist"
-                       >
-                       <i class="far fa-heart"></i>
-                       </a>
-                   </li>
-                 </ul>-->
                 <router-link class="cart" :to="{ path: '/shop-detail', query: { goodId: list.goodId } }">查看商品
                 </router-link>
               </div>
@@ -330,7 +274,7 @@ export default {
       })
     },
     getBannerList () {
-      bannerApi.getBannerList().then((response) => {
+      bannerApi.getBannerList(1).then((response) => {
         this.bannerlist = response.data.adlist
       })
     }
