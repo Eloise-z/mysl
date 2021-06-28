@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-// import cookie from 'js-cookie'
+import cookie from 'js-cookie'
 
 const Common = () => import(/* webpackChunkName: "Common" */ '../components/Common')
 
@@ -226,18 +226,24 @@ router.afterEach(() => {
   document.documentElement.scrollTop = 0
 })
 
-/* router.beforeEach((to, from, next) => {
-  // 从cookie中获取用户信息
-  var userStr = cookie.get('agriculture_ucenter')
-  // userStr是字符串   需要转换为json对象
-  if (userStr) {
-    this.userId = JSON.parse(userStr).userId
-    this.getDataList()
-  } else {
-    next({
-      path: '/login'
-    })
+// 去 personal 中的页面时要判断是否登录
+router.beforeEach((to, from, next) => {
+  var personal = ['/wishlist', '/emeradd', '/my-account', '/order-generate', '/order-list', '/my-farm']
+  // true 表示需要检查是否登录
+  if (personal.includes(to.fullPath)) {
+    // 从cookie中获取用户信息
+    var userStr = cookie.get('agriculture_ucenter')
+    // 有数据，说明登录了的
+    if (userStr) {
+      next()
+    } else {
+      alert('请先登录！')
+      next({
+        path: '/login'
+      })
+    }
   }
-}) */
+  next()
+})
 
 export default router
