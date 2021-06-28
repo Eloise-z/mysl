@@ -116,7 +116,7 @@
         </div>
       </div>
       <div class="row">
-        <div v-for="list in dataList.ruralVitalizationList" :key="list.toId"
+        <div v-for="list in dataList.newCountrysideList" :key="list.toId"
              class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
           <div class="shop-cat-box">
             <div class="type-lb">

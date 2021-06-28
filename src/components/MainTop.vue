@@ -19,7 +19,7 @@
               </li>
               <li v-if="loginInfo.userId" id="is-login-two" class="h-r-user">
                 <router-link class="mr-3" :to="{ path: '/my-account', query: { userId: loginInfo.userId} }">
-                  <img v-show="loginInfo.userAvatar != null" :src="loginInfo.userAvatar" style="width: 25px;height: 25px;border-radius: 50%;object-fit: cover"
+                  <img v-show="loginInfo.userAvatar !== null && loginInfo.userAvatar !== undefined && loginInfo.userAvatar !== ''" :src="loginInfo.userAvatar" style="width: 25px;height: 25px;border-radius: 50%;object-fit: cover"
                        class="vam picImg mr-2" alt/>
                   <span id="userName" class="vam disIb">{{ loginInfo.userName }}</span>
                 </router-link>

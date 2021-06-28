@@ -163,7 +163,7 @@ export default {
           message: response.data.msg,
           type: 'success'
         })
-        this.$router.push({ path: '/login' })
+        this.$router.push({ path: '/index' })
       })
     }
   }

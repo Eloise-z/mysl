@@ -107,6 +107,7 @@
 import { province as provinceData, city as cityData, area as areaData } from './addressData.json'
 import cookie from 'js-cookie'
 import shipApi from '@/api/ship'
+import { ElMessage } from 'element-plus'
 
 export default {
   name: 'AddressAdd',
@@ -160,17 +161,22 @@ export default {
     // 判断是添加还是修改
     submit () {
       if (this.shipInfo.shipId) {
-        alert('调用修改方法')
+        // alert('调用修改方法')
         this.update()
       } else {
-        alert('调用添加方法')
+        // alert('调用添加方法')
         this.add()
       }
     },
     // 添加地址信息
     add () {
       shipApi.addShipInfo(this.shipInfo).then((response) => {
-        alert(response.data.msg)
+        // alert(response.data.msg)
+        ElMessage({
+          showClose: true,
+          message: response.data.msg,
+          type: 'success'
+        })
         if (response.data.code === 0) {
           this.$router.push({ path: '/addr' })
         }
@@ -185,7 +191,12 @@ export default {
     // 修改地址信息
     update () {
       shipApi.updateInfoById(this.shipInfo).then((response) => {
-        alert(response.data.msg)
+        // alert(response.data.msg)
+        ElMessage({
+          showClose: true,
+          message: response.data.msg,
+          type: 'success'
+        })
         if (response.data.code === 0) {
           this.$router.push({ path: '/addr' })
         }
