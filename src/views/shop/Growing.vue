@@ -58,43 +58,43 @@
               </div>
               <div class="row text-center" style="font-size: 18px">
                 <div class="col-lg-12" :class="[MaxPhaseId>=1?'content-green':'content-grey']">
-                  <p><i class="far fa-check-circle"></i>众筹期</p>
+                  <p><i class="far" :class="[MaxPhaseId>=1?'fa-check-circle':'fa-times-circle']"></i>众筹期</p>
                 </div>
                 <div class="col-lg-12">
                   <p><i class="fas fa-angle-double-down"></i></p>
                 </div>
                 <div class="col-lg-12" :class="[MaxPhaseId>=2?'content-green':'content-grey']">
-                  <p><i class="far fa-times-circle"></i>准备期</p>
+                  <p><i class="far" :class="[MaxPhaseId>=2?'fa-check-circle':'fa-times-circle']"></i>准备期</p>
                 </div>
                 <div class="col-lg-12">
                   <p><i class="fas fa-angle-double-down"></i></p>
                 </div>
                 <div class="col-lg-12" :class="[MaxPhaseId>=3?'content-green':'content-grey']">
-                  <p><i class="far fa-times-circle"></i>育苗期</p>
+                  <p><i class="far" :class="[MaxPhaseId>=3?'fa-check-circle':'fa-times-circle']"></i>育苗期</p>
                 </div>
                 <div class="col-lg-12">
                   <p><i class="fas fa-angle-double-down"></i></p>
                 </div>
                 <div class="col-lg-12" :class="[MaxPhaseId>=4?'content-green':'content-grey']">
-                  <p><i class="far fa-times-circle"></i>生长期</p>
+                  <p><i class="far" :class="[MaxPhaseId>=4?'fa-check-circle':'fa-times-circle']"></i>生长期</p>
                 </div>
                 <div class="col-lg-12">
                   <p><i class="fas fa-angle-double-down"></i></p>
                 </div>
                 <div class="col-lg-12" :class="[MaxPhaseId>=5?'content-green':'content-grey']">
-                  <p><i class="far fa-times-circle"></i>成熟期</p>
+                  <p><i class="far" :class="[MaxPhaseId>=5?'fa-check-circle':'fa-times-circle']"></i>成熟期</p>
                 </div>
                 <div class="col-lg-12">
                   <p><i class="fas fa-angle-double-down"></i></p>
                 </div>
                 <div class="col-lg-12" :class="[MaxPhaseId>=6?'content-green':'content-grey']">
-                  <p><i class="far fa-times-circle"></i>结果</p>
+                  <p><i class="far" :class="[MaxPhaseId>=6?'fa-check-circle':'fa-times-circle']"></i>结果</p>
                 </div>
                 <div class="col-lg-12">
                   <p><i class="fas fa-angle-double-down"></i></p>
                 </div>
                 <div class="col-lg-12" :class="[MaxPhaseId>=7?'content-green':'content-grey']">
-                  <p><i class="far fa-times-circle"></i>本轮农场结束</p>
+                  <p><i class="far" :class="[MaxPhaseId>=7?'fa-check-circle':'fa-times-circle']"></i>本轮农场结束</p>
                 </div>
               </div>
             </div>

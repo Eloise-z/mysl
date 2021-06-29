@@ -153,64 +153,6 @@ export default {
         goodFarm: '',
         gooduserId: ''
       },
-      dataRule: {
-        goodName: [
-          {
-            required: true,
-            message: '产品名称不能为空',
-            trigger: 'blur'
-          }
-        ],
-        goodStatus: [
-          {
-            required: true,
-            message: '审核状态不能为空',
-            trigger: 'blur'
-          }
-        ],
-        goodPrice: [
-          {
-            required: true,
-            message: '产品价格不能为空',
-            trigger: 'blur'
-          }
-        ],
-        goodPricecut: [
-          {
-            required: true,
-            message: '产品折扣不能为空',
-            trigger: 'blur'
-          }
-        ],
-        goodState: [
-          {
-            required: true,
-            message: '产品类型不能为空',
-            trigger: 'blur'
-          }
-        ],
-        goodNum: [
-          {
-            required: true,
-            message: '产品数量不能为空',
-            trigger: 'blur'
-          }
-        ],
-        goodContent: [
-          {
-            required: true,
-            message: '产品简介不能为空',
-            trigger: 'blur'
-          }
-        ],
-        goodPlace: [
-          {
-            required: true,
-            message: '产品产地不能为空',
-            trigger: 'blur'
-          }
-        ]
-      },
       loginInfo: {}, // 用户信息
       // 封装数据
       dataList: [],

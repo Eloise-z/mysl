@@ -64,10 +64,9 @@
                 <div class="col-md-3" v-if="list.status===1">
                   <router-link to="/pay-page">去支付</router-link>
                 </div>
-                <div class="col-md-3"><a role="button">再次购买</a></div>
+                <div v-show="false" class="col-md-3"><a role="button">再次购买</a></div>
                 <div class="col-md-3"><a @click="deletOrder(list.orderId)">删除订单</a></div>
                 <div class="col-md-3"><a @click="orderDetail(list.orderId)">查看详情</a></div>
-
               </div>
             </div>
           </div>

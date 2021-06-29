@@ -52,12 +52,6 @@
                   data-target="#carousel-example-1" data-slide-to="index" :class="{'active':index===0}">
                 <img class="d-block w-100 img-fluid" :src="list.url" alt=""/>
               </li>
-              <!-- <li data-target="#carousel-example-1" data-slide-to="1">
-                <img class="d-block w-100 img-fluid" src="../../assets/images/smp-img-02.jpg" alt=""/>
-              </li>
-              <li data-target="#carousel-example-1" data-slide-to="2">
-                <img class="d-block w-100 img-fluid" src="../../assets/images/smp-img-03.jpg" alt=""/>
-              </li> -->
             </ol>
           </div>
         </div>
@@ -67,10 +61,9 @@
             <h2>{{ goodsDetail.goodName }}</h2>
             <h5>
               <del>￥ {{ goodsDetail.goodPrice }}</del>
-              ￥{{ goodsDetail.goodPricecut }}
+              ￥{{ goodsDetail.goodPrice - goodsDetail.goodPricecut }}
             </h5>
-            <p class="available-stock"><span> 库存总数{{ goodsDetail.goodNum }} / <a
-              href="#">已售{{ goodsDetail.salesNum }}件 </a></span>
+            <p class="available-stock"><span> 库存总数{{ goodsDetail.goodNum }} / 已售{{ goodsDetail.salesNum }}件</span>
             </p>
             <p class="goods-info-detail">上市时间：{{ goodsDetail.createTime }}</p>
             <p class="goods-info-detail">商品编号：{{ goodsDetail.goodId }}</p>
@@ -85,28 +78,29 @@
             </p>
             <h4>所属分类</h4>
             <p>[{{ goodsDetail.goodState === 0 ? '现货' : '预售' }}]</p>
-            <p v-for="list in goodstypeList" :key="list.typeId">[{{ list.typeName }}]</p>
+            <span v-for="list in goodstypeList" :key="list.typeId">[{{ list.typeName }}]</span>
           </div>
           <div class="row">
             <div class="col-xl-12">
               <div class="price-box-bar">
                 <div class="cart-and-bay-btn">
-                  <a class="btn hvr-hover" style="margin-right: 5px" data-fancybox-close="">
+                  <!--<a class="btn hvr-hover" style="margin-right: 5px" data-fancybox-close="">
                     <router-link class="cart" :to="{ path: '/order-generate', query: { goodId: goodsDetail.goodId } }">
                       立即购买
                     </router-link>
-                  </a>
+                  </a>-->
+                  <button type="button" class="btn hvr-hover" style="margin-right: 5px"
+                          @click="$router.push({ path: '/order-generate', query: { goodId: goodsDetail.goodId } })">立即购买
+                  </button>
                   <button type="button" class="btn hvr-hover" data-fancybox-close="" @click="clickWish()">加入收藏</button>
-
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
 
-      <!--商品详情-->
+      <!--商品描述，动态-->
       <div class="row my-5">
         <div class="shop-detail-content card card-outline-secondary col-md-12">
           <div class="card-header">
