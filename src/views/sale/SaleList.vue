@@ -62,7 +62,7 @@
                 </router-link>
 
                 <router-link class="mr-3 btn-outline-info"
-                             :to="{ path: '/shop-detail', query: { goodId: list.goodId } }">查看评论
+                             :to="{ path: '/shop-detail', query: { goodId: list.goodId } }">查看详情
                 </router-link>
                 <router-link :to="{path:'/sale-class',query:{goodid:list.goodId,goodName:list.goodName}}"
                              class="mr-3 btn-outline-info">管理类别

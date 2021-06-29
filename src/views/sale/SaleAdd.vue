@@ -39,10 +39,11 @@
         <div class="col-md-12 mb-5">
           <form>
             <div class="form-group">
-              <label for="goodsImg">商品图片</label>
+              <label for="uploadImage">商品图片</label>
               <div class="row">
                 <div class="col-lg-6">
-                  <input type="file" class="form-control form-control-file" id="goodsImg" accept="image/*">
+<!--                  <input type="file" class="form-control form-control-file" id="updateImg" accept="image/*">-->
+                  <input type="file" class="form-control form-control-file" id="uploadImage" accept="image/*" @change="toUpload"/>
                 </div>
                 <div class="col-lg-6">
                   <img style="max-width: 300px" :src="dataForm.goodPicture" id="uploadImgView" alt="">
@@ -59,12 +60,9 @@
                      v-model="dataForm.goodPrice">
             </div>
             <div class="form-group">
-              <label for="goodPricecut">商品折扣</label>
+              <label for="goodPricecut">商品优惠</label>
               <input type="number" step="0.01" min="0" class="form-control" id="goodPricecut" required
                      v-model="dataForm.goodPricecut">
-              <small id="PricecutHelpInline" class="text-muted">
-                填写0.01~1之间小数
-              </small>
             </div>
             <div class="form-group">
               <label for="goodsNum">商品数量</label>
@@ -116,6 +114,7 @@
 import centerApi from '@/api/center'
 // 引入调用js-cookie
 import cookie from 'js-cookie'
+import OSS from 'ali-oss'
 
 $('#goodsImg').change(function () {
   var newPreview = $('#goodsImg').val()
@@ -208,6 +207,43 @@ export default {
             this.$router.push({ path: '/sale-list' })
           }
         })
+      }
+    },
+    // 头像上传到阿里云OSS
+    toUpload() {
+      const _this = this
+      _this.loading = true
+      var client = new OSS({
+        region: 'oss-cn-hangzhou',
+        accessKeyId: 'LTAI4Fz5NWHGpfiaHcFQJfUD',
+        accessKeySecret: 'TSEel61Sf4mBR5CSDFFudBzSr7s24X',
+        bucket: 'agricultureproduct-cuit'
+      })
+      // 获取文件信息
+      const files = document.getElementById('uploadImage')
+      var date = new Date()
+      var year = date.getFullYear()
+      var month = date.getMonth() + 1
+      month = month < 10 ? '0' + month : month
+      var mydate = date.getDate()
+      mydate = mydate < 10 ? '0' + mydate : mydate
+      this.baseurl = 'agriculture-front/goods/' + year + '/' + month + '/' + mydate + '/' // 上传到阿里云指定路径
+
+      if (files.files) {
+        const fileLen = document.getElementById('uploadImage').files
+        const name = this.baseurl + (new Date().getTime() + 1000) + fileLen[0].name // 文件名
+        for (let i = 0; i < fileLen.length; i++) {
+          const file = fileLen[i]
+          client.put(name, file).then(function(res) {
+            _this.loading = false
+            var str = res.res.requestUrls[0]
+            console.log('url:' + str.split('?')[0])
+            _this.dataForm.goodPicture = str.split('?')[0]
+            _this.$emit('childByValue', str.split('?')[0])
+          }).catch((err) => {
+            console.log(err)
+          })
+        }
       }
     }
   }
