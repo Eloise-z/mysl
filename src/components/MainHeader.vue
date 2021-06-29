@@ -9,18 +9,19 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
       <div class="container">
         <!-- Start Header Navigation -->
-        <div class="navbar-header">
+        <div class="navbar-header col-2" style="margin-top:10px">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu"
                   aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-bars"></i>
           </button>
-          <router-link class="navbar-brand" to="/index"><img src="../assets/images/logo11.png" class="logo" alt="">
+          <router-link class="navbar-brand" to="/index">
+            <img style="height: 70px; margin-left: 100px" src="../assets/images/eloise/newIco.png" class="logo" alt="">
           </router-link>
         </div>
         <!-- End Header Navigation -->
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbar-menu">
+        <div class="collapse navbar-collapse col-10" id="navbar-menu">
           <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
             <li class="nav-item" @click="navChoose = 1" :class="{'active' : navChoose === 1}">
               <router-link to="/index" class="nav-link">首页</router-link>
@@ -97,32 +98,32 @@
 
       </div>
       <!-- Start Side Menu -->
-      <div class="side">
-        <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-        <li class="cart-box">
-          <ul class="cart-list">
-            <li>
-              <a href="#" class="photo"><img src="../assets/images/img-pro-01.jpg" class="cart-thumb" alt=""/></a>
-              <h6><a href="#">Delica omtantur </a></h6>
-              <p>1x - <span class="price">$80.00</span></p>
-            </li>
-            <li>
-              <a href="#" class="photo"><img src="../assets/images/img-pro-02.jpg" class="cart-thumb" alt=""/></a>
-              <h6><a href="#">Omnes ocurreret</a></h6>
-              <p>1x - <span class="price">$60.00</span></p>
-            </li>
-            <li>
-              <a href="#" class="photo"><img src="../assets/images/img-pro-03.jpg" class="cart-thumb" alt=""/></a>
-              <h6><a href="#">Agam facilisis</a></h6>
-              <p>1x - <span class="price">$40.00</span></p>
-            </li>
-            <li class="total">
-              <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-              <span class="float-right"><strong>Total</strong>: $180.00</span>
-            </li>
-          </ul>
-        </li>
-      </div>
+      <!--      <div class="side">
+              <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+              <li class="cart-box">
+                <ul class="cart-list">
+                  <li>
+                    <a href="#" class="photo"><img src="../assets/images/img-pro-01.jpg" class="cart-thumb" alt=""/></a>
+                    <h6><a href="#">Delica omtantur </a></h6>
+                    <p>1x - <span class="price">$80.00</span></p>
+                  </li>
+                  <li>
+                    <a href="#" class="photo"><img src="../assets/images/img-pro-02.jpg" class="cart-thumb" alt=""/></a>
+                    <h6><a href="#">Omnes ocurreret</a></h6>
+                    <p>1x - <span class="price">$60.00</span></p>
+                  </li>
+                  <li>
+                    <a href="#" class="photo"><img src="../assets/images/img-pro-03.jpg" class="cart-thumb" alt=""/></a>
+                    <h6><a href="#">Agam facilisis</a></h6>
+                    <p>1x - <span class="price">$40.00</span></p>
+                  </li>
+                  <li class="total">
+                    <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                    <span class="float-right"><strong>Total</strong>: $180.00</span>
+                  </li>
+                </ul>
+              </li>
+            </div>-->
       <!-- End Side Menu -->
     </nav>
     <!-- End Navigation -->
@@ -147,7 +148,7 @@ export default {
 }
 
 .attr-nav ul {
-  width: 152.13px;
-  height: 82.6px;
+  width: 152px;
+  height: 82px;
 }
 </style>
