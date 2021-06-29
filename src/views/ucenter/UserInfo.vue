@@ -92,8 +92,8 @@
 import centerApi from '@/api/center'
 // 引入调用js-cookie
 import cookie from 'js-cookie'
-import { ElMessage } from 'element-plus'
 import OSS from 'ali-oss'
+import { ElLoading, ElMessage } from 'element-plus'
 
 export default {
   name: 'UserInfo',
@@ -105,23 +105,28 @@ export default {
     }
   },
   created () {
+    const loading = ElLoading.service({ fullscreen: true, text: '正在获取数据..请稍后' })
     var userStr = cookie.get('agriculture_ucenter')
     if (userStr) {
       this.loginInfo = JSON.parse(userStr)
     }
+    loading.close()
   },
   methods: {
     // 修改用户信息
     modifyUserInfo () {
       if (this.checkMail()) {
+        const loading = ElLoading.service({ fullscreen: true, text: '正在处理..请稍后' })
         // 调用修改用户信息接口
         centerApi.ModifyUserInfo(this.loginInfo)
           .then(response => {
-            alert(response.data.msg)
+            loading.close()
             if (response.data.code === 0) { // 修改成功
+              ElMessage.success('修改成功！')
               cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
               // this.$router.push({ path: '/my-account' })
             } else {
+              ElMessage.error(response.data.msg)
             }
           })
       }
@@ -183,7 +188,5 @@ export default {
 </script>
 
 <style scoped>
-.avatar-uploader :hover {
-  border-color: #409EFF;
-}
+
 </style>

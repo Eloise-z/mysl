@@ -26,7 +26,7 @@
 
   <!--主体部分-->
   <div class="land-list">
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
       <div class="row">
         <!--一个农场块的开始-->
         <div v-for="list in farmlist" :key="list.orderId" class="col-lg-6">
@@ -85,11 +85,15 @@
           </div>
         </div>
         <!--一个农场块的结束-->
-        <div class="col-lg-12 text-center mt-3 mb-5">
+        <div v-show="farmlist.length !== 0" class="col-lg-12 text-center mt-3 mb-5">
           <a role="button" class="btn btn-outline-primary w-100" @click="flag=true;getMyfarmList()">加载更多</a>
         </div>
       </div>
-
+      <div class="row" v-if="farmlist.length === 0">
+        <div class="col-12">
+          <el-empty description="您还没有农场，快去购买吧！"></el-empty>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -98,6 +102,7 @@
 // 引入调用js-cookie
 import cookie from 'js-cookie'
 import orderApi from '@/api/order'
+import { ElLoading } from 'element-plus'
 
 export default {
   name: 'MyFarm',
@@ -110,6 +115,10 @@ export default {
     }
   },
   created () {
+    const loading = ElLoading.service({
+      fullscreen: true,
+      text: '加载中..请稍后'
+    })
     var userStr = cookie.get('agriculture_ucenter')
     if (userStr) { // 已登录
       this.userId = JSON.parse(userStr).userId
@@ -119,6 +128,7 @@ export default {
     }
     // 获取我的农场
     this.getMyfarmList()
+    loading.close()
   },
   methods: {
     getMyfarmList () {

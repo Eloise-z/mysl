@@ -42,8 +42,9 @@
               <label for="uploadImage">商品图片</label>
               <div class="row">
                 <div class="col-lg-6">
-<!--                  <input type="file" class="form-control form-control-file" id="updateImg" accept="image/*">-->
-                  <input type="file" class="form-control form-control-file" id="uploadImage" accept="image/*" @change="toUpload"/>
+                  <!--                  <input type="file" class="form-control form-control-file" id="updateImg" accept="image/*">-->
+                  <input type="file" class="form-control form-control-file" id="uploadImage" accept="image/*"
+                         @change="toUpload"/>
                 </div>
                 <div class="col-lg-6">
                   <img style="max-width: 300px" :src="dataForm.goodPicture" id="uploadImgView" alt="">
@@ -86,7 +87,7 @@
               <label for="goodPlace">商品产地</label>
               <input type="text" min="0" class="form-control" id="goodPlace" required v-model="dataForm.goodPlace">
             </div>
-            <div class="form-group" v-if="dataForm.goodState===1">
+            <div class="form-group" v-show="dataForm.goodState===1">
               <label for="goodFarm">商品农场</label>
               <input type="text" min="0" class="form-control" id="goodFarm" aria-describedby="FarmHelpInline"
                      v-model="dataForm.goodFarm">
@@ -104,7 +105,6 @@
         </div>
       </div>
       <div class="row mt-2">
-
       </div>
     </div>
   </div>
@@ -210,7 +210,7 @@ export default {
       }
     },
     // 头像上传到阿里云OSS
-    toUpload() {
+    toUpload () {
       const _this = this
       _this.loading = true
       var client = new OSS({
@@ -234,7 +234,7 @@ export default {
         const name = this.baseurl + (new Date().getTime() + 1000) + fileLen[0].name // 文件名
         for (let i = 0; i < fileLen.length; i++) {
           const file = fileLen[i]
-          client.put(name, file).then(function(res) {
+          client.put(name, file).then(function (res) {
             _this.loading = false
             var str = res.res.requestUrls[0]
             console.log('url:' + str.split('?')[0])

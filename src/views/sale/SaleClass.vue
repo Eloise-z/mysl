@@ -87,6 +87,7 @@
 
 <script>
 import centerApi from '@/api/center'
+import { ElLoading, ElMessage } from 'element-plus'
 
 export default {
   name: 'SaleClass',
@@ -108,6 +109,10 @@ export default {
   methods: {
     // 获取数据
     getDataList () {
+      const loading = ElLoading.service({
+        fullscreen: true,
+        text: '正在获取信息..请稍后'
+      })
       // 获取不含有的数据在一个表
       centerApi.getNotTypeInfo(this.param.goodId).then((response) => {
         this.dataList = response.data.goodsTypeList
@@ -116,6 +121,7 @@ export default {
       centerApi.getTypeInfo(this.param.goodId).then((response) => {
         this.dataForm = response.data.goodsTypeList
       })
+      loading.close()
     },
     // 获取商品信息
     getquery () {
@@ -128,31 +134,39 @@ export default {
     },
     // 移除商品类别
     removeGoodstype (typeId) {
-      if (confirm('确定移除该类别')) {
+      this.$confirm('此操作将移除该类别, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
         centerApi.removeGoodstype(typeId, this.param.goodId).then((response) => {
           if (response.data.code === 0) { // 移除成功
-            alert(response.data.msg)
+            ElMessage.success('移除类别成功！')
             this.getDataList()
           } else { // 移除失败
-            alert(response.data.msg)
+            ElMessage.error('移除类别失败！')
             this.getDataList()
           }
         })
-      }
+      })
     },
     // 增加商品类别
     addGoodstype (typeId) {
-      if (confirm('确定添加该类别')) {
+      this.$confirm('此操作将添加该类别, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
         centerApi.addGoodstype(typeId, this.param.goodId).then((response) => {
           if (response.data.code === 0) { // 增加成功
-            alert(response.data.msg)
+            ElMessage.success('添加类别成功！')
             this.getDataList()
           } else { // 移除失败
-            alert(response.data.msg)
+            ElMessage.error('添加类别失败')
             this.getDataList()
           }
         })
-      }
+      })
     }
   }
 }

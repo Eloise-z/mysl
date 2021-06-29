@@ -40,10 +40,12 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-12 mb-2 text-right">
-          <router-link to="/growing" class="btn btn-primary">查看本产品全部动态</router-link>
+        <div v-show="dataList !== null" class="col-lg-12 mb-2 text-right">
+          <router-link :to="{ path: '/growing', query: { goodId: dataForm.goodId} }" class="btn btn-primary">
+            查看本产品全部动态
+          </router-link>
         </div>
-        <div class="col-md-12 mb-5">
+        <div v-show="dataList !== null" class="col-md-12 mb-5">
           <form>
             <div class="form-group">
               <label for="goodsDateCode">当前批次码</label>
@@ -82,6 +84,7 @@
 
 <script>
 import centerApi from '@/api/center'
+import { ElMessage } from 'element-plus'
 
 export default {
   name: 'SaleGrowing',
@@ -103,6 +106,19 @@ export default {
     getDataList () {
       centerApi.selectdynById(this.dataForm.goodId).then((response) => {
         this.dataList = response.data.frontDynInfo
+        if (this.dataList === null) {
+          this.$msgbox({
+            confirmButtonText: '确定',
+            type: 'warning',
+            title: '警告',
+            message: '该产品不是预售产品，没有动态信息！',
+            showClose: false,
+            closeOnClickModal: false,
+            closeOnPressEscape: false
+          }).then(() => {
+            this.$router.push('/sale-list')
+          })
+        }
       })
     },
     // 获取商品ID
@@ -115,10 +131,10 @@ export default {
     adddyn () {
       centerApi.adddyn(this.dataList).then((response) => {
         if (response.data.code === 0) { // 增加成功
-          alert(response.data.msg)
+          ElMessage.success(response.data.msg)
           this.$router.push({ path: '/sale-list' })
         } else { // 增加失败
-          alert(response.data.msg)
+          ElMessage.error(response.data.msg)
           this.$router.push({ path: '/sale-list' })
         }
       })

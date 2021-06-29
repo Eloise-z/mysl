@@ -31,7 +31,7 @@
         <span style="margin-top: 20px; margin-bottom: 20px; font-size: 23px;">收货信息</span>
       </div>
       <div class="row">
-        <form class="form-horizontal" role="form">
+        <form v-show="currShip.provinceCode!==undefined" class="form-horizontal" role="form">
           <div class="form-group" style="margin-left: 30px">
             <div class="row">
               <h3>{{ currShip.name }} {{ currShip.tel }}</h3>
@@ -51,6 +51,11 @@
                 </option>
               </select>
             </div>
+            <div class="row">
+              <router-link :to="{ path: '/add-addr' }">
+                <el-button type="primary">新增收货地址</el-button>
+              </router-link>
+            </div>
             <div class="row" style="margin-top: 20px;">
               <label for="remark"><b>备注：</b></label>
               <textarea class="form-control" v-model="orderInfo.remark" id="remark" cols="300" rows="2"
@@ -58,6 +63,11 @@
             </div>
           </div>
         </form>
+        <el-empty description="暂无地址信息" v-show="currShip.provinceCode===undefined">
+          <router-link :to="{ path: '/add-addr' }">
+            <el-button type="primary">添加收货地址</el-button>
+          </router-link>
+        </el-empty>
       </div>
       <hr>
       <div class="row">
@@ -90,12 +100,13 @@
       <div class="row" style="margin-bottom: 100px;">
         <form class="form-horizontal" role="form">
           <div class="row">
-            <div class="col">
-              <img :src="goodsinfo.goodPicture" alt="图片找不到了">
+            <div class="col border">
+              <img style="height: 300px; width: 300px; object-fit: cover" class="pt-4" :src="goodsinfo.goodPicture"
+                   alt="图片找不到了">
             </div>
             <div class="col">
               <div class="form-group">
-                <h3>[{{ goodsinfo.goodStatus === 0 ? '现货' : '预售' }}]</h3>
+                <h3>[{{ goodsinfo.goodState === 0 ? '现货' : '预售' }}]</h3>
               </div>
               <div class="form-group">
                 <h3>{{ goodsinfo.goodName }}</h3>
@@ -131,6 +142,7 @@ import shipApi from '@/api/ship'
 import goodsApi from '@/api/goods'
 import orderApi from '@/api/order'
 import wishApi from '@/api/wish'
+import { ElMessage, ElLoading } from 'element-plus'
 
 import { area as areaData, city as cityData, province as provinceData } from '../ucenter/addressData.json'
 
@@ -164,14 +176,19 @@ export default {
   created () {
     var userStr = cookie.get('agriculture_ucenter')
     if (userStr) {
+      const loading = ElLoading.service({
+        fullscreen: true,
+        text: '正在加载用户和商品信息..请稍后'
+      })
       this.orderInfo.userId = JSON.parse(userStr).userId
       // 加载用户地址信息列表
       this.getShipList()
       // 根据goodid获取商品信息
       this.orderInfo.goodId = this.$route.query.goodId
       this.getGoodsInfo()
+      loading.close()
     } else { // 用户未登录
-      alert('请先登录！')
+      ElMessage.error('用户未登录，请先登录！')
       // 回登录页面
       this.$router.push({ path: '/login' })
     }

@@ -35,7 +35,7 @@
             <div class="carousel-inner" role="listbox">
               <div v-for="(list,index) in goodspicList" :key="list.picId" class="carousel-item"
                    :class="{'active': index===0}">
-                <img class="d-block w-100" :src="list.url"
+                <img class="d-block w-100" style="height: 300px;width: 420px;object-fit: cover" :src="list.url"
                      alt="First slide">
               </div>
             </div>
@@ -77,8 +77,8 @@
               <span><i class="fas fa-credit-card"></i>银行卡支付</span>
             </p>
             <h4>所属分类</h4>
-            <p>[{{ goodsDetail.goodState === 0 ? '现货' : '预售' }}]</p>
-            <span v-for="list in goodstypeList" :key="list.typeId">[{{ list.typeName }}]</span>
+            <p style="margin: 2px">[{{ goodsDetail.goodState === 0 ? '现货' : '预售' }}]</p>
+            <span style="margin: 2px" v-for="list in goodstypeList" :key="list.typeId">[{{ list.typeName }}]</span>
           </div>
           <div class="row">
             <div class="col-xl-12">
@@ -110,6 +110,7 @@
             <div class="media mb-3">
               <div :data="goodsDetail" class="media-body">
                 {{ goodsDetail.goodContent }}
+                <el-empty v-if="goodsDetail.goodContent === ''" description="该商品还没有商品详情"></el-empty>
               </div>
             </div>
             <hr>
@@ -141,7 +142,8 @@
               </div>
               <hr>
             </template>
-            <a class="btn hvr-hover" @click="flag=true;getDetail()">展示更多</a>
+            <a v-show="gcriticList.length !== 0" class="btn hvr-hover" @click="flag=true;getDetail()">展示更多</a>
+            <el-empty v-if="gcriticList.length === 0" description="还没有用户进行评论"></el-empty>
           </div>
         </div>
       </div>
@@ -156,6 +158,7 @@ import goodsApi from '@/api/goods'
 import wishApi from '@/api/wish'
 // 引入调用js-cookie
 import cookie from 'js-cookie'
+import { ElLoading, ElMessage } from 'element-plus'
 
 export default {
   name: 'ShopDetail',
@@ -173,7 +176,9 @@ export default {
     }
   },
   created () {
+    const loading = ElLoading.service({ fullscreen: true, text: '正在获取数据..请稍后' })
     this.getDetail() // 获取商品信息
+    loading.close()
   },
   methods: {
     // 获取数据
@@ -210,18 +215,21 @@ export default {
         this.userId = JSON.parse(userStr).userId
         wishApi.getWishByUserIdAndGoodId(this.userId, this.goodId).then((response) => {
           if (response.data.tag === 1) {
-            alert('该商品已在您的收藏中！您可在[我的收藏]中查看')
+            ElMessage.warning('该商品已在您的收藏中！您可在[我的收藏]中查看')
           } else {
             // 加入收藏
             wishApi.addWish(this.userId, this.goodId).then((response) => {
               if (response.data.code === 0) {
-                alert('加入成功！您可在[我的收藏]中查看')
+                ElMessage({
+                  message: '加入成功！您可在[我的收藏]中查看',
+                  type: 'success'
+                })
               }
             })
           }
         })
       } else {
-        alert('请先登录！')
+        ElMessage.error('您还未登录，请先登录！')
       }
     }
   }

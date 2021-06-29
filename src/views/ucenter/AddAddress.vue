@@ -83,7 +83,8 @@
                   <div class="col-md-2" style="text-align: right">
                     <p style="display: inline-block; line-height: 38px;margin: 0;font-size: 16px">收货人手机号</p>
                   </div>
-                  <div class="col-md-6"><input v-model="shipInfo.tel" class="form-control address-input"></div>
+                  <div class="col-md-6"><input v-model="shipInfo.tel" type="number" class="form-control address-input">
+                  </div>
                 </div>
               </div>
             </div>
@@ -170,17 +171,16 @@ export default {
     },
     // 添加地址信息
     add () {
-      shipApi.addShipInfo(this.shipInfo).then((response) => {
-        // alert(response.data.msg)
-        ElMessage({
-          showClose: true,
-          message: response.data.msg,
-          type: 'success'
+      if (this.islegal()) {
+        shipApi.addShipInfo(this.shipInfo).then((response) => {
+          if (response.data.code === 0) {
+            ElMessage.success('地址信息添加成功！')
+            this.$router.push({ path: '/addr' })
+          } else {
+            ElMessage.error('地址信息添加失败！')
+          }
         })
-        if (response.data.code === 0) {
-          this.$router.push({ path: '/addr' })
-        }
-      })
+      }
     },
     // 根据shipId获取地址信息
     getShipInfo () {
@@ -190,17 +190,16 @@ export default {
     },
     // 修改地址信息
     update () {
-      shipApi.updateInfoById(this.shipInfo).then((response) => {
-        // alert(response.data.msg)
-        ElMessage({
-          showClose: true,
-          message: response.data.msg,
-          type: 'success'
+      if (this.islegal()) {
+        shipApi.updateInfoById(this.shipInfo).then((response) => {
+          if (response.data.code === 0) {
+            ElMessage.success('地址信息修改成功！')
+            this.$router.push({ path: '/addr' })
+          } else {
+            ElMessage.error('地址信息修改失败！')
+          }
         })
-        if (response.data.code === 0) {
-          this.$router.push({ path: '/addr' })
-        }
-      })
+      }
     },
     loadAllInfo () {
       /* 停止使用此方法获取源数据了，直接import就可以了
@@ -243,6 +242,25 @@ export default {
       console.log('provinceCode = ' + this.shipInfo.provinceCode)
       console.log('cityCode = ' + this.shipInfo.cityCode)
       console.log('areaCode = ' + this.shipInfo.areaCode)
+    },
+    islegal: function () { // 判空函数
+      if (this.shipInfo.address === '') {
+        ElMessage.warning('具体收货地址不能为空！')
+        return false
+      }
+      if (this.shipInfo.name === '') {
+        ElMessage.warning('收货人姓名不能为空！')
+        return false
+      }
+      if (this.shipInfo.tel === '') {
+        ElMessage.warning('收货人手机号不能为空！')
+        return false
+      }
+      if (this.shipInfo.tel.length !== 11) {
+        ElMessage.warning('手机号不符合规范！')
+        return false
+      }
+      return true
     }
   }
 }

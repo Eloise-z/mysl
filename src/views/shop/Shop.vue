@@ -13,9 +13,9 @@
             <li class="breadcrumb-item">
               <router-link to="/index">首页</router-link>
             </li>
-            <li class="breadcrumb-item active"> 商品列表</li>
+            <li class="breadcrumb-item active"> {{ navName }}</li>
           </ul>
-          <h2>商品列表</h2>
+          <h2>{{ navName }}</h2>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
               <div class="col-12 col-sm-4 text-center text-sm-right">
                 <ul class="nav nav-tabs ml-auto">
                   <li>
-                    <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i class="fa fa-th"></i> </a>
+                    <a class="nav-link active" href="#" data-toggle="tab"> <i class="fa fa-th"></i> </a>
                   </li>
                 </ul>
               </div>
@@ -80,9 +80,11 @@
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-                      <a class="btn btn-outline-primary w-100" role="button" @click="flag=true;getDataList()">
+                      <a v-show="dataList.length !== 0" class="btn btn-outline-primary w-100" role="button"
+                         @click="flag=true;getDataList()">
                         加载更多
                       </a>
+                      <el-empty v-show="dataList.length === 0" description="当前类别下没有商品"></el-empty>
                     </div>
                   </div>
                 </div>
@@ -108,7 +110,7 @@
                 <p>
                   <input type="text" @keyup.enter="changePrice" @click="changePrice();flag=false" id="amount" readonly
                          v-model="eloisePrice" style="border:0; color:#fbb714; font-weight:bold;">
-<!--                  <button class="btn hvr-hover" type="submit">筛选</button>-->
+                  <!--                  <button class="btn hvr-hover" type="submit">筛选</button>-->
                 </p>
               </div>
             </div>
@@ -121,6 +123,7 @@
 
 <script>
 import goodsApi from '@/api/goods'
+import { ElLoading } from 'element-plus'
 
 $(function () {
   $('#slider-range').slider({
@@ -155,14 +158,20 @@ export default {
       // 封装数据
       dataList: [],
       flag: false, // 点击加载更多变为true
-      eloisePrice: '' // 价格那一列的值，之后再拆分
+      eloisePrice: '', // 价格那一列的值，之后再拆分
+      navName: '商品列表' // 导航栏名字
     }
   },
   created () {
+    const loading = ElLoading.service({
+      fullscreen: true,
+      text: '正在获取数据..请稍后'
+    })
     this.params.typeId = this.$route.query.typeId
     this.params.goodState = this.$route.query.goodState
     this.params.goodName = this.$route.query.goodName
     this.getDataList()
+    loading.close()
   },
   // 监听路由变化
   watch: {
@@ -181,6 +190,14 @@ export default {
       }
       goodsApi.getGoodsList(this.params).then((response) => {
         this.dataList = response.data.page
+        if (this.params.goodState === '0') {
+          this.navName = '现货商品'
+        } else if (this.params.goodState === '1') {
+          this.navName = '预售农场'
+        }
+        if (this.params.typeId === '13') {
+          this.navName = '乡村振兴系列产品'
+        }
       })
     },
     changePrice () {

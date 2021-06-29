@@ -76,6 +76,7 @@
 
 <script>
 import emerApi from '@/api/emer'
+import { ElMessage } from 'element-plus'
 
 export default {
   name: 'EmerAdd',
@@ -94,8 +95,13 @@ export default {
   methods: {
     // 提交
     submit () {
+      if (this.addEmerInfo.emName === '' || this.addEmerInfo.emNum === '' || this.addEmerInfo.emPlace === '' ||
+        this.addEmerInfo.emMan === '' || this.addEmerInfo.emContact === '') {
+        ElMessage.warning('必填项不能为空！')
+        return
+      }
       emerApi.addEmer(this.addEmerInfo).then((response) => {
-        alert(response.data.msg)
+        ElMessage.success(response.data.msg)
         // 路由跳转 滞销列表
         this.$router.push({ path: '/emergency' })
       })
@@ -109,5 +115,7 @@ export default {
 </script>
 
 <style scoped>
-
+p {
+  margin: 2px;
+}
 </style>

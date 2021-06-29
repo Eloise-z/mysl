@@ -38,7 +38,12 @@
           <hr>
           <div class="row" style="margin-bottom: 50px; margin-top: 50px">
             <div class="paycode" style="margin: 0 auto">
-              <h3>测试阶段，点击图片即视为支付</h3>
+              <el-alert
+                title="测试阶段，点击图片即视为支付"
+                type="info"
+                :closable="false"
+                show-icon>
+              </el-alert>
               <img src="../../assets/images/paycode.png" @click="payment()" alt="图片找不到了">
             </div>
           </div>
@@ -57,6 +62,7 @@
 <script>
 import orderApi from '@/api/order'
 import goodsApi from '@/api/goods'
+import { ElMessage, ElLoading } from 'element-plus'
 
 export default {
   name: 'PayPage',
@@ -75,28 +81,64 @@ export default {
   methods: {
     // 获取订单信息
     getOrderInfo () {
+      const loading = ElLoading.service({
+        fullscreen: true,
+        text: '正在加载订单信息..请稍后'
+      })
       orderApi.getOrderById(this.orderId).then((response) => {
+        loading.close()
         this.orderInfo = response.data.order
+        console.log(this.orderInfo)
+        console.log(this.goodState)
+        if (this.goodState === '1') {
+          this.$notify({
+            title: '预售认证',
+            message: '您当前购买的是预售产品，付款即可享受全程溯源、正品保证服务。',
+            type: 'info',
+            duration: 10000
+          })
+        }
       })
     },
     // 支付
     payment () {
+      const loading = ElLoading.service({
+        fullscreen: true,
+        text: '正在获取支付信息，请不要关闭页面...'
+      })
       orderApi.orderPayment(this.orderId).then((response) => {
-        alert(response.data.msg)
+        loading.close()
         if (response.data.code === 0) { // 支付成功
+          ElMessage.success('支付成功！')
           this.$router.push({
             path: '/pay-res',
             query: { totalpay: response.data.totalpay }
           })
           // 支付成功后生成产品码
-          this.generateTgCode()
+          if (this.goodState === '1') {
+            this.generateTgCode() // 预售产品才生成
+          } else {
+            this.$notify({
+              title: '提示',
+              message: '购买预售产品，正品保证，全程溯源。欢迎购买预售产品！',
+              type: 'info',
+              duration: 5000
+            })
+          }
+        } else {
+          ElMessage.error('支付失败，请重新支付！')
         }
       })
     },
     // 生成产品码
     generateTgCode () {
-      goodsApi.addTrackgoods(this.orderId).then((response) => {
-        alert('产品码生成成功！')
+      goodsApi.addTrackgoods(this.orderId).then(() => {
+        this.$notify({
+          title: '溯源码生成成功',
+          message: '您购买的是预售商品，唯一产品溯源码已生成！购买预售产品，正品保证，全程溯源。',
+          type: 'success',
+          duration: 10000
+        })
       })
     }
   }

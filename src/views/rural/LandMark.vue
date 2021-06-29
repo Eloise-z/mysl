@@ -42,9 +42,9 @@
   <div class="box-add-products">
     <div class="container">
       <div class="row">
-        <div v-for="list in bannerlist" :key="list.adId" class="col-lg-6 col-md-6 col-sm-12">
-          <div class="offer-box-products">
-            <img class="img-fluid"
+        <div v-for="list in bannerlist" :key="list.adId" class="col-lg-6 col-md-6 col-sm-12 mb-4">
+          <div class="offer-box-products shadow">
+            <img class="img-fluid" style="width: 100%;height:300px;object-fit: cover"
                  :src="list.picUrl"
                  alt=""/>
           </div>

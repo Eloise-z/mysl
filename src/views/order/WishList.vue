@@ -38,7 +38,7 @@
                 <th>移除</th>
               </tr>
               </thead>
-              <tbody>
+              <tbody v-show="datalist.length!==0">
               <tr v-for="list in datalist" :key="list.wId">
                 <td class="thumbnail-img">
                   <a>
@@ -80,6 +80,11 @@
                 </td>
               </tr>
               </tbody>
+              <tr v-show="datalist.length===0">
+                <td colspan="6">
+                  <el-empty description="暂无收藏信息，快去收藏商品吧！"></el-empty>
+                </td>
+              </tr>
             </table>
           </div>
         </div>
@@ -93,6 +98,7 @@
 // 引入调用js-cookie
 import cookie from 'js-cookie'
 import wishApi from '@/api/wish'
+import { ElLoading, ElMessage } from 'element-plus'
 
 export default {
   name: 'WishList',
@@ -106,14 +112,20 @@ export default {
     }
   },
   created () {
+    const loading = ElLoading.service({
+      fullscreen: true,
+      text: '加载中..请稍后'
+    })
     // 从cookie中获取用户信息
     var userStr = cookie.get('agriculture_ucenter')
     // userStr是字符串   需要转换为json对象
     if (userStr) {
       this.userId = JSON.parse(userStr).userId
       this.getDataList()
+      loading.close()
     } else {
-      alert('您还未登录！请先登录在查看')
+      ElMessage.error('您还未登录！请先登录在查看')
+      this.$router.push('/login')
     }
   },
   methods: {
@@ -128,10 +140,15 @@ export default {
     },
     // 移除收藏信息
     deleteWish (wid) {
-      alert(wid)
-      wishApi.deleteByWid(wid).then((response) => {
-        alert(response.data.msg)
-        this.getDataList()
+      this.$confirm('此操作将移除该收藏, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        wishApi.deleteByWid(wid).then((response) => {
+          ElMessage.success('移除成功！')
+          this.getDataList()
+        })
       })
     }
   }

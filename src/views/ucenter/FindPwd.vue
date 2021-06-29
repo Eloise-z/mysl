@@ -32,7 +32,7 @@
               <input type="email" v-model="user.userMail" class="form-control" id="userEmail"
                      placeholder="name@example.com">
               <div class="text-right">
-                <button type="button" class="btn btn-outline-primary mt-2 " @click="sendMail();showCode=true">发送验证码
+                <button type="button" class="btn btn-outline-primary mt-2 " @click="sendMail()">发送验证码
                 </button>
               </div>
             </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
               <label for="userPdwagain">确认新密码</label>
-              <input type="password" class="form-control" id="userPdwagain">
+              <input type="password" v-model="user.userPwdAgain" class="form-control" id="userPdwagain">
             </div>
             <div class="text-center">
               <button type="button" class="btn btn-success" @click="submit()">提交</button>
@@ -61,6 +61,7 @@
 
 <script>
 import loginApi from '@/api/login'
+import { ElMessage, ElLoading } from 'element-plus'
 
 export default {
   name: 'FindPwd',
@@ -70,7 +71,8 @@ export default {
         userMail: '',
         userPwd: '',
         code: '', // 用户输入的验证码
-        sysCode: '' // 系统发送的验证码
+        sysCode: '', // 系统发送的验证码
+        userPwdAgain: '' // 确认密码
       },
       showCode: false,
       sign: 1 // 表示这是找回密码
@@ -79,18 +81,57 @@ export default {
   methods: {
     // 发送邮件
     sendMail () {
+      var mailTest = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+      if (this.user.userMail === '') {
+        ElMessage.warning('请输入邮箱！')
+        return
+      } else if (!(mailTest.test(this.user.userMail))) {
+        ElMessage.warning('请输入正确的邮箱格式！[只允许英文字母、数字、下划线、英文句号、以及中划线组成]')
+        return
+      }
+      const loading = ElLoading.service({ fullscreen: true, text: '邮件处理中..请稍后' })
       loginApi.sendEmail(this.user.userMail, this.sign).then((response) => {
-        alert(response.data.msg)
+        loading.close()
+        ElMessage.info(response.data.msg)
+        this.showCode = true // 发送邮箱成功后才显示
         this.user.sysCode = response.data.code
       })
     },
     // 提交
     submit () {
+      var mailTest = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+      if (this.user.userMail === '') {
+        ElMessage.warning('请输入邮箱！')
+        return
+      } else if (!(mailTest.test(this.user.userMail))) {
+        ElMessage.warning('请输入正确的邮箱格式！[只允许英文字母、数字、下划线、英文句号、以及中划线组成]')
+        return
+      }
+      if (this.user.sysCode === '') {
+        ElMessage.warning('请获取验证码！')
+        return
+      }
+      if (this.user.code === '') {
+        ElMessage.warning('请输入验证码！')
+        return
+      }
+      if (this.user.userPwd === '') {
+        ElMessage.warning('请输入密码！')
+        return
+      }
+      if (this.user.userPdwagain !== this.user.userPwd) {
+        ElMessage.warning('两次密码不一致！')
+        return
+      }
+      const loading = ElLoading.service({ fullscreen: true, text: '处理中..请稍后' })
       loginApi.findPwd(this.user).then((response) => {
-        alert(response.data.msg)
+        loading.close()
         if (response.data.code === 0) {
+          ElMessage.success('密码修改成功！')
           // 路由跳转 跳转页面
           this.$router.push({ path: '/login' })
+        } else {
+          ElMessage.error(response.data.msg)
         }
       })
     },

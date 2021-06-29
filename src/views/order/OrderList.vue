@@ -8,7 +8,6 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
               <router-link to="/index">首页</router-link>
@@ -27,10 +26,10 @@
 
   <!--主体部分-->
   <div class="order-list">
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
       <div class="row">
         <!--一个订单块开始-->
-        <div class="col-lg-6" v-for="list in dataList" :key="list.orderId">
+        <div class="col-lg-6" v-show="dataList.length !== 0" v-for="list in dataList" :key="list.orderId">
           <div class="order-item shadow p-3 mb-4">
             <div class="row">
               <div class="col-md-6 text-left"><p>{{ list.goodFarm }}</p></div>
@@ -64,15 +63,20 @@
                 <div class="col-md-3" v-if="list.status===1">
                   <router-link to="/pay-page">去支付</router-link>
                 </div>
-                <div v-show="false" class="col-md-3"><a role="button">再次购买</a></div>
+                <!--<div v-show="false" class="col-md-3"><a role="button">再次购买</a></div>-->
                 <div class="col-md-3"><a @click="deletOrder(list.orderId)">删除订单</a></div>
                 <div class="col-md-3"><a @click="orderDetail(list.orderId)">查看详情</a></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-12 text-center mt-3 mb-5">
+        <div class="col-lg-12 text-center mt-3 mb-5" v-show="dataList.length !== 0">
           <a role="button" class="btn btn-outline-primary w-100" @click="flag=true;getDataList()">加载更多</a>
+        </div>
+      </div>
+      <div class="row" v-show="dataList.length === 0">
+        <div class="col-lg-12">
+          <el-empty description="暂无订单信息，快去下单吧！"></el-empty>
         </div>
       </div>
     </div>
@@ -83,6 +87,7 @@
 import centerApi from '@/api/center'
 // 引入调用js-cookie
 import cookie from 'js-cookie'
+import { ElLoading, ElMessage } from 'element-plus'
 
 export default {
   name: 'OrderList',
@@ -101,12 +106,17 @@ export default {
     }
   },
   created () {
+    const loading = ElLoading.service({
+      fullscreen: true,
+      text: '正在获取信息..请稍后'
+    })
     var userStr = cookie.get('agriculture_ucenter')
     if (userStr) {
       this.loginInfo = JSON.parse(userStr)
     }
     this.params.userId = this.loginInfo.userId
     this.getDataList()
+    loading.close()
   },
   methods: {
     // 获取数据
@@ -119,19 +129,21 @@ export default {
       })
     },
     deletOrder (orderId) {
-      if (confirm('是否对此订单进行删除？')) {
+      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
         centerApi.deletOrder(orderId).then((response) => {
           if (response.data.code === 0) { // 删除成功
-            alert(response.data.msg)
-            this.$router.push({ path: '/order-list' })
+            ElMessage.success('删除成功！')
+            this.getDataList()
           } else { // 删除失败
-            alert(response.data.msg)
-            this.$router.push({ path: '/order-list' })
+            ElMessage.error('删除失败！')
+            this.getDataList()
           }
         })
-      } else {
-        this.$router.push({ path: '/order-list' })
-      }
+      })
     },
     orderDetail (orderId) {
       this.$router.push({

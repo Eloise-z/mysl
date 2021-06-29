@@ -18,7 +18,7 @@
             </li>
             <li class="breadcrumb-item active"> 旅游线路详情</li>
           </ul>
-          <h2>旅游线路详情</h2>
+          <h2>旅游线路详情丨{{ tourDetail.toName }}</h2>
         </div>
       </div>
     </div>
@@ -29,34 +29,30 @@
   <div class="#">
     <div class="container mb-5">
       <div class="row mt-5">
-        <div class="col-md-12" style="text-align: left;font-size: 30px">
-          <p>{{ tourDetail.toName }}</p>
+        <div class="col-md-12 mb-3" style="text-align: left;">
+          <p style="font-size: 30px">{{ tourDetail.toName }}</p>
         </div>
       </div>
       <hr>
       <div class="row mt-3">
-        <div class="col-md-8 text-center" style="height:30px;width: 100%;object-fit: cover ">
-          <img style="width: 100%"
-               :src="tourDetail.toMainpic"
-               alt="">
+        <div class="col-md-8 text-center">
+          <img style="height: 392px;width: 731px;object-fit: cover" alt=""
+               :src="tourDetail.toMainpic">
         </div>
         <div class="col-md-4">
-          <div class="col-lg-12 text-center" style="width: 100%;height: 200px;object-fit: fill">
-            <img
-              :src="tourDetail.toSecpic"
-              alt="">
+          <div class="col-lg-12 text-center">
+            <img style="height: 183px;width: 305px;object-fit: cover" alt=""
+                 :src="tourDetail.toSecpic">
           </div>
-          <div class="col-lg-12 text-center mt-2" style="width: 100%;height: 200px;object-fit: fill">
-            <img
-              :src="tourDetail.toThpic"
-              alt="">
+          <div class="col-lg-12 text-center mt-4">
+            <img style="height: 183px;width: 305px;object-fit: cover" alt=""
+                 :src="tourDetail.toThpic">
           </div>
         </div>
       </div>
       <hr>
       <div class="row mt-3 ml-5">
         <div class="col-lg-12">
-
           <p>{{ tourDetail.toIntro }}</p>
         </div>
       </div>
@@ -139,5 +135,8 @@ export default {
 </script>
 
 <style scoped>
-
+p {
+  margin: 0;
+  font-size: 16px;
+}
 </style>

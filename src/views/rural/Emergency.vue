@@ -98,6 +98,7 @@
 
 <script>
 import emerApi from '@/api/emer'
+import { ElLoading } from 'element-plus'
 
 export default {
   name: 'Emergency',
@@ -112,7 +113,12 @@ export default {
     }
   },
   created () {
+    const loading = ElLoading.service({
+      fullscreen: true,
+      text: '正在获取数据..请稍后'
+    })
     this.getDataList()
+    loading.close()
   },
   methods: {
     getDataList () {

@@ -43,7 +43,7 @@
               <div class="row">
                 <h3>创建时间：{{ dataList.createtime }}</h3>
               </div>
-              <div class="row">
+              <div class="row" v-if="dataList.goodstate === 1">
                 <h3>唯一产品码：{{ dataList.tgcode }}</h3>
               </div>
             </div>
@@ -102,10 +102,10 @@
             </div>
             <div class="col-5">
               <div class="form-group" v-if="dataList.goodstate===0">
-                <h3>[现货][乡村振兴]</h3>
+                <h3>[现货]</h3>
               </div>
               <div class="form-group" v-if="dataList.goodstate===1">
-                <h3>[预售][乡村振兴]</h3>
+                <h3>[预售]</h3>
               </div>
               <div class="form-group">
                 <h3>{{ dataList.goodname }}</h3>

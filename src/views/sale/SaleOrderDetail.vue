@@ -148,6 +148,21 @@ export default {
     getDataList () {
       centerApi.getOrderDetail(this.orderId).then((response) => {
         this.dataList = response.data.orderDetail
+        if (this.dataList.goodstate === 1) {
+          this.$notify({
+            title: '预售商品提示',
+            message: '当前出售产品为预售商品，可延缓发货时间。在本轮农场结束的30个工作日内完成发货。',
+            type: 'success',
+            duration: 10000
+          })
+        } else {
+          this.$notify({
+            title: '现货商品提示',
+            message: '当前出售产品为现货商品，需要您在3个工作日内完成发货。请尽快发货！',
+            type: 'warning',
+            duration: 10000
+          })
+        }
         /* 获取地址具体名字 */
         for (const p of this.province) {
           if (p.code === this.dataList.provinceCode) {

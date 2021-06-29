@@ -26,10 +26,10 @@
 
   <!--主体部分-->
   <div class="userSaleList">
-    <div class="container">
+    <div class="container mt-5 mb-5">
       <div class="row mt-5">
         <div class="col-md-12 text-right">
-          <router-link :to="{path:'/sale-add'}" class="btn btn-primary" role="button">新增商品</router-link>
+          <router-link :to="{path:'/sale-add'}" class="btn btn-primary mr-2" role="button">新增商品</router-link>
           <router-link class="btn btn-primary" role="button" to="/sale-order">商品订单管理</router-link>
         </div>
       </div>
@@ -76,8 +76,11 @@
             </tbody>
           </table>
         </div>
-        <div class="col-lg-12 text-center mb-5">
+        <div v-show="dataList.length !== 0" class="col-lg-12 text-center mb-5">
           <a class="btn btn-outline-primary w-100" role="button" @click="flag=true;getDataList()">展示更多</a>
+        </div>
+        <div v-show="dataList.length === 0" class="col-lg-12 text-center mb-5">
+          <el-empty description="您还没有出售的商品，快去添加吧！"></el-empty>
         </div>
       </div>
     </div>
@@ -88,6 +91,7 @@
 import centerApi from '@/api/center'
 // 引入调用js-cookie
 import cookie from 'js-cookie'
+import { ElMessage } from 'element-plus'
 
 export default {
   name: 'SaleList',
@@ -125,19 +129,21 @@ export default {
     },
     //
     deleteUserGoods (goodId) {
-      if (confirm('是否对此订单进行删除？')) {
+      this.$confirm('此商品将被删除, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
         centerApi.deletUserGoods(goodId).then((response) => {
           if (response.data.code === 0) { // 删除成功
-            alert(response.data.msg)
+            ElMessage.success('删除成功!')
             this.getDataList()
           } else { // 删除失败
-            alert(response.data.msg)
+            ElMessage.error('删除失败!')
             this.getDataList()
           }
         })
-      } else {
-        this.getDataList()
-      }
+      })
     }
   }
 }

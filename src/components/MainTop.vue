@@ -9,6 +9,9 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="right-phone-box">
+            <router-link to="/index"><p class="font-weight-bold">梦源商旅：</p></router-link>
+          </div>
+          <div class="right-phone-box">
             <!--            <p>CUIT:- <a href="#"> 软件工程学院</a></p>-->
             <router-link to="/my-account"><p class="font-weight-bold">个人中心</p></router-link>
           </div>

@@ -9,7 +9,9 @@
       <div class="row">
         <div class="col-lg-12">
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
+            <li class="breadcrumb-item">
+              <router-link to="/index">首页</router-link>
+            </li>
             <li class="breadcrumb-item active"> 产品溯源</li>
           </ul>
           <h2>产品溯源</h2>
@@ -71,13 +73,14 @@
               <form id="dateform">
                 <div class="col-md-8">
                   <div class="form-group">
-                    <input v-model="tgCode" type="text" class="form-control" id="name" name="name" placeholder="产品码" required
+                    <input v-model="tgCode" type="text" class="form-control" id="name" name="name" placeholder="产品码"
+                           required
                            data-error="请输入产品码">
                     <div class="help-block with-errors"></div>
                   </div>
                 </div>
                 <div class="col-md-8">
-                  <div class="form-group">
+                  <!--<div class="form-group">
                     <div class="row">
                       <div class="col-md-4">
                         <div class="form-group">
@@ -92,7 +95,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div>-->
                   <div class="col-md-8">
                     <div class="form-group">
                       <div class="submit-button text-center">
@@ -117,14 +120,17 @@
 
 export default {
   name: 'ProductOrigin',
-  data() {
+  data () {
     return {
       tgCode: ''
     }
   },
   methods: {
-    query() {
-      this.$router.push({ path: '/origin-res', query: { tgCode: this.tgCode } })
+    query () {
+      this.$router.push({
+        path: '/origin-res',
+        query: { tgCode: this.tgCode }
+      })
     }
   }
 }

@@ -39,6 +39,7 @@
 
 <script>
 import indexApi from '@/api/index'
+import { ElLoading } from 'element-plus'
 
 export default {
   name: 'Notice',
@@ -54,7 +55,9 @@ export default {
     }
   },
   created () {
+    const loading = ElLoading.service({ fullscreen: true, text: '正在获取数据..请稍后' })
     this.getDataList()
+    loading.close()
   },
   methods: {
     getDataList () {

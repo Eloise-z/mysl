@@ -53,6 +53,7 @@
 import centerApi from '@/api/center'
 // 引入调用js-cookie
 import cookie from 'js-cookie'
+import { ElLoading, ElMessage } from 'element-plus'
 
 export default {
   name: 'ModifyPwd',
@@ -93,16 +94,27 @@ export default {
   methods: {
     // 修改密码方法
     modifyPwd () {
+      if (this.pwd.userOPdw === '') {
+        ElMessage.warning('旧密码不能为空！')
+        return
+      }
+      if (this.pwd.userPdw === '') {
+        ElMessage.warning('新密码不能为空！')
+        return
+      }
+      const loading = ElLoading.service({ fullscreen: true, text: '正在处理..请稍后' })
       // 调用修改密码接口
       centerApi.ModifyPwd(this.pwd.userOPdw, this.pwd.userId, this.pwd.userPdw)
         .then(response => {
-          alert(response.data.msg)
+          loading.close()
           if (response.data.code === 0) { // 修改成功
+            ElMessage.success('密码修改成功！请重新登录！')
             cookie.set('agriculture_ucenter', '', { domain: 'localhost' })
             cookie.set('agriculture_token', '', { domain: 'localhost' })
             // 回登录页面
             this.$router.push({ path: '/login' })
           } else { // 登录失败
+            ElMessage.error(response.data.msg)
             // 路由跳转 跳转页面
             // this.$router.push({ path: '/login' })
           }

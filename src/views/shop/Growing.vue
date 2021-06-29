@@ -117,7 +117,8 @@
                         <div class="row">
                           <div class="col-lg-12" v-for="urllist in dynpicturl" :key="urllist.gdId">
                             <template v-if="urllist.gdId === dynlist.gdId">
-                              <img class="item-img" :src="urllist.url" alt="图片不见了">
+                              <img v-show="urllist.url !== undefined || urllist.url !== null || urllist.url !== ''"
+                                   class="item-img" :src="urllist.url" alt="图片不见了">
                             </template>
                           </div>
                         </div>
@@ -127,6 +128,7 @@
                 </div>
               </div>
             </template>
+            <el-empty v-if="dynlist.length === 0" description="暂无动态信息，请耐心等待。"></el-empty>
           </div>
         </div>
       </div>
@@ -137,6 +139,7 @@
 <script>
 import '../../assets/css/aricommen.css'
 import goodsApi from '@/api/goods'
+import { ElLoading } from 'element-plus'
 
 export default {
   name: 'Growing',
@@ -150,6 +153,7 @@ export default {
     }
   },
   created () {
+    const loading = ElLoading.service({ fullscreen: true, text: '正在获取数据..请稍后' })
     this.goodId = this.$route.query.goodId
     // 获取批次信息
     this.getTrackInfo()
@@ -159,6 +163,7 @@ export default {
     this.getDynInfo()
     // 获取动态图片
     this.getDynPictureInfo()
+    loading.close()
   },
   methods: {
     // 获取批次信息

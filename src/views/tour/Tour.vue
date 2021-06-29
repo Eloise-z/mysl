@@ -4,7 +4,8 @@
 -->
 <template>
   <!--新轮播图开始-->
-  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" style="padding: 0" data-interval="3000">
+  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" style="padding: 0" data-interval="3000"
+       data-pause="false">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -47,7 +48,7 @@
             <div class="border-red">
               <h1 class="content-red" style="margin-left: 20px;color: #bd1e22">革命老区旅游线路</h1>
             </div>
-            <p style="margin-left: 20px">传承红色基因</p>
+            <p style="margin-left: 20px">传承红色基因，献礼建党100年</p>
           </div>
         </div>
       </div>
@@ -75,12 +76,12 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="title-all text-center">
-            <div class="border-red">
+            <!--<div class="border-red">
               <h1 class="content-red" style="margin-left: -940px;color: #bd1e22">乡村振兴</h1>
             </div>
-            <p style="margin-left: -830px">共护诗画万丈湖,同筑百年乡村梦。</p>
-            <!-- <h1>乡村振兴</h1>
-            <p>共护诗画万丈湖,同筑百年乡村梦。</p> -->
+            <p style="margin-left: -830px">共护诗画万丈湖,同筑百年乡村梦。</p>-->
+            <h1>乡村振兴</h1>
+            <p>共护诗画万丈湖,同筑百年乡村梦。</p>
           </div>
         </div>
       </div>
@@ -142,12 +143,14 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12">
           <div class="offer-box-products">
-            <img class="img-fluid" src="../../assets/images/add-img-02.jpg" alt=""/>
+            <img class="img-fluid" alt=""
+                 src="https://p1-q.mafengwo.net/s18/M00/EC/1A/CoUBYGDUeHGAWguXACgvdrQm7TY320.png?imageView2%2F2%2Fw%2F1920%2Fq%2F90%2Fformat%2Fjpeg"/>
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <div class="offer-box-products">
-            <img class="img-fluid" src="../../assets/images/add-img-02.jpg" alt=""/>
+            <img class="img-fluid" alt=""
+                 src="https://p1-q.mafengwo.net/s16/M00/FF/E3/CoUBUl_tlHSAdImwAAOXSO6qxds42.jpeg?imageMogr2%2Fstrip"/>
           </div>
         </div>
       </div>
@@ -169,7 +172,7 @@
       </div>
       <div class="row">
         <div class="col-md-6 col-lg-4 col-xl-4">
-          <div class="blog-box">
+          <div class="blog-box" style="height: 480px">
             <div class="blog-img">
               <img class="img-fluid"
                    src="https://p1-q.mafengwo.net/s17/M00/39/80/CoUBXl9iOw6ADZObAAV3-OGa7oc722.jpg?imageMogr2%2Fthumbnail%2F%21440x300r%2Fstrip%2Fgravity%2FCenter%2Fcrop%2F%21440x300%2Fquality%2F90"
@@ -184,31 +187,29 @@
           </div>
         </div>
         <div class="col-md-6 col-lg-4 col-xl-4">
-          <div class="blog-box">
+          <div class="blog-box" style="height: 480px">
             <div class="blog-img">
-              <img class="img-fluid"
-                   src="https://p1-q.mafengwo.net/s17/M00/39/80/CoUBXl9iOw6ADZObAAV3-OGa7oc722.jpg?imageMogr2%2Fthumbnail%2F%21440x300r%2Fstrip%2Fgravity%2FCenter%2Fcrop%2F%21440x300%2Fquality%2F90"
-                   alt=""/>
+              <img class="img-fluid" alt=""
+                   src="https://b1-q.mafengwo.net/s13/M00/EF/14/wKgEaVzNqOiACl-aAAulsAbzjqw66.jpeg?imageMogr2%2Fthumbnail%2F%21440x300r%2Fstrip%2Fgravity%2FCenter%2Fcrop%2F%21440x300%2Fquality%2F90"/>
             </div>
             <div class="blog-content">
               <div class="title-blog">
-                <h3>特殊时期的寻味之旅——西北篇（西安/天水/兰州）</h3>
-                <p> 决定去 缙云 ，只因为一块榴莲味的烧饼。 前些天带六宝去朋友家玩，刚巧碰上她家邻居送来几块 缙云 带回来的烧饼。六宝第一次吃到芝士榴莲味的烧饼，整个人都惊呆了。从朋友家离开后的几天里...</p>
+                <h3>甘肃｜河西四日，丝路千年（自驾探寻冷门景点）</h3>
+                <p> 前言 “在曾经的历史 通道 上， 作为通往广阔西部的咽喉， 河西走廊 是那么的意气飞扬，更洒下过无数先辈的血汗，沉淀了太多的期待与渴望。” ——纪录片《 河西走廊 》 两千年前，张骞义无...</p>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-lg-4 col-xl-4">
-          <div class="blog-box">
+          <div class="blog-box" style="height: 480px">
             <div class="blog-img">
-              <img class="img-fluid"
-                   src="https://p1-q.mafengwo.net/s17/M00/39/80/CoUBXl9iOw6ADZObAAV3-OGa7oc722.jpg?imageMogr2%2Fthumbnail%2F%21440x300r%2Fstrip%2Fgravity%2FCenter%2Fcrop%2F%21440x300%2Fquality%2F90"
-                   alt=""/>
+              <img class="img-fluid" alt=""
+                   src="https://p1-q.mafengwo.net/s12/M00/73/B0/wKgED1woYniAZLueABTPJUQaNh023.jpeg?imageMogr2%2Fthumbnail%2F%21440x300r%2Fstrip%2Fgravity%2FCenter%2Fcrop%2F%21440x300%2Fquality%2F90"/>
             </div>
             <div class="blog-content">
               <div class="title-blog">
-                <h3>特殊时期的寻味之旅——西北篇（西安/天水/兰州）</h3>
-                <p> 决定去 缙云 ，只因为一块榴莲味的烧饼。 前些天带六宝去朋友家玩，刚巧碰上她家邻居送来几块 缙云 带回来的烧饼。六宝第一次吃到芝士榴莲味的烧饼，整个人都惊呆了。从朋友家离开后的几天里...</p>
+                <h3>重逢云南：大理的夏，丽江的秋</h3>
+                <p>某日，看到夏初 大理 的颜色，在我心里轻轻的抚过，像是完成了多年的夙愿，不由得深吸一口气。那种风声灌进领口，阳光洒在肩上的美好依然历历在目。 这一年，不停的回到过去。从 重庆 的十...</p>
               </div>
             </div>
           </div>

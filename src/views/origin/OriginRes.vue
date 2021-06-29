@@ -9,8 +9,12 @@
       <div class="row">
         <div class="col-lg-12">
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/index">首页</router-link></li>
-            <li class="breadcrumb-item"><router-link to="/origin"> 产品溯源 </router-link></li>
+            <li class="breadcrumb-item">
+              <router-link to="/index">首页</router-link>
+            </li>
+            <li class="breadcrumb-item">
+              <router-link to="/origin"> 产品溯源</router-link>
+            </li>
             <li class="breadcrumb-item active"> 溯源结果</li>
           </ul>
           <h2>溯源结果</h2>
@@ -64,12 +68,12 @@
 
           <!--主体开始-->
           <div class="col-lg-8 col-sm-12">
-            <div class="date-form">
+            <div class="date-form" v-show="goodsinfo !== undefined">
               <!--  <h1>标题</h1>-->
               <div class="border-green">
-              <p style="margin-left:10px; margin-bottom: 20px">
-                这是第{{goodsinfo.tgNum}}次查询，
-                首次查询是{{goodsinfo.stTime}}。
+                <p style="margin-left:10px; margin-bottom: 20px">
+                  这是第{{ goodsinfo.tgNum }}次查询，
+                  首次查询是{{ goodsinfo.stTime }}。
                 </p>
               </div>
 
@@ -85,7 +89,7 @@
                           <span style="color: #f92672">
                           <i class="fas fa-sun">
                           </i>
-                          </span>{{list.typeName}}
+                          </span>{{ list.typeName }}
                         </p>
                       </div>
                     </div>
@@ -95,7 +99,7 @@
                         <p>产品名称</p>
                       </div>
                       <div class="col-md-9">
-                        <p>{{goodsinfo.goodName}}</p>
+                        <p>{{ goodsinfo.goodName }}</p>
                       </div>
                     </div>
 
@@ -104,7 +108,7 @@
                         <p>批次名称</p>
                       </div>
                       <div class="col-md-9">
-                        <p>{{goodsinfo.twName}}</p>
+                        <p>{{ goodsinfo.twName }}</p>
                       </div>
                     </div>
 
@@ -113,7 +117,7 @@
                         <p>播种时间</p>
                       </div>
                       <div class="col-md-9">
-                        <p>{{goodsinfo.stime}}</p>
+                        <p>{{ goodsinfo.stime }}</p>
                       </div>
                     </div>
 
@@ -122,7 +126,7 @@
                         <p>成熟时间</p>
                       </div>
                       <div class="col-md-9">
-                        <p>{{goodsinfo.etime}}</p>
+                        <p>{{ goodsinfo.etime }}</p>
                       </div>
                     </div>
 
@@ -131,7 +135,7 @@
                         <p>产地农场</p>
                       </div>
                       <div class="col-md-9">
-                        <p>{{goodsinfo.goodFarm}}</p>
+                        <p>{{ goodsinfo.goodFarm }}</p>
                       </div>
                     </div>
 
@@ -140,7 +144,7 @@
                         <p>货号</p>
                       </div>
                       <div class="col-md-9">
-                        <p>{{goodsinfo.twOthnum}}</p>
+                        <p>{{ goodsinfo.twOthnum }}</p>
                       </div>
                     </div>
 
@@ -149,9 +153,10 @@
                         <p>产品信息</p>
                       </div>
                       <div class="col-md-9">
-                        <router-link style="display: inline-block;height: 70px" class="cart" :to="{ path: '/shop-detail', query: { goodId: goodsinfo.goodId } }">
-                              查看详情
-                            </router-link>
+                        <router-link style="display: inline-block;height: 70px" class="cart"
+                                     :to="{ path: '/shop-detail', query: { goodId: goodsinfo.goodId } }">
+                          查看详情
+                        </router-link>
                       </div>
                     </div>
 
@@ -160,7 +165,9 @@
                         <p>生长全程溯源</p>
                       </div>
                       <div class="col-md-9">
-                        <router-link style="display: inline-block;height: 70px"  :to="{ path: '/growing', query: { goodId: goodId} }">点击查看</router-link>
+                        <router-link style="display: inline-block;height: 70px"
+                                     :to="{ path: '/growing', query: { goodId: goodId} }">点击查看
+                        </router-link>
                       </div>
                     </div>
 
@@ -169,7 +176,7 @@
                         <p>备注</p>
                       </div>
                       <div class="col-md-9">
-                        <text>{{goodsinfo.twInfo}}</text>
+                        <text>{{ goodsinfo.twInfo }}</text>
                       </div>
                     </div>
                   </div>
@@ -192,9 +199,11 @@
 
 <script>
 import goodsApi from '@/api/goods'
+import { ElMessage, ElLoading } from 'element-plus'
+
 export default {
   name: 'OriginRes',
-  data() {
+  data () {
     return {
       tgCode: '',
       goodsinfo: {}, // 商品信息
@@ -202,21 +211,33 @@ export default {
       goodId: ''
     }
   },
-  created() {
+  created () {
     this.tgCode = this.$route.query.tgCode
     this.getGoodsInfo()
   },
   methods: {
     // 根据产品码查询商品信息
-    getGoodsInfo() {
+    getGoodsInfo () {
+      const loading = ElLoading.service({
+        fullscreen: true,
+        text: '溯源中..请稍后'
+      })
       goodsApi.getGoodsInfoByTgCode(this.tgCode).then((response) => {
+        loading.close()
         this.goodsinfo = response.data.trackgoods
-        this.goodId = response.data.trackgoods.goodId
-        this.getTypeList()
+        console.log(this.goodsinfo)
+        if (this.goodsinfo === undefined) {
+          ElMessage.error('没有找到溯源信息！')
+          this.$router.push('/origin')
+        } else {
+          ElMessage.success('查询成功')
+          this.goodId = response.data.trackgoods.goodId
+          this.getTypeList()
+        }
       })
     },
     // 根据产品id查询类别信息
-    getTypeList() {
+    getTypeList () {
       goodsApi.getGoodsTypeList(this.goodId).then((response) => {
         this.typelist = response.data.goodstypeList
       })

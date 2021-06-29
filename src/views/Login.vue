@@ -27,7 +27,7 @@
                   <input v-show="showCode" type="text" id="code" v-model="user.code" placeholder="验证码">
                 </div>
                 <div class="col-6">
-                  <button type="button" class="btn btn-outline-success mt-2 " @click="showCode=true; sendMail()">发送验证码
+                  <button type="button" class="btn btn-outline-success mt-2 " @click="sendMail()">发送验证码
                   </button>
                 </div>
                 <div class="col-12">
@@ -78,7 +78,7 @@
 import cookie from 'js-cookie'
 // 引入调用login.js文件
 import loginApi from '@/api/login'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElLoading } from 'element-plus'
 // function checkCode(){
 //   var code = document.getElementById("code").nodeValue
 //   var syscode = this.user.sysCode;
@@ -107,84 +107,116 @@ export default {
       showCode: false // 注册-验证码展示
     }
   },
-
+  created () {
+    this.$loading({ text: '安全检测中...' }).close()
+  },
   methods: {
     // 登录的方法
     submitLogin () {
-      if (this.checkMail()) {
-        // 调用登录接口 返回token字符串
-        loginApi.userLogin(this.user)
-          .then(response => {
-            // alert(response.data.msg)
-            if (response.data.code === 0) { // 登录成功
-              ElMessage({
-                showClose: true,
-                message: '登录成功！',
-                type: 'success'
-              })
-              // 获取到的token字符串放入cookie
-              // 1.cookie名称，2.token参数值，3.作用范围-在什么样的请求中
-              cookie.set('agriculture_token', response.data.token, { domain: 'localhost' })
-              // 调用接口 根据token解析出用户信息 给首页用
-              loginApi.getUserInfo()
-                .then(response => {
-                  this.loginInfo = response.data.userInfo
-                  // 获取返回的用户信息  放入cookie
-                  cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
-                  // 路由跳转 跳转守页面
-                  this.$router.push({ path: '/' })
-                })
-            } else { // 登录失败
-              ElMessage({
-                showClose: true,
-                message: '邮箱或密码错误，登录失败!',
-                type: 'error'
-              })
-              // 路由跳转 跳转页面
-              // this.$router.push({ path: '/login' })
-            }
-          })
+      var mailTest = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+      if (this.user.userMail === '') {
+        ElMessage.warning('请输入邮箱！')
+        return
+      } else if (!(mailTest.test(this.user.userMail))) {
+        ElMessage.warning('请输入正确的邮箱格式！[只允许英文字母、数字、下划线、英文句号、以及中划线组成]')
+        return
       }
+      if (this.user.userPwd === '') {
+        ElMessage.warning('请输入密码！')
+        return
+      }
+      // 调用登录接口 返回token字符串
+      const loading = ElLoading.service({
+        fullscreen: true,
+        text: '登录中..请稍后'
+      })
+      loginApi.userLogin(this.user)
+        .then(response => {
+          loading.close()
+          // alert(response.data.msg)
+          if (response.data.code === 0) { // 登录成功
+            ElMessage.success('登录成功！')
+            // 获取到的token字符串放入cookie
+            // 1.cookie名称，2.token参数值，3.作用范围-在什么样的请求中
+            cookie.set('agriculture_token', response.data.token, { domain: 'localhost' })
+            // 调用接口 根据token解析出用户信息 给首页用
+            loginApi.getUserInfo()
+              .then(response => {
+                this.loginInfo = response.data.userInfo
+                // 获取返回的用户信息  放入cookie
+                cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
+                // 路由跳转 跳转守页面
+                this.$router.push({ path: '/' })
+              })
+          } else {
+            loading.close()
+            // 登录失败
+            ElMessage({
+              showClose: true,
+              message: '邮箱或密码错误，登录失败!',
+              type: 'error'
+            })
+            // 路由跳转 跳转页面
+            // this.$router.push({ path: '/login' })
+          }
+        })
     },
     // 注册-发送邮件
     sendMail () {
-      if (this.checkMail()) {
-        loginApi.sendEmail(this.user.userMail, this.sign).then((response) => {
-          ElMessage({
-            showClose: true,
-            message: response.data.msg
-          })
-          this.user.sysCode = response.data.code
-        })
-      } else {
-        this.showCode = false
+      var mailTest = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+      if (this.user.userMail === '') {
+        ElMessage.warning('请输入邮箱！')
+        return
+      } else if (!(mailTest.test(this.user.userMail))) {
+        ElMessage.warning('请输入正确的邮箱格式！[只允许英文字母、数字、下划线、英文句号、以及中划线组成]')
+        return
       }
+      const loading = ElLoading.service({
+        fullscreen: true,
+        text: '系统正在处理，正在发送邮件，请稍后...'
+      })
+      loginApi.sendEmail(this.user.userMail, this.sign).then((response) => {
+        loading.close()
+        ElMessage.info(response.data.msg)
+        this.showCode = true // 发送邮箱成功后才显示
+        this.user.sysCode = response.data.code
+      })
     },
     // 注册
     register () {
-      if (this.checkMail()) {
-        loginApi.userRegister(this.user).then((response) => {
-          // 路由跳转 跳转登录页面
-          ElMessage({
-            showClose: true,
-            message: response.data.msg,
-            type: 'success'
-          })
-          this.$router.push({ path: '/index' })
-        })
+      var mailTest = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+      if (this.user.userName === '') {
+        ElMessage.warning('请输入用户名！')
+        return
       }
-    },
-    checkMail () {
-      if (/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/.test(this.user.userMail)) {
-        return true
-      } else {
+      if (this.user.userMail === '') {
+        ElMessage.warning('请输入邮箱！')
+        return
+      } else if (!(mailTest.test(this.user.userMail))) {
+        ElMessage.warning('请输入正确的邮箱格式！[只允许英文字母、数字、下划线、英文句号、以及中划线组成]')
+        return
+      }
+      if (this.user.sysCode === '') {
+        ElMessage.warning('请先获取验证码！')
+        return
+      }
+      if (this.user.code === '') {
+        ElMessage.warning('请输入验证码！')
+        return
+      }
+      if (this.user.userPwd === '') {
+        ElMessage.warning('请输入密码！')
+        return
+      }
+      loginApi.userRegister(this.user).then((response) => {
+        // 路由跳转 跳转登录页面
         ElMessage({
           showClose: true,
-          message: '邮箱格式不对!',
-          type: 'error'
+          message: response.data.msg,
+          type: 'success'
         })
-        return false
-      }
+        this.$router.push({ path: '/login' })
+      })
     }
   }
 }

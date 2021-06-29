@@ -4,7 +4,8 @@
 -->
 <template>
   <!--新轮播图开始-->
-  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" style="padding: 0" data-interval="2500">
+  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" style="padding: 0" data-interval="3000"
+       data-pause="false">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -13,14 +14,15 @@
     <div class="carousel-inner">
       <div v-for="(list, index) in bannerlist" class="carousel-item" :key="list.adId" :class="{'active' : index === 0}">
         <img :src="list.picUrl" style="width: 100%;height: 80vh;object-fit:cover" class="d-block w-100" alt="">
-        <div class="cover w-100"
+        <div v-show="list.adName !== ''" class="cover w-100"
              style="position: absolute ;right:0;top: 0;height:80vh;background-color: rgba(0, 0, 0, 0.4);"></div>
         <div class="carousel-caption d-none d-md-block" style="bottom:25% ">
           <h5>
-            <i class="fas fa-broadcast-tower" style="padding-right: 5px;"></i>
+            <!--<i class="fas fa-broadcast-tower" style="padding-right: 5px;"></i>-->
             <strong>{{ list.adName }} <br>{{ list.adTitle }}</strong>
           </h5>
-          <p>{{ list.adSubtitle }}</p>
+          <p v-show="list.adSubtitle!==''"><i class="fas fa-at" style="padding-right: 5px;"></i>{{ list.adSubtitle }}
+          </p>
         </div>
       </div>
     </div>
@@ -167,76 +169,59 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="title-all text-center">
-            <h1>这是标题</h1>
-            <p>这是简介这是简介这是简介这是简介这是简介这是简介这是简介</p>
+            <h1><span style="color:#D91D10;font-size: 35px">建党100年</span><span
+              style="color: #999999;font-size: 25px">&</span><span style="color: #0068b7;font-size: 35px">建校70年</span>
+            </h1>
+            <p>红旅线路与校园风景推荐</p>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6 col-lg-4 col-xl-4">
-          <div class="blog-box">
-            <div class="blog-img">
+        <div class="col-md-6 col-lg-6 col-xl-6">
+          <div class="blog-box" style="height: 600px">
+            <div class="blog-img text-center">
               <img
-                class="img-fluid"
-                src="../assets/images/blog-img.jpg"
-                alt=""
-              />
+                class="img-fluid" style="height: 360px;width:100%;object-fit: cover" alt=""
+                src="https://n1-q.mafengwo.net/s10/M00/D4/D0/wKgBZ1lgRSWAPcRVAA4min43Nsc78.jpeg?imageMogr2%2Fthumbnail%2F%21690x450r%2Fgravity%2FCenter%2Fcrop%2F%21690x450%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cHM6Ly9iMS1xLm1hZmVuZ3dvLm5ldC9zMTEvTTAwLzQ0LzlCL3dLZ0JFRnNQNVJ5QUR2N3BBQUFIWlpVUFJsUTk5MC5wbmc%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11">
             </div>
             <div class="blog-content">
               <div class="title-blog">
-                <h3>这是标题</h3>
-                <p>这是简介这是简介这是简介这是简介这是简介这是简介这是简介</p>
+                <h3>中国共产党第一次全国代表大会会址纪念馆</h3>
+                <p>1921年中国共产党第一次全国代表大会，就在这里的一间18平方米的客厅内召开。</p>
               </div>
-              <ul class="option-blog" style="position: relative">
-                <li>
-                  <a href="#"><i class="fas fa-eye"></i></a>
-                </li>
-              </ul>
             </div>
+            <ul class="option-blog" style="position: absolute; bottom: 45px">
+              <li>
+                <router-link :to="{ path: '/tour-detail', query: { toId: 8 } }">
+                  <i class="fas fa-eye"></i>
+                </router-link>
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4 col-xl-4">
-          <div class="blog-box">
-            <div class="blog-img">
+        <div class="col-md-6 col-lg-6 col-xl-6">
+          <div class="blog-box" style="height: 600px">
+            <div class="blog-img text-center">
               <img
-                class="img-fluid"
-                src="../assets/images/blog-img-01.jpg"
+                class="img-fluid" style="height: 360px;width:100%;object-fit: cover"
+                src="https://www.cuit.edu.cn/__local/0/97/35/07A2E6DAFC4B8AB6CEA8C480683_35845070_6C2A5.jpg?e=.jpg"
                 alt=""
               />
             </div>
             <div class="blog-content">
               <div class="title-blog">
-                <h3>这是标题</h3>
-                <p>这是简介这是简介这是简介这是简介这是简介这是简介这是简介</p>
+                <h3>成信大校园风光</h3>
+                <p>面向未来，学校将继续秉承“成于大气，信达天下”的大学精神，以人为本，追求卓越，努力为服务国家战略需求和区域经济社会发展做出更多更大贡献。</p>
               </div>
-              <ul class="option-blog" style="position: relative">
-                <li>
-                  <a href="#"><i class="fas fa-eye"></i></a>
-                </li>
-              </ul>
+
             </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 col-xl-4">
-          <div class="blog-box">
-            <div class="blog-img">
-              <img
-                class="img-fluid"
-                src="../assets/images/blog-img-02.jpg"
-                alt=""
-              />
-            </div>
-            <div class="blog-content">
-              <div class="title-blog">
-                <h3>这是标题</h3>
-                <p>这是简介这是简介这是简介这是简介这是简介这是简介这是简介</p>
-              </div>
-              <ul class="option-blog" style="position: relative">
-                <li>
-                  <a href="#"><i class="fas fa-eye"></i></a>
-                </li>
-              </ul>
-            </div>
+            <ul class="option-blog" style="position: absolute; bottom: 45px">
+              <li>
+                <router-link :to="{ path: '/tour-detail', query: { toId: 9 } }">
+                  <i class="fas fa-eye"></i>
+                </router-link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

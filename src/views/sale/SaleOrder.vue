@@ -62,14 +62,16 @@
                 <router-link :to="{path:'/sale-order-detail',query:{orderId:list.orderId}}"
                              class="mr-3 btn btn-outline-info">查看详情
                 </router-link>
-                <a class="btn btn-outline-danger" href="#">删除</a>
+                <!--<a class="btn btn-outline-danger" href="#">删除</a>-->
               </td>
             </tr>
             </tbody>
           </table>
         </div>
         <div class="col-lg-12 text-center mb-5">
-          <a class="btn btn-outline-primary w-100" role="button" @click="flag=true;getDataList()">展示更多</a>
+          <a v-if="dataList.length !== 0" class="btn btn-outline-primary w-100" role="button"
+             @click="flag=true;getDataList()">展示更多</a>
+          <el-empty v-if="dataList.length === 0" description="暂时没有用户下单哦~"></el-empty>
         </div>
       </div>
     </div>
@@ -80,6 +82,7 @@
 import centerApi from '@/api/center'
 // 引入调用js-cookie
 import cookie from 'js-cookie'
+import { ElMessage } from 'element-plus'
 
 export default {
   name: 'SaleOrder',
@@ -117,25 +120,37 @@ export default {
       })
     },
     getOrder (orderId) {
-      centerApi.recevieOrder(orderId).then((response) => {
-        if (response.data.code === 0) { // 接单成功
-          alert(response.data.msg)
-          this.getDataList()
-        } else { // 接单失败
-          alert(response.data.msg)
-          this.getDataList()
-        }
+      this.$confirm('此操作将接单, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'success'
+      }).then(() => {
+        centerApi.recevieOrder(orderId).then((response) => {
+          if (response.data.code === 0) { // 接单成功
+            ElMessage.success('接单成功！')
+            this.getDataList()
+          } else { // 接单失败
+            ElMessage.error('接单失败！')
+            this.getDataList()
+          }
+        })
       })
     },
     cacelOrder (orderId) {
-      centerApi.cacelOrder(orderId).then((response) => {
-        if (response.data.code === 0) { // 取消订单成功
-          alert(response.data.msg)
-          this.getDataList()
-        } else { // 取消订单失败
-          alert(response.data.msg)
-          this.getDataList()
-        }
+      this.$confirm('此操作将取消订单, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        centerApi.cacelOrder(orderId).then((response) => {
+          if (response.data.code === 0) { // 取消订单成功
+            ElMessage.success('取消订单成功！')
+            this.getDataList()
+          } else { // 取消订单失败
+            ElMessage.error('取消订单失败！')
+            this.getDataList()
+          }
+        })
       })
     }
   }

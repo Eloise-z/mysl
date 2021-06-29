@@ -26,7 +26,7 @@
 
   <!--地址管理主体部分开始-->
   <div class="address-manage">
-    <div class="container">
+    <div class="container my-5">
       <div class="row">
         <div class="col-md-12" style="text-align: right;font-size: 40px">
           <div class="top-botton">
@@ -55,9 +55,11 @@
           </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-          <a class="btn btn-outline-primary w-100" role="button" @click="flag=true;getDataList()">
+          <a v-show="datalist.length !== 0" class="btn btn-outline-primary w-100" role="button"
+             @click="flag=true;getDataList()">
             加载更多
           </a>
+          <el-empty v-if="datalist.length === 0" description="还没有收货地址信息，快去添加吧！"></el-empty>
         </div>
       </div>
     </div>
@@ -70,6 +72,7 @@
 import cookie from 'js-cookie'
 import shipApi from '@/api/ship'
 import { area as areaData, city as cityData, province as provinceData } from './addressData.json'
+import { ElMessage } from 'element-plus'
 
 export default {
   name: 'AddressManage',
@@ -106,10 +109,16 @@ export default {
     },
     // 删除
     deleteShip (shipId) {
-      shipApi.deleteById(shipId).then((response) => {
-        alert(response.data.msg)
-        // 重新加载数据
-        this.getDataList()
+      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        shipApi.deleteById(shipId).then(() => {
+          ElMessage.success('删除成功！')
+          // 重新加载数据
+          this.getDataList()
+        })
       })
     },
     // 跳转到添加页面
