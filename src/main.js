@@ -46,8 +46,8 @@ import './assets/js/contact-form-script.js'
 // 有问题的custom.js
 import './assets/js/custom.js'
 
-console.log('测试Jquery : main.js调用了 ' + $)
-console.log('测试axios : main.js调用了 ' + axios)
+// console.log('测试Jquery : main.js调用了 ' + $)
+// console.log('测试axios : main.js调用了 ' + axios)
 
 const app = createApp(App)
 app.use(store).use(router).use(ElementUI)

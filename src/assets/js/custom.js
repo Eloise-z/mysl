@@ -83,7 +83,7 @@ import baguetteBox from './baguetteBox.min'
       });
     });
   }catch (e){
-    console.log("custom.js 的 Container.imagesLoaded(function () 的 try")
+    // console.log("custom.js 的 Container.imagesLoaded(function () 的 try")
   }
 
 	/* ..............................................
@@ -96,7 +96,7 @@ import baguetteBox from './baguetteBox.min'
       noScrollbars: true
     });
   }catch (e){
-    console.log('custom.js 的 BaguetteBox 的 try')
+    // console.log('custom.js 的 BaguetteBox 的 try')
   }
 
 	/* ..............................................
