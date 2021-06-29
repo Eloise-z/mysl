@@ -36,9 +36,9 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="updateImg" class="col-sm-2 col-form-label">上传头像</label>
+            <label for="uploadImage" class="col-sm-2 col-form-label">上传头像</label>
             <div class="col-sm-10">
-              <input type="file" class="form-control-file" id="updateImg">
+              <input type="file" id="uploadImage" @change="toUpload">
             </div>
           </div>
 
@@ -93,12 +93,15 @@ import centerApi from '@/api/center'
 // 引入调用js-cookie
 import cookie from 'js-cookie'
 import { ElMessage } from 'element-plus'
+import OSS from 'ali-oss'
 
 export default {
   name: 'UserInfo',
   data () {
     return {
-      loginInfo: {} // 用户信息
+      loginInfo: {
+        userAvatar: ''
+      } // 用户信息
     }
   },
   created () {
@@ -117,7 +120,7 @@ export default {
             alert(response.data.msg)
             if (response.data.code === 0) { // 修改成功
               cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
-              this.$router.push({ path: '/my-account' })
+              // this.$router.push({ path: '/my-account' })
             } else {
             }
           })
@@ -138,37 +141,49 @@ export default {
         })
         return false
       }
+    },
+    toUpload () {
+      const _this = this
+      _this.loading = true
+      var client = new OSS({
+        region: 'oss-cn-hangzhou',
+        accessKeyId: 'LTAI4Fz5NWHGpfiaHcFQJfUD',
+        accessKeySecret: 'TSEel61Sf4mBR5CSDFFudBzSr7s24X',
+        bucket: 'agricultureproduct-cuit'
+      })
+      // 获取文件信息
+      const files = document.getElementById('uploadImage')
+      var date = new Date()
+      var year = date.getFullYear()
+      var month = date.getMonth() + 1
+      month = month < 10 ? '0' + month : month
+      var mydate = date.getDate()
+      mydate = mydate < 10 ? '0' + mydate : mydate
+      this.baseurl = 'agriculture-front/user/' + year + '/' + month + '/' + mydate + '/' // 上传到阿里云指定路径
+
+      if (files.files) {
+        const fileLen = document.getElementById('uploadImage').files
+        const name = this.baseurl + (new Date().getTime() + 1000) + fileLen[0].name // 文件名
+        for (let i = 0; i < fileLen.length; i++) {
+          const file = fileLen[i]
+          client.put(name, file).then(function (res) {
+            _this.loading = false
+            var str = res.res.requestUrls[0]
+            console.log('url:' + str.split('?')[0])
+            _this.loginInfo.userAvatar = str.split('?')[0]
+            _this.$emit('childByValue', str.split('?')[0])
+          }).catch((err) => {
+            console.log(err)
+          })
+        }
+      }
     }
   }
-
 }
 </script>
 
-<style>
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.avatar-uploader .el-upload:hover {
+<style scoped>
+.avatar-uploader :hover {
   border-color: #409EFF;
-}
-
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 178px;
-  height: 178px;
-  line-height: 178px;
-  text-align: center;
-}
-
-.avatar {
-  width: 178px;
-  height: 178px;
-  display: block;
 }
 </style>
