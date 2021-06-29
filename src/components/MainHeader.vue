@@ -15,7 +15,7 @@
             <i class="fa fa-bars"></i>
           </button>
           <router-link class="navbar-brand" to="/index">
-            <img style="height: 70px" src="../assets/images/eloise/newIco.png" class="logo" alt="">
+            <img style="height: 70px" src="../assets/images/logo11.png" class="logo" alt="">
           </router-link>
           <a href="#" class="font-weight-bold align-middle" style="height: 82px; font-size: 16px">梦源商旅</a>
         </div>
@@ -147,12 +147,8 @@ export default {
 
   // 监听路由变化
   watch: {
-    '$route' (to, from) {
+    '$route' (to) {
       // 路由发生变化页面刷新
-      console.log('to')
-      console.log(to)
-      console.log('from')
-      console.log(from)
       switch (to.path) {
         case '/index' :
           this.navChoose = 1
@@ -189,7 +185,6 @@ export default {
         case '/wishlist' :
           this.navChoose = 8
       }
-      console.log('navChoose = ' + this.navChoose)
     }
   }
 }

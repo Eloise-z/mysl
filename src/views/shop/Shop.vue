@@ -125,21 +125,6 @@
 import goodsApi from '@/api/goods'
 import { ElLoading } from 'element-plus'
 
-$(function () {
-  $('#slider-range').slider({
-    range: true,
-    min: 0,
-    max: 2000,
-    values: [0, 200],
-    slide: function (event, ui) {
-      $('#amount').val('￥' + ui.values[0] + ' - ￥' + ui.values[1])
-      $('#amount').click()
-    }
-  })
-  $('#amount').val('￥' + $('#slider-range').slider('values', 0) +
-    ' - ￥' + $('#slider-range').slider('values', 1))
-})
-
 export default {
   name: 'Shop',
   data () {
@@ -172,6 +157,21 @@ export default {
     this.params.goodName = this.$route.query.goodName
     this.getDataList()
     loading.close()
+
+    $(function () {
+      $('#slider-range').slider({
+        range: true,
+        min: 0,
+        max: 2000,
+        values: [0, 200],
+        slide: function (event, ui) {
+          $('#amount').val('￥' + ui.values[0] + ' - ￥' + ui.values[1])
+          $('#amount').click()
+        }
+      })
+      $('#amount').val('￥' + $('#slider-range').slider('values', 0) +
+        ' - ￥' + $('#slider-range').slider('values', 1))
+    })
   },
   // 监听路由变化
   watch: {

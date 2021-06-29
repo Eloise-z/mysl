@@ -51,6 +51,7 @@
               <input type="password" v-model="user.userPwd" name="userPwd" placeholder="密码">
               <router-link to="/findpwd">忘记密码？</router-link>
               <button type="button" @click="submitLogin()">登录</button>
+              <button type="button" @click="$router.push('/index')">游览</button>
             </form>
           </div>
           <div class="overlay-container">

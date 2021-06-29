@@ -8,25 +8,23 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-          <div class="right-phone-box">
-            <router-link to="/index"><p class="font-weight-bold">梦源商旅：</p></router-link>
-          </div>
-          <div class="right-phone-box">
-            <!--            <p>CUIT:- <a href="#"> 软件工程学院</a></p>-->
-            <router-link to="/my-account"><p class="font-weight-bold">个人中心</p></router-link>
-          </div>
           <div class="our-link">
             <ul>
+              <li>
+                <router-link to="/index">梦源商旅</router-link>
+              </li>
               <li v-if="!loginInfo.userId">
                 <router-link to="/login"><i class="fa fa-user s_color"></i> 登录注册</router-link>
               </li>
               <li v-if="loginInfo.userId" id="is-login-two" class="h-r-user">
                 <router-link class="mr-3" :to="{ path: '/my-account', query: { userId: loginInfo.userId} }">
-                  <img v-show="loginInfo.userAvatar !== null && loginInfo.userAvatar !== undefined && loginInfo.userAvatar !== ''" :src="loginInfo.userAvatar" style="width: 25px;height: 25px;border-radius: 50%;object-fit: cover"
-                       class="vam picImg mr-2" alt/>
-                  <span id="userName" class="vam disIb">{{ loginInfo.userName }}</span>
+                  <img
+                    v-show="loginInfo.userAvatar !== null && loginInfo.userAvatar !== undefined && loginInfo.userAvatar !== ''"
+                    :src="loginInfo.userAvatar" style="width: 25px;height: 25px;border-radius: 50%;object-fit: cover"
+                    class="vam picImg mr-2" alt/>
+                  <span id="userName" class="vam disIb"> {{ loginInfo.userName }}</span>
                 </router-link>
-                <a href="javascript:void(0);" title="退出" @click="logout()" class="ml5">退出</a>
+                <a href="" title="退出" @click="logout()" class="ml5"> 退出</a>
               </li>
               <li>
                 <router-link to="/order-list"><i class="fas fa-file-alt"></i> 订单</router-link>

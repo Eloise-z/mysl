@@ -117,6 +117,7 @@
 </template>
 
 <script>
+import { ElMessage } from 'element-plus'
 
 export default {
   name: 'ProductOrigin',
@@ -126,11 +127,12 @@ export default {
     }
   },
   methods: {
-    query () {
-      this.$router.push({
-        path: '/origin-res',
-        query: { tgCode: this.tgCode }
-      })
+    query() {
+      if (this.tgCode === '') {
+        ElMessage.warning('请输入产品码！')
+        return
+      }
+      this.$router.push({ path: '/origin-res', query: { tgCode: this.tgCode } })
     }
   }
 }

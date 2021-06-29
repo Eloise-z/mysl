@@ -235,6 +235,17 @@ export default {
     },
     // 支付=>判断该商品是不是用户收藏名单，若是则从收藏表中删除=>生成订单=>跳转页面
     payment () {
+      if (this.shipList.length === 0) {
+        this.$msgbox({
+          confirmButtonText: '确定',
+          type: 'warning',
+          title: '警告',
+          message: '你还没有收货地址，快去添加吧！'
+        }).then(() => {
+          this.$router.push('/add-addr')
+        })
+        return
+      }
       this.orderInfo.goodStatus = this.goodsinfo.goodStatus
       this.orderInfo.payway = this.payway
       this.orderInfo.discount = (this.goodsinfo.goodPrice - this.goodsinfo.goodPricecut)
@@ -244,13 +255,15 @@ export default {
         if (response.data.tag === 1) { // 说明是用户收藏名单
           // 移除收藏名单
           wishApi.deleteByUserIdAndGoodId(this.orderInfo.userId, this.orderInfo.goodId).then((response) => {
-            console('商品购买-移除收藏名单:' + response.data.msg)
+            // console.log('商品购买-移除收藏名单:' + response.data.msg)
           })
         }
       })
       // 生成订单
       orderApi.generateOrder(this.orderInfo).then((response) => {
-        alert(response.data.msg)
+        if (response.data.msg === 'success') {
+          ElMessage.success('订单生成成功，请扫码付款。')
+        }
         if (response.data.code === 0) {
           // 跳转页面
           this.$router.push({
@@ -266,7 +279,7 @@ export default {
   },
   watch: {
     payway () {
-      console.log('watching payway')
+      // console.log('watching payway')
       $('#payway1').css('border', '2px solid white')
       $('#payway2').css('border', '2px solid white')
       $('#payway3').css('border', '2px solid white')
