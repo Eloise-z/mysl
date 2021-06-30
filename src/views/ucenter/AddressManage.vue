@@ -47,7 +47,7 @@
                   <li> {{ '姓名：' + list.name }}</li>
                   <li> {{ '电话：' + list.tel }}</li>
                 </ul>
-                <a class="address-delete" @click="flag=false;deleteShip(list.shipId)">
+                <a class="address-delete mr-2" @click="flag=false;deleteShip(list.shipId)">
                   <i class="far fa-trash-alt"></i></a>
                 <a class="address-edit" @click="updateShip(list.shipId)"><i class="fas fa-edit"></i></a>
               </div>

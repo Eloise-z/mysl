@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import cookie from 'js-cookie'
+import { ElMessage } from 'element-plus'
 
 const Common = () => import(/* webpackChunkName: "Common" */ '../components/Common')
 
@@ -195,6 +196,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "sale" */ '../views/sale/SaleOrderDetail')
       }
     ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import(/* webpackChunkName: "index" */ '../views/404')
   }
 ]
 
@@ -237,7 +243,7 @@ router.beforeEach((to, from, next) => {
     if (userStr) {
       next()
     } else {
-      alert('请先登录！')
+      ElMessage.warning('登录后才能访问该页面！')
       next({
         path: '/login'
       })

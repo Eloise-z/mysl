@@ -102,6 +102,10 @@ export default {
         ElMessage.warning('新密码不能为空！')
         return
       }
+      if (this.pwd.userPdw === this.pwd.userOPdw) {
+        ElMessage.warning('新密码与旧密码相等！')
+        return
+      }
       const loading = ElLoading.service({ fullscreen: true, text: '正在处理..请稍后' })
       // 调用修改密码接口
       centerApi.ModifyPwd(this.pwd.userOPdw, this.pwd.userId, this.pwd.userPdw)

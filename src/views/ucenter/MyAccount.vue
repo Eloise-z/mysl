@@ -35,7 +35,9 @@
                   </router-link>
                 </div>
                 <div class="service-desc">
-                  <h4>订单中心</h4>
+                  <router-link :to="{ path: '/order-list', query: { userId: userId} }">
+                    <h4>订单中心</h4>
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -49,7 +51,9 @@
                   </router-link>
                 </div>
                 <div class="service-desc">
-                  <h4>修改密码</h4>
+                  <router-link :to="{ path: '/modifypwd', query: { userId: userId} }">
+                    <h4>修改密码</h4>
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -63,7 +67,9 @@
                   </router-link>
                 </div>
                 <div class="service-desc">
-                  <h4>地址管理</h4>
+                  <router-link :to="{ path: '/addr', query: { userId: userId} }">
+                    <h4>地址管理</h4>
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -77,7 +83,9 @@
                   </router-link>
                 </div>
                 <div class="service-desc">
-                  <h4>个人信息</h4>
+                  <router-link :to="{ path: '/userinfo', query: { userId: userId} }">
+                    <h4>个人信息</h4>
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -91,7 +99,9 @@
                   </router-link>
                 </div>
                 <div class="service-desc">
-                  <h4>商品营销</h4>
+                  <router-link :to="{ path: '/sale-list', query: { userId: userId} }">
+                    <h4>商品营销</h4>
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -105,7 +115,9 @@
                   </router-link>
                 </div>
                 <div class="service-desc">
-                  <h4>系统消息</h4>
+                  <router-link :to="{ path: '/notice', query: { userId: userId} }">
+                    <h4>系统消息</h4>
+                  </router-link>
                 </div>
               </div>
             </div>

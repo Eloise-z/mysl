@@ -11,7 +11,7 @@
           <div class="our-link">
             <ul>
               <li>
-                <router-link to="/index">梦源商旅</router-link>
+                <router-link to="/index"><i class="fas fa-leaf"></i> 梦源商旅</router-link>
               </li>
               <li v-if="!loginInfo.userId">
                 <router-link to="/login"><i class="fa fa-user s_color"></i> 登录注册</router-link>
@@ -24,13 +24,16 @@
                     class="vam picImg mr-2" alt/>
                   <span id="userName" class="vam disIb"> {{ loginInfo.userName }}</span>
                 </router-link>
-                <a href="" title="退出" @click="logout()" class="ml5"> 退出</a>
+                <a href="" title="退出" @click="logout()" class="ml5"><i class="fas fa-times"></i> 退出</a>
               </li>
               <li>
                 <router-link to="/order-list"><i class="fas fa-file-alt"></i> 订单</router-link>
               </li>
               <li>
                 <router-link to="/notice"><i class="fas fa-bell"></i> 系统消息</router-link>
+              </li>
+              <li>
+                <router-link to="" @click="$router.back()"><i class="fas fa-reply"></i> 返回</router-link>
               </li>
             </ul>
           </div>

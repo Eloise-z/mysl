@@ -92,10 +92,10 @@
               <router-link class="nav-link" to="/origin">产品溯源</router-link>
             </li>
             <li class="nav-item" :class="{'active' : navChoose === 7}" style="margin-left: 72px">
-              <router-link class="nav-link" to="/search"><i class="fa fa-search"></i></router-link>
+              <router-link class="nav-link" to="/search"><i class="fa fa-search"></i> 搜索</router-link>
             </li>
             <li class="nav-item" :class="{'active' : navChoose === 8}">
-              <router-link class="nav-link" to="/wishlist"><i class="fa fa-shopping-bag mr-1"></i>我的收藏</router-link>
+              <router-link class="nav-link" to="/wishlist"><i class="fa fa-shopping-bag mr-1"></i> 我的收藏</router-link>
             </li>
           </ul>
         </div>
