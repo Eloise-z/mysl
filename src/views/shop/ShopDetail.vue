@@ -176,7 +176,10 @@ export default {
     }
   },
   created () {
-    const loading = ElLoading.service({ fullscreen: true, text: '正在获取数据..请稍后' })
+    const loading = ElLoading.service({
+      fullscreen: true,
+      text: '正在获取数据..请稍后'
+    })
     this.getDetail() // 获取商品信息
     loading.close()
   },
@@ -237,5 +240,21 @@ export default {
 </script>
 
 <style scoped>
+span {
+  font-size: 15px;
+}
 
+p {
+  margin: 5px;
+}
+
+a {
+  margin: 5px;
+  font-size: 15px;
+}
+
+button {
+  margin: 5px;
+  font-size: 15px;
+}
 </style>

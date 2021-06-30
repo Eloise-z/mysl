@@ -63,8 +63,9 @@
               </div>
               <div class="row p-3">
                 <div class="col-3"></div>
-                <div class="col-9"><textarea class="form-control" v-model="shipInfo.address"
-                                             placeholder="具体收货地址"></textarea></div>
+                <div class="col-9">
+                  <textarea class="form-control" v-model="shipInfo.address" placeholder="具体收货地址"></textarea>
+                </div>
               </div>
             </div>
             <hr>
@@ -77,13 +78,15 @@
                   <div class="col-md-2" style="text-align: right">
                     <p style="display: inline-block; line-height: 38px;margin: 0;font-size: 16px">收货人姓名</p>
                   </div>
-                  <div class="col-md-6"><input v-model="shipInfo.name" class="form-control address-input"></div>
+                  <div class="col-md-6"><input v-model="shipInfo.name" type="text" class="form-control address-input">
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-md-2" style="text-align: right">
                     <p style="display: inline-block; line-height: 38px;margin: 0;font-size: 16px">收货人手机号</p>
                   </div>
-                  <div class="col-md-6"><input v-model="shipInfo.tel" type="number" class="form-control address-input">
+                  <div class="col-md-6"><input v-model="shipInfo.tel" type="number"
+                                               class="form-control address-input">
                   </div>
                 </div>
               </div>
@@ -256,8 +259,8 @@ export default {
         ElMessage.warning('收货人手机号不能为空！')
         return false
       }
-      if (this.shipInfo.tel.length !== 11) {
-        ElMessage.warning('手机号不符合规范！')
+      if (this.shipInfo.tel.length !== 11 || /^[1]([3-9])[0-9]{9}$/.test(this.shipInfo.tel) === false) {
+        ElMessage.warning('手机号格式不符合规范！')
         return false
       }
       return true

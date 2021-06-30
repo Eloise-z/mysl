@@ -42,9 +42,9 @@
               <label for="uploadImage">商品图片</label>
               <div class="row">
                 <div class="col-lg-6">
-                  <!--                  <input type="file" class="form-control form-control-file" id="updateImg" accept="image/*">-->
+                  <!--<input type="file" class="form-control form-control-file" id="updateImg" accept="image/*">-->
                   <input type="file" class="form-control form-control-file" id="uploadImage" accept="image/*"
-                         @change="toUpload"/>
+                         @change="toUpload" required>
                 </div>
                 <div class="col-lg-6">
                   <img style="max-width: 300px" :src="dataForm.goodPicture" id="uploadImgView" alt="">
@@ -53,17 +53,17 @@
             </div>
             <div class="form-group">
               <label for="goodsName">商品名称</label>
-              <input type="text" class="form-control" id="goodsName" v-model="dataForm.goodName">
+              <input type="text" class="form-control" id="goodsName" v-model="dataForm.goodName" required>
             </div>
             <div class="form-group">
               <label for="goodsPrice">商品价格</label>
               <input type="number" step="0.01" min="0" class="form-control" id="goodsPrice" required
-                     v-model="dataForm.goodPrice">
+                     v-model="dataForm.goodPrice" @blur="changMoney">
             </div>
             <div class="form-group">
               <label for="goodPricecut">商品优惠</label>
               <input type="number" step="0.01" min="0" class="form-control" id="goodPricecut" required
-                     v-model="dataForm.goodPricecut">
+                     v-model="dataForm.goodPricecut" @blur="changMoney">
             </div>
             <div class="form-group">
               <label for="goodsNum">商品数量</label>
@@ -97,7 +97,8 @@
             </div>
             <div class="form-group">
               <label for="goodContent">商品简介</label>
-              <textarea cols="3" class="form-control" id="goodContent" v-model="dataForm.goodContent"></textarea>
+              <textarea cols="3" class="form-control" id="goodContent" required
+                        v-model="dataForm.goodContent"></textarea>
             </div>
             <button type="submit" class="btn btn-primary mr-3" @click="addorupdateSaleGoods()">提交</button>
             <button type="button" class="btn" @click="goOff()">返回</button>
@@ -115,6 +116,7 @@ import centerApi from '@/api/center'
 // 引入调用js-cookie
 import cookie from 'js-cookie'
 import OSS from 'ali-oss'
+import { ElMessage } from 'element-plus'
 
 $('#goodsImg').change(function () {
   var newPreview = $('#goodsImg').val()
@@ -150,7 +152,8 @@ export default {
         goodContent: '',
         goodPlace: '',
         goodFarm: '',
-        gooduserId: ''
+        gooduserId: '',
+        isBuy: ''
       },
       loginInfo: {}, // 用户信息
       // 封装数据
@@ -186,27 +189,29 @@ export default {
       this.$router.go(-1)
     },
     addorupdateSaleGoods () {
-      if (this.dataForm.goodId) {
-        centerApi.updateSaleGoods(this.dataForm).then((response) => {
-          if (response.data.code === 0) { // 修改成功
-            alert(response.data.msg)
-            this.$router.push({ path: '/sale-list' })
-          } else { // 修改失败
-            alert(response.data.msg)
-            this.$router.push({ path: '/sale-list' })
-          }
-        })
-      } else {
-        this.dataForm.gooduserId = this.loginInfo.userId
-        centerApi.addSaleGoods(this.dataForm).then((response) => {
-          if (response.data.code === 0) { // 增加成功
-            alert(response.data.msg)
-            this.$router.push({ path: '/sale-list' })
-          } else { // 增加失败
-            alert(response.data.msg)
-            this.$router.push({ path: '/sale-list' })
-          }
-        })
+      if (this.checkInfoFormat()) {
+        if (this.dataForm.goodId) {
+          centerApi.updateSaleGoods(this.dataForm).then((response) => {
+            if (response.data.code === 0) { // 修改成功
+              alert(response.data.msg)
+              this.$router.push({ path: '/sale-list' })
+            } else { // 修改失败
+              alert(response.data.msg)
+              this.$router.push({ path: '/sale-list' })
+            }
+          })
+        } else {
+          this.dataForm.gooduserId = this.loginInfo.userId
+          centerApi.addSaleGoods(this.dataForm).then((response) => {
+            if (response.data.code === 0) { // 增加成功
+              alert(response.data.msg)
+              this.$router.push({ path: '/sale-list' })
+            } else { // 增加失败
+              alert(response.data.msg)
+              this.$router.push({ path: '/sale-list' })
+            }
+          })
+        }
       }
     },
     // 头像上传到阿里云OSS
@@ -244,6 +249,75 @@ export default {
             console.log(err)
           })
         }
+      }
+    },
+    checkInfoFormat () {
+      if (this.dataForm.goodPicture === '') {
+        ElMessage.warning('请选择商品图片！')
+        return false
+      }
+      if (this.dataForm.goodName === '') {
+        ElMessage.warning('商品名称不能为空！')
+        return false
+      }
+      if (this.dataForm.goodPrice === '') {
+        ElMessage.warning('商品价格不能为空！')
+        return false
+      }
+      if (/^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$/.test(this.dataForm.goodPrice) === false) {
+        ElMessage.warning('商品价格格式错误！')
+        return false
+      }
+      if (this.dataForm.goodPricecut === '') {
+        ElMessage.warning('商品优惠不能为空！')
+        return false
+      }
+      if (/((^[-]?([1-9]\d*))|^0)(\.\d{1,2})?$|(^[-]0\.\d{1,2}$)/.test(this.dataForm.goodPricecut) === false) {
+        ElMessage.warning('商品优惠格式错误！')
+        return false
+      }
+      if (this.dataForm.goodNum === '') {
+        ElMessage.warning('商品数量不能为空！')
+        return false
+      }
+      if (this.dataForm.goodState === '') {
+        ElMessage.warning('商品类型不能为空！')
+        return false
+      }
+      if (this.dataForm.isBuy === '') {
+        ElMessage.warning('商品销售状态不能为空！')
+        return false
+      }
+      if (this.dataForm.goodPlace === '') {
+        ElMessage.warning('商品产地不能为空！')
+        return false
+      }
+      if (this.dataForm.goodFarm === '' && this.dataForm.goodState === 1) {
+        ElMessage.warning('商品农场不能为空！')
+        return false
+      }
+      if (this.dataForm.goodContent === '') {
+        ElMessage.warning('商品简介不能为空！')
+        return false
+      }
+      return true
+    },
+    changMoney () {
+      const index = this.dataForm.goodPrice.indexOf('.')
+      if (index !== -1) {
+        if (index + 1 === this.dataForm.goodPrice.length) {
+          this.dataForm.goodPrice.replace('.', '.00')
+        }
+      } else if (this.dataForm.goodPrice.length !== 0) {
+        this.dataForm.goodPrice += '.00'
+      }
+      const index1 = this.dataForm.goodPricecut.indexOf('.')
+      if (index1 !== -1) {
+        if (index1 + 1 === this.dataForm.goodPricecut.length) {
+          this.dataForm.goodPricecut.replace('.', '.00')
+        }
+      } else if (this.dataForm.goodPricecut.length !== 0) {
+        this.dataForm.goodPricecut += '.00'
       }
     }
   }

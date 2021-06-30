@@ -45,8 +45,8 @@
               <input type="password" v-model="user.userPwd" class="form-control" id="userPdw">
             </div>
             <div class="form-group">
-              <label for="userPdwagain">确认新密码</label>
-              <input type="password" v-model="user.userPwdAgain" class="form-control" id="userPdwagain">
+              <label for="userPwdAgain">确认新密码</label>
+              <input type="password" v-model="user.userPwdAgain" class="form-control" id="userPwdAgain">
             </div>
             <div class="text-center">
               <button type="button" class="btn btn-success" @click="submit()">提交</button>
@@ -119,7 +119,7 @@ export default {
         ElMessage.warning('请输入密码！')
         return
       }
-      if (this.user.userPdwagain !== this.user.userPwd) {
+      if (this.user.userPwdAgain !== this.user.userPwd) {
         ElMessage.warning('两次密码不一致！')
         return
       }
