@@ -189,6 +189,10 @@ export default {
     getShipInfo () {
       shipApi.getInfoById(this.shipInfo.shipId).then((response) => {
         this.shipInfo = response.data.ship
+        // 修改时的初始化
+        this.provinceSelectCode = this.shipInfo.provinceCode
+        this.citySelectCode = this.shipInfo.cityCode
+        this.areaSelectCode = this.shipInfo.areaCode
       })
     },
     // 修改地址信息
