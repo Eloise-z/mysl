@@ -112,16 +112,16 @@
                 <h3>{{ goodsinfo.goodName }}</h3>
               </div>
               <div class="form-group">
-                <h3>商品单价：￥{{ goodsinfo.goodPricecut }}</h3>
+                <h3>商品单价：￥{{ goodsinfo.goodPrice }}</h3>
               </div>
               <div class="form-group">
                 <h3>商品数量：1</h3>
               </div>
               <div class="form-group">
-                <h3>总优惠：￥{{ goodsinfo.goodPrice - goodsinfo.goodPricecut }}</h3>
+                <h3>总优惠：￥{{ goodsinfo.goodPricecut }}</h3>
               </div>
               <div class="form-group">
-                <h3>总需支付：￥{{ goodsinfo.goodPricecut }}</h3>
+                <h3>总需支付：￥{{ goodsinfo.goodPrice - goodsinfo.goodPricecut }}</h3>
               </div>
               <div class="row justify-content-end">
                 <input type="button" class="btn btn-info" style="margin-right: 10px" @click="$router.back()" value="取消">

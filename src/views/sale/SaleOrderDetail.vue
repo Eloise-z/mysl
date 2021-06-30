@@ -19,7 +19,7 @@
               <router-link to="/sale-list"> 营销管理</router-link>
             </li>
             <li class="breadcrumb-item">
-              <router-link to="/order-list"> 订单管理</router-link>
+              <router-link to="/sale-order"> 订单管理</router-link>
             </li>
             <li class="breadcrumb-item active"> 订单详情</li>
           </ul>

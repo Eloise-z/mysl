@@ -45,7 +45,7 @@
             查看本产品全部动态
           </router-link>
         </div>
-        <div v-show="dataList !== null" class="col-md-12 mb-5">
+        <div v-if="dataList !== null" class="col-md-12 mb-5">
           <form>
             <div class="form-group">
               <label for="goodsDateCode">当前批次码</label>
@@ -56,13 +56,14 @@
               <input type="text" readonly class="form-control" id="goodsDateName" v-model="dataList.twName">
             </div>
             <div class="form-group">
-              <label for="goodsImg">动态图片</label>
+              <label for="uploadImage">动态图片</label>
               <div class="row">
                 <div class="col-lg-6">
-                  <input type="file" class="form-control form-control-file" id="goodsImg" accept="image/*">
+                  <input type="file" class="form-control form-control-file" id="uploadImage" accept="image/*"
+                         @change="toUpload" required>
                 </div>
                 <div class="col-lg-6">
-                  <img style="max-width: 300px" src="" id="uploadImgView" alt="">
+                  <img style="max-width: 300px" :src="dataList.url" id="uploadImgView" alt="">
                 </div>
               </div>
             </div>
@@ -85,6 +86,7 @@
 <script>
 import centerApi from '@/api/center'
 import { ElMessage } from 'element-plus'
+import OSS from 'ali-oss'
 
 export default {
   name: 'SaleGrowing',
@@ -94,7 +96,10 @@ export default {
         goodId: ''
       },
       // 封装数据
-      dataList: []
+      dataList: {
+        url: '',
+        gdText: ''
+      }
     }
   },
   created () {
@@ -138,6 +143,54 @@ export default {
           this.$router.push({ path: '/sale-list' })
         }
       })
+    },
+    // 头像上传到阿里云OSS
+    toUpload () {
+      const _this = this
+      _this.loading = true
+      var client = new OSS({
+        region: 'oss-cn-hangzhou',
+        accessKeyId: 'LTAI4Fz5NWHGpfiaHcFQJfUD',
+        accessKeySecret: 'TSEel61Sf4mBR5CSDFFudBzSr7s24X',
+        bucket: 'agricultureproduct-cuit'
+      })
+      // 获取文件信息
+      const files = document.getElementById('uploadImage')
+      var date = new Date()
+      var year = date.getFullYear()
+      var month = date.getMonth() + 1
+      month = month < 10 ? '0' + month : month
+      var mydate = date.getDate()
+      mydate = mydate < 10 ? '0' + mydate : mydate
+      this.baseurl = 'agriculture-front/dynpic/' + year + '/' + month + '/' + mydate + '/' // 上传到阿里云指定路径
+
+      if (files.files) {
+        const fileLen = document.getElementById('uploadImage').files
+        const name = this.baseurl + (new Date().getTime() + 1000) + fileLen[0].name // 文件名
+        for (let i = 0; i < fileLen.length; i++) {
+          const file = fileLen[i]
+          client.put(name, file).then(function (res) {
+            _this.loading = false
+            var str = res.res.requestUrls[0]
+            console.log('url:' + str.split('?')[0])
+            _this.dataList.url = str.split('?')[0]
+            _this.$emit('childByValue', str.split('?')[0])
+          }).catch((err) => {
+            console.log(err)
+          })
+        }
+      }
+    },
+    checkInfoFormat () {
+      if (this.dataList.url === '') {
+        ElMessage.warning('请选择商品图片！')
+        return false
+      }
+      if (this.dataList.gdText === '') {
+        ElMessage.warning('动态内容不能为空！')
+        return false
+      }
+      return true
     }
   }
 }

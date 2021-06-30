@@ -136,6 +136,12 @@ export default {
           loading.close()
           // alert(response.data.msg)
           if (response.data.code === 0) { // 登录成功
+            this.$notify({
+              title: '欢迎您使用本平台',
+              message: '新用户请进入个人中心上传头像，完善个人信息~',
+              type: 'success',
+              duration: '10000'
+            })
             ElMessage.success('登录成功！')
             // 获取到的token字符串放入cookie
             // 1.cookie名称，2.token参数值，3.作用范围-在什么样的请求中

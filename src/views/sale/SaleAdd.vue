@@ -193,10 +193,10 @@ export default {
         if (this.dataForm.goodId) {
           centerApi.updateSaleGoods(this.dataForm).then((response) => {
             if (response.data.code === 0) { // 修改成功
-              alert(response.data.msg)
+              ElMessage.success(response.data.msg)
               this.$router.push({ path: '/sale-list' })
             } else { // 修改失败
-              alert(response.data.msg)
+              ElMessage.warning(response.data.msg)
               this.$router.push({ path: '/sale-list' })
             }
           })
@@ -204,10 +204,10 @@ export default {
           this.dataForm.gooduserId = this.loginInfo.userId
           centerApi.addSaleGoods(this.dataForm).then((response) => {
             if (response.data.code === 0) { // 增加成功
-              alert(response.data.msg)
+              ElMessage.success(response.data.msg)
               this.$router.push({ path: '/sale-list' })
             } else { // 增加失败
-              alert(response.data.msg)
+              ElMessage.warning(response.data.msg)
               this.$router.push({ path: '/sale-list' })
             }
           })

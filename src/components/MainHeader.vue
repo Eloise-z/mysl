@@ -146,6 +146,7 @@ export default {
   },
 
   // 监听路由变化
+
   watch: {
     '$route' (to) {
       // 路由发生变化页面刷新

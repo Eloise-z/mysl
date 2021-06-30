@@ -55,6 +55,7 @@
               <td>{{ list.createtime }}</td>
               <td>
                 <a class="mr-3 btn btn-outline-success" @click="getOrder(list.orderId)" v-if="list.status===2">接单</a>
+                <a class="mr-3 btn btn-outline-success" @click="getOrderFahuo(list.orderId)" v-if="list.status===3">发货</a>
                 <a class="mr-3 btn btn-outline-warning" @click="cacelOrder(list.orderId)"
                    v-if="list.status===1">取消订单</a>
                 <a class="mr-3 btn btn-outline-warning" @click="cacelOrder(list.orderId)"
@@ -131,6 +132,23 @@ export default {
             this.getDataList()
           } else { // 接单失败
             ElMessage.error('接单失败！')
+            this.getDataList()
+          }
+        })
+      })
+    },
+    getOrderFahuo (orderId) {
+      this.$confirm('此操作将发货, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'success'
+      }).then(() => {
+        centerApi.recevieOrder(orderId).then((response) => {
+          if (response.data.code === 0) { // 发货成功
+            ElMessage.success('发货成功！')
+            this.getDataList()
+          } else { // 发货失败
+            ElMessage.error('发货失败！')
             this.getDataList()
           }
         })

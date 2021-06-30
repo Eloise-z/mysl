@@ -68,7 +68,7 @@
 
           <!--主体开始-->
           <div class="col-lg-8 col-sm-12">
-            <div class="date-form" v-show="goodsinfo !== undefined">
+            <div class="date-form" v-if="goodsinfo !== undefined">
               <!--  <h1>标题</h1>-->
               <div class="border-green">
                 <p style="margin-left:10px; margin-bottom: 20px">

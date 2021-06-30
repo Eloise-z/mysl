@@ -36,7 +36,7 @@
           <hr>
           <div class="row" style="margin-bottom: 30px; margin-top: 30px">
             <div class="col-md-12 text-center">
-              <router-link class="btn btn-outline-primary w-25" to="/index">继续购物</router-link>
+              <router-link class="btn btn-outline-primary w-25" to="/shop">继续购物</router-link>
             </div>
           </div>
         </form>
