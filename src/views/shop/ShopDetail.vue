@@ -70,11 +70,11 @@
             <p class="goods-info-detail">服务支持：<span style="color: #bd1e22"><i
               class="fas fa-american-sign-language-interpreting"></i>放心购</span></p>
             <p style="font-size: 16px" class="goods-info-detail">付款支持：
-              <span><i class="fab fa-weixin"></i>微信支付</span>
-              <span><i class="fab fa-alipay"></i>支付宝支付</span>
-              <span><i class="fab fa-qq"></i>QQ支付</span>
-              <span><i class="fab fa-cc-apple-pay"></i>苹果支付</span>
-              <span><i class="fas fa-credit-card"></i>银行卡支付</span>
+              <span><i class="fab fa-weixin"></i>微信支付 </span>
+              <span><i class="fab fa-alipay"></i>支付宝支付 </span>
+              <span><i class="fab fa-qq"></i>QQ支付 </span>
+              <span><i class="fab fa-cc-apple-pay"></i>苹果支付 </span>
+              <span><i class="fas fa-credit-card"></i>银行卡支付 </span>
             </p>
             <h4>所属分类</h4>
             <p style="margin: 2px">[{{ goodsDetail.goodState === 0 ? '现货' : '预售' }}]</p>
