@@ -87,11 +87,19 @@
               <label for="goodPlace">商品产地</label>
               <input type="text" min="0" class="form-control" id="goodPlace" required v-model="dataForm.goodPlace">
             </div>
-            <div class="form-group" v-show="dataForm.goodState===1">
+            <div class="form-group" v-show="dataForm.goodState==='1'">
               <label for="goodFarm">商品农场</label>
               <input type="text" min="0" class="form-control" id="goodFarm" aria-describedby="FarmHelpInline"
                      v-model="dataForm.goodFarm">
               <small id="FarmHelpInline" class="text-muted">
+                预售商品填写
+              </small>
+            </div>
+            <div class="form-group" v-show="dataForm.goodState==='1'&&!dataForm.goodId">
+              <label for="twName">批次名称</label>
+              <input type="text" min="0" class="form-control" id="twName" aria-describedby="FarmHelpInline1"
+                     v-model="dataForm.twName">
+              <small id="FarmHelpInline1" class="text-muted">
                 预售商品填写
               </small>
             </div>
@@ -153,7 +161,8 @@ export default {
         goodPlace: '',
         goodFarm: '',
         gooduserId: '',
-        isBuy: ''
+        isBuy: '',
+        twName: ''
       },
       loginInfo: {}, // 用户信息
       // 封装数据
@@ -292,8 +301,12 @@ export default {
         ElMessage.warning('商品产地不能为空！')
         return false
       }
-      if (this.dataForm.goodFarm === '' && this.dataForm.goodState === 1) {
+      if (this.dataForm.goodFarm === '' && this.dataForm.goodState === '1') {
         ElMessage.warning('商品农场不能为空！')
+        return false
+      }
+      if (this.dataForm.twName === '' && this.dataForm.goodState === '1') {
+        ElMessage.warning('商品批次名称不能为空！')
         return false
       }
       if (this.dataForm.goodContent === '') {

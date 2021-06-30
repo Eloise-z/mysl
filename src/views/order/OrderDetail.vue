@@ -114,7 +114,7 @@
                 <h3>商品单价：￥{{ dataList.goodprice }}</h3>
               </div>
               <div class="form-group">
-                <h3>商品数量：{{ dataList.goodsnum }}</h3>
+                <h3>购买数量：{{ dataList.goodsnum }}</h3>
               </div>
             </div>
             <div class="col-2">
@@ -183,6 +183,7 @@ export default {
   methods: {
     getorderId () {
       this.orderId = this.$route.query.orderId
+      this.userId = this.$route.query.userId
     },
     getDataList () {
       centerApi.getOrderDetail(this.orderId).then((response) => {
@@ -216,7 +217,13 @@ export default {
           if (response.data.code === 0) { // 收货成功
             loading.close()
             ElMessage.success('收货成功！请对商品进行评价！')
-            this.$router.push({ path: '/order-review' })
+            this.$router.push({
+              path: '/order-review',
+              query: {
+                orderId: this.orderId,
+                userId: this.userId
+              }
+            })
             this.getDataList()
           } else { // 删除失败
             loading.close()

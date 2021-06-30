@@ -49,12 +49,15 @@
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
-                  <div class="col-md-8"><p>{{ list.goodName }}</p></div>
-                  <div class="col-md-4"><p>￥{{ list.goodprice }}</p></div>
+                  <div class="col-md-7"><p>{{ list.goodName }}</p></div>
+                  <!--<div class="col-md-4"><p>{{'单价：￥' + list.goodprice }}</p></div>-->
+                  <div class="col-md-4"><p>单价：<span class="font-weight-bold">￥{{ list.goodprice }}</span></p></div>
+                  <div class="col-md-1"></div>
                 </div>
                 <div class="row mt-3">
-                  <div class="col-md-6"><p>优惠：<span class="font-weight-bold">￥{{ list.discount }}</span></p></div>
-                  <div class="col-md-6"><p>实付：<span class="font-weight-bold">￥{{ list.totalpay }}</span></p></div>
+                  <div class="col-md-7"><p>优惠：<span class="font-weight-bold">￥{{ list.discount }}</span></p></div>
+                  <div class="col-md-4"><p>实付：<span class="font-weight-bold">￥{{ list.totalpay }}</span></p></div>
+                  <div class="col-md-1"></div>
                 </div>
               </div>
               <hr>
@@ -70,7 +73,7 @@
 
                 <div class="col-md-3" v-if="list.status==='5' && !list.crText">
                   <router-link :to="{ path: '/order-review',
-                  query: { orderId: list.orderId, userId: list.userId, flag: true, goodName:list.goodName } }">去评价
+                  query: { orderId: list.orderId, userId: params.userId, flag: true } }">去评价
                   </router-link>
                 </div>
 
@@ -162,7 +165,10 @@ export default {
     orderDetail (orderId) {
       this.$router.push({
         path: '/order-detail',
-        query: { orderId: orderId }
+        query: {
+          orderId: orderId,
+          userId: this.params.userId
+        }
       })
     }
   }

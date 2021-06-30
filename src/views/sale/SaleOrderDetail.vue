@@ -122,7 +122,8 @@ export default {
   data () {
     return {
       dataList: {
-        orderId: ''
+        orderId: '',
+        goodId: ''
       },
       orderId: '',
 

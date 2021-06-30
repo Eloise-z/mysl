@@ -64,7 +64,7 @@
               <textarea v-model="addEmerInfo.emOth" class="form-control" id="emerOth" rows="3"></textarea>
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-success mr-4" @click="submit()">提交</button>
+              <button type="button" class="btn btn-success mr-4" @click="submit()">提交</button>
               <button type="button" class="btn" @click="goOff()">返回</button>
             </div>
           </form>
@@ -101,7 +101,7 @@ export default {
         return
       }
       emerApi.addEmer(this.addEmerInfo).then((response) => {
-        ElMessage.success(response.data.msg)
+        ElMessage.success('发布成功！')
         // 路由跳转 滞销列表
         this.$router.push({ path: '/emergency' })
       })

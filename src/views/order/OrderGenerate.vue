@@ -114,7 +114,7 @@
                 <h3>商品单价：￥{{ goodsinfo.goodPrice }}</h3>
               </div>
               <div class="form-group">
-                <h3>商品数量：1</h3>
+                <h3>购买数量：1</h3>
               </div>
               <div class="form-group">
                 <h3>总优惠：￥{{ goodsinfo.goodPricecut }}</h3>

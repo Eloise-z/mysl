@@ -126,7 +126,7 @@ export default {
         cancelButtonText: '取消',
         type: 'success'
       }).then(() => {
-        centerApi.recevieOrder(orderId).then((response) => {
+        centerApi.sendOrder(orderId).then((response) => {
           if (response.data.code === 0) { // 接单成功
             ElMessage.success('接单成功！')
             this.getDataList()

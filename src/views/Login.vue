@@ -51,8 +51,14 @@
               <input type="password" v-model="user.userPwd" name="userPwd" placeholder="密码">
               <router-link to="/findpwd">忘记密码？</router-link>
               <div class="row">
-                <div class="col-6"><button type="button" @click="submitLogin()">登录</button></div>
-                <div class="col-6"> <button type="button"  style="color: #99CC00;background: white;border: 1px solid #99CC00;" @click="$router.push('/index')">游览</button></div>
+                <div class="col-6">
+                  <button type="button" @click="submitLogin()">登录</button>
+                </div>
+                <div class="col-6">
+                  <button type="button" style="color: #99CC00;background: white;border: 1px solid #99CC00;"
+                          @click="$router.push('/index')">游览
+                  </button>
+                </div>
               </div>
             </form>
           </div>
@@ -187,9 +193,13 @@ export default {
       })
       loginApi.sendEmail(this.user.userMail, this.sign).then((response) => {
         loading.close()
-        ElMessage.info(response.data.msg)
-        this.showCode = true // 发送邮箱成功后才显示
-        this.user.sysCode = response.data.code
+        if (response.data.code === 0) {
+          ElMessage.success(response.data.msg)
+          this.showCode = true // 发送邮箱成功后才显示
+          this.user.sysCode = response.data.strcode
+        } else {
+          ElMessage.error(response.data.msg)
+        }
       })
     },
     // 注册
@@ -226,6 +236,7 @@ export default {
           type: 'success'
         })
         this.$router.push({ path: '/login' })
+        this.submitLogin()
       })
     }
   }

@@ -55,6 +55,26 @@
               <label for="goodsDateName">当前批次名称</label>
               <input type="text" readonly class="form-control" id="goodsDateName" v-model="dataList.twName">
             </div>
+            <!-- <div class="form-group" v-if="dataList.phaseId === 0">
+              <label for="goodsPhase">当前阶段</label>
+              <input type="text" class="form-control" id="goodsPhase" v-model="dataList.phaseId">
+            </div> -->
+            <div class="form-group">
+              <label>当前阶段</label>
+              <tr>
+                <td v-if="dataList.phaseId===0">[未开始]</td>
+                <td v-if="dataList.phaseId===1">[众筹期]</td>
+                <td v-if="dataList.phaseId===2">[准备期]</td>
+                <td v-if="dataList.phaseId===3">[育苗期]</td>
+                <td v-if="dataList.phaseId===4">[生长期]</td>
+                <td v-if="dataList.phaseId===5">[成熟期]</td>
+                <td v-if="dataList.phaseId===6">[结果]</td>
+                <td v-if="dataList.phaseId===7">[结束]</td>
+              </tr>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary mr-3" @click="openNextPhase(dataList.twId)">开启下一阶段</button>
+            </div>
             <div class="form-group">
               <label for="uploadImage">动态图片</label>
               <div class="row">
@@ -132,19 +152,6 @@ export default {
     getDataList () {
       centerApi.selectdynById(this.dataForm.goodId).then((response) => {
         this.dataList = response.data.frontDynInfo
-        if (this.dataList === null) {
-          this.$msgbox({
-            confirmButtonText: '确定',
-            type: 'warning',
-            title: '警告',
-            message: '该产品不是预售产品，没有动态信息！',
-            showClose: false,
-            closeOnClickModal: false,
-            closeOnPressEscape: false
-          }).then(() => {
-            this.$router.push('/sale-list')
-          })
-        }
       })
     },
     // 获取商品ID
@@ -160,6 +167,18 @@ export default {
           ElMessage.success(response.data.msg)
           this.$router.push({ path: '/sale-list' })
         } else { // 增加失败
+          ElMessage.error(response.data.msg)
+          this.$router.push({ path: '/sale-list' })
+        }
+      })
+    },
+    openNextPhase (twid) {
+      alert('twid:' + twid)
+      centerApi.nextPhase(twid).then((response) => {
+        if (response.data.code === 0) { // 开启成功
+          ElMessage.success(response.data.msg)
+          this.$router.push({ path: '/sale-list' })
+        } else { // 开启失败
           ElMessage.error(response.data.msg)
           this.$router.push({ path: '/sale-list' })
         }

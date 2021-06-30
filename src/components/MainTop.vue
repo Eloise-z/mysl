@@ -24,7 +24,8 @@
                     class="vam picImg mr-2" alt/>
                   <span id="userName" class="vam disIb"> {{ loginInfo.userName }}</span>
                 </router-link>
-                <a href="" title="退出" @click="logout()" class="ml5"><i class="fas fa-times"></i> 退出</a>
+                <!--fas fa-times-->
+                <a href="" title="退出" @click="logout()" class="ml5"><i class="fas fa-sign-out-alt"></i> 退出</a>
               </li>
               <li>
                 <router-link to="/order-list"><i class="fas fa-file-alt"></i> 订单</router-link>

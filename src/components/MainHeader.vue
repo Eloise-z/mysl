@@ -105,7 +105,8 @@
             </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/wishlist" :style="{color:(navChoose === 8)?'rgb(176 180 53)':'black'}">
-                <i class="fa fa-shopping-bag mr-1"></i> 我的收藏
+                <!--fa-shopping-bag-->
+                <i class="fas fa-heart mr-1"></i> 我的收藏
               </router-link>
             </li>
           </ul>

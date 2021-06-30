@@ -155,7 +155,7 @@ export default {
   created () {
     const loading = ElLoading.service({
       fullscreen: true,
-      text: '正在获取数据..请稍后'
+      text: '正在获取数据...请稍后'
     })
     this.goodId = this.$route.query.goodId
     // 获取批次信息

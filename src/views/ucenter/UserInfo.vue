@@ -51,17 +51,17 @@
           <div class="form-group row">
             <label for="inlineRadio1" class="col-sm-2 col-form-label">性别</label>
             <div class="form-check form-check-inline">
-              <input class="form-check-input ml-3" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+              <input class="form-check-input ml-3" type="radio" id="inlineRadio1"
                      value="1" v-model="loginInfo.gender">
               <label class="form-check-label" for="inlineRadio1">男</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2"
+              <input class="form-check-input" type="radio" id="inlineRadio2" value="2"
                      v-model="loginInfo.gender">
               <label class="form-check-label" for="inlineRadio2">女</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3"
+              <input class="form-check-input" type="radio" id="inlineRadio3" value="3"
                      v-model="loginInfo.gender">
               <label class="form-check-label" for="inlineRadio3">保密</label>
             </div>
@@ -79,7 +79,7 @@
             </div>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-success mr-3" @click="modifyUserInfo()">修改</button>
+            <button type="button" class="btn btn-success mr-3" @click="modifyUserInfo()">修改</button>
             <button type="button" class="btn" @click="goOff()">返回</button>
           </div>
         </form>
@@ -124,9 +124,9 @@ export default {
             if (response.data.code === 0) { // 修改成功
               ElMessage.success('修改成功！')
               cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
-              // this.$router.push({ path: '/my-account' })
+              this.$router.push({ path: '/my-account' })
             } else {
-              ElMessage.error(response.data.msg)
+              ElMessage.error('修改失败！')
             }
           })
       }

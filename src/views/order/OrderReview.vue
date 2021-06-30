@@ -101,7 +101,7 @@ export default {
             if (this.$route.query.flag) {
               // 跳转到个人中心
               this.$router.push({
-                path: '/my-account',
+                path: '/order-list',
                 query: { userId: this.reviewInfo.userId }
               })
             } else {
@@ -129,7 +129,7 @@ export default {
             if (this.$route.query.flag) {
               // 跳转到个人中心
               this.$router.push({
-                path: '/my-account',
+                path: '/order-list',
                 query: { userId: this.reviewInfo.userId }
               })
             } else {

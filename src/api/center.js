@@ -106,6 +106,13 @@ export default {
       method: 'post'
     })
   },
+  // 发货
+  sendOrder (orderId) {
+    return request({
+      url: `/order/front/sendOrder/${orderId}`,
+      method: 'post'
+    })
+  },
   selectdynById (goodId) {
     return request({
       url: `/product/front/goodsinfo/selectdynById/${goodId}`,
@@ -140,6 +147,12 @@ export default {
   addGoodstype (typeId, goodId) {
     return request({
       url: `/product/goodstype/addFromCenter/${goodId}/${typeId}`,
+      method: 'post'
+    })
+  },
+  nextPhase (twId) {
+    return request({
+      url: '/product/goodsphase/next?twId=' + twId,
       method: 'post'
     })
   }
