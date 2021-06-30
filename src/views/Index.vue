@@ -52,25 +52,13 @@
       </div>
       <div class="row">
         <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
-          <div
-            class="offer-box-products"
-            style="text-align: center; height: 360px"
-          >
-            <img
-              src="https://ww1.sinaimg.cn/bmiddle/9b697c38gy1gqts4i5ph4j20go0dfgnf.jpg"
-              alt="没找到图片"
-            />
+          <div class="offer-box-products" style="text-align: center; height: 360px">
+            <img src="../assets/images/mhylp1.jpg" alt="没找到图片"/>
           </div>
         </div>
         <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
-          <div
-            class="offer-box-products"
-            style="text-align: center; height: 360px"
-          >
-            <img
-              src="https://ww2.sinaimg.cn/bmiddle/9b697c38gy1gqts4hdxtfj20go0bsmya.jpg"
-              alt="没找到图片"
-            />
+          <div class="offer-box-products" style="text-align: center; height: 360px">
+            <img src="../assets/images/mhylp2.jpg" alt="没找到图片"/>
           </div>
         </div>
       </div>
@@ -93,11 +81,7 @@
         </div>
       </div>
       <div class="row">
-        <div
-          v-for="list in ruralList"
-          class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
-          :key="list.goodId"
-        >
+        <div v-for="list in ruralList" class="col-lg-4 col-md-4 col-sm-12 col-xs-12" :key="list.goodId">
           <div class="shop-cat-box" style="height: 250px;object-fit: contain">
             <div class="type-lb">
               <p class="hot">乡村振兴</p>
@@ -133,11 +117,8 @@
 
       <!--商品展示开始-->
       <div class="row special-list">
-        <div
-          v-for="list in bestSellersList"
-          class="col-lg-3 col-md-6 special-grid sale best-seller mb-2" style="height:400px;"
-          :key="list.goodId"
-        >
+        <div v-for="list in bestSellersList" class="col-lg-3 col-md-6 special-grid sale best-seller mb-2"
+             style="height:400px;" :key="list.goodId">
           <div class="products-single fix">
             <div class="box-img-hover">
               <div class="type-lb">
@@ -180,9 +161,8 @@
         <div class="col-md-6 col-lg-6 col-xl-6">
           <div class="blog-box" style="height: 600px">
             <div class="blog-img text-center">
-              <img
-                class="img-fluid" style="height: 360px;width:100%;object-fit: cover" alt=""
-                src="https://n1-q.mafengwo.net/s10/M00/D4/D0/wKgBZ1lgRSWAPcRVAA4min43Nsc78.jpeg?imageMogr2%2Fthumbnail%2F%21690x450r%2Fgravity%2FCenter%2Fcrop%2F%21690x450%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cHM6Ly9iMS1xLm1hZmVuZ3dvLm5ldC9zMTEvTTAwLzQ0LzlCL3dLZ0JFRnNQNVJ5QUR2N3BBQUFIWlpVUFJsUTk5MC5wbmc%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11">
+              <img class="img-fluid" style="height: 360px;width:100%;object-fit: cover" alt=""
+                   src="https://n1-q.mafengwo.net/s10/M00/D4/D0/wKgBZ1lgRSWAPcRVAA4min43Nsc78.jpeg?imageMogr2%2Fthumbnail%2F%21690x450r%2Fgravity%2FCenter%2Fcrop%2F%21690x450%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cHM6Ly9iMS1xLm1hZmVuZ3dvLm5ldC9zMTEvTTAwLzQ0LzlCL3dLZ0JFRnNQNVJ5QUR2N3BBQUFIWlpVUFJsUTk5MC5wbmc%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11">
             </div>
             <div class="blog-content">
               <div class="title-blog">
@@ -202,18 +182,14 @@
         <div class="col-md-6 col-lg-6 col-xl-6">
           <div class="blog-box" style="height: 600px">
             <div class="blog-img text-center">
-              <img
-                class="img-fluid" style="height: 360px;width:100%;object-fit: cover"
-                src="https://www.cuit.edu.cn/__local/0/97/35/07A2E6DAFC4B8AB6CEA8C480683_35845070_6C2A5.jpg?e=.jpg"
-                alt=""
-              />
+              <img class="img-fluid" style="height: 360px;width:100%;object-fit: cover" alt=""
+                   src="https://www.cuit.edu.cn/__local/0/97/35/07A2E6DAFC4B8AB6CEA8C480683_35845070_6C2A5.jpg?e=.jpg"/>
             </div>
             <div class="blog-content">
               <div class="title-blog">
                 <h3>成信大校园风光</h3>
                 <p>面向未来，学校将继续秉承“成于大气，信达天下”的大学精神，以人为本，追求卓越，努力为服务国家战略需求和区域经济社会发展做出更多更大贡献。</p>
               </div>
-
             </div>
             <ul class="option-blog" style="position: absolute; bottom: 45px">
               <li>

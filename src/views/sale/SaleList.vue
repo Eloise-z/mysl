@@ -54,11 +54,11 @@
               <td>{{ list.goodNum }}</td>
               <td>￥{{ list.goodPrice }}</td>
               <td>{{ list.createTime }}</td>
-              <td v-if="list.goodStatus===1">未审核</td>
-              <td v-if="list.goodStatus===2">审核通过</td>
-              <td v-if="list.goodStatus===3">审核未通过</td>
+              <td class="text-secondary" v-if="list.goodStatus===1">未审核</td>
+              <td class="text-success" v-if="list.goodStatus===2">审核通过</td>
+              <td class="text-danger" v-if="list.goodStatus===3">审核未通过</td>
               <td>
-                <router-link :to="{path:'/sale-add',query:{goodId:list.goodId}}" class="mr-3 btn-outline-info">修改
+                <router-link :to="{path:'/sale-add',query:{goodId:list.goodId}}" class="mr-3 btn-outline-warning">修改
                 </router-link>
 
                 <router-link class="mr-3 btn-outline-info"
@@ -70,7 +70,7 @@
                 <router-link :to="{path:'/sale-growing',query:{goodId:list.goodId}}" class="mr-3 btn-outline-info">
                   动态管理
                 </router-link>
-                <a class="btn-outline-danger" @click="deleteUserGoods(list.goodId)">删除</a>
+                <router-link to="" class="btn-outline-danger" @click="deleteUserGoods(list.goodId)">删除</router-link>
               </td>
             </tr>
             </tbody>
