@@ -33,7 +33,7 @@
       <div class="row" style="margin: 30px">
         <div class="col-lg-12">
           <p class="font-weight-bold" style="font-size: 30px;color: #28a745">确认收货成功</p>
-          <p class="font-weight-bold">红富士苹果水果10斤新鲜现摘脆甜一级当季整箱山东省烟...</p>
+          <p class="font-weight-bold">{{ reviewInfo.goodName }}</p>
         </div>
         <div class="col-lg-12 mt-5">
           <form>
@@ -51,7 +51,7 @@
             </div>
             <div class="form-group mt-5">
               <button type="button" class="btn btn-primary mr-3" @click="submit()">提交评价</button>
-              <button type="button" class="btn" onclick="window.location.href='orderlist.html'">跳过评价</button>
+              <button type="button" class="btn" @click="$router.back()">跳过评价</button>
             </div>
           </form>
         </div>
