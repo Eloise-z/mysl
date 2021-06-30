@@ -81,21 +81,31 @@ export default {
   },
   methods: {
     submit () {
-      alert('评价程度:' + this.reviewInfo.crDegree)
-      alert('crText:' + this.reviewInfo.crText)
-      alert('orderId:' + this.reviewInfo.orderId)
-      alert('userId:' + this.reviewInfo.userId)
       goodsApi.addReview(this.reviewInfo).then((response) => {
-        alert(response.data.msg)
-        if (this.$route.query.flag) {
-          // 跳转到个人中心
-          this.$router.push({
-            path: '/my-account',
-            query: { userId: this.reviewInfo.userId }
+        if (response.data.code === 0) {
+          this.$notify({
+            title: '成功',
+            message: '评价成功！',
+            type: 'success',
+            duration: '5000'
           })
+          if (this.$route.query.flag) {
+            // 跳转到个人中心
+            this.$router.push({
+              path: '/my-account',
+              query: { userId: this.reviewInfo.userId }
+            })
+          } else {
+            // 跳转到我的农场
+            this.$router.push({ path: '/my-farm' })
+          }
         } else {
-          // 跳转到我的农场
-          this.$router.push({ path: '/my-farm' })
+          this.$notify({
+            title: '错误',
+            message: '评价失败！',
+            type: 'error',
+            duration: '5000'
+          })
         }
       })
     }

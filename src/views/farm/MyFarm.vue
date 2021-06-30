@@ -45,7 +45,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img :src="list.goodPicture" style="max-width: 150px" alt="图片不见了">
+                <img :src="list.goodPicture" style="width: 150px; height: 200px; object-fit: contain" alt="图片不见了">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">

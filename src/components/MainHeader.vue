@@ -24,12 +24,15 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-menu">
           <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-            <li class="nav-item" :class="{'active' : navChoose === 1}">
-              <router-link to="/index" class="nav-link">首页</router-link>
+            <li class="nav-item">
+              <router-link to="/index" class="nav-link" :style="{color:(navChoose === 1)?'rgb(176 180 53)':'black'}">
+                首页
+              </router-link>
             </li>
-            <li class="dropdown" :class="{'active' : navChoose === 2}">
+            <li class="dropdown">
               <router-link class="nav-link dropdown-toggle arrow" data-toggle="dropdown"
-                           :to="{path:'/shop',query: {goodState: 0}}">现货商品
+                           :to="{path:'/shop',query: {goodState: 0}}"
+                           :style="{color:(navChoose === 2)?'rgb(176 180 53)':'black'}">现货商品
               </router-link>
               <ul class="dropdown-menu">
                 <li>
@@ -55,9 +58,9 @@
                 </li>
               </ul>
             </li>
-            <li class="dropdown" :class="{'active' : navChoose === 3}">
+            <li class="dropdown">
               <router-link :to="{path:'/shop',query: {goodState: 1}}" class="nav-link dropdown-toggle arrow"
-                           data-toggle="dropdown">在线农场
+                           data-toggle="dropdown" :style="{color:(navChoose === 3)?'rgb(176 180 53)':'black'}">在线农场
               </router-link>
               <ul class="dropdown-menu">
                 <li>
@@ -69,9 +72,9 @@
               </ul>
             </li>
 
-            <li class="dropdown" :class="{'active' : navChoose === 4}">
+            <li class="dropdown">
               <router-link :to="{path:'/shop',query: {typeId: 13}}" class="nav-link dropdown-toggle arrow"
-                           data-toggle="dropdown">乡村振兴
+                           data-toggle="dropdown" :style="{color:(navChoose === 4)?'rgb(176 180 53)':'black'}">乡村振兴
               </router-link>
               <ul class="dropdown-menu">
                 <li>
@@ -85,51 +88,30 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item" :class="{'active' : navChoose === 5}">
-              <router-link class="nav-link" to="/tour">文·旅</router-link>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/tour" :style="{color:(navChoose === 5)?'rgb(176 180 53)':'black'}">
+                文·旅
+              </router-link>
             </li>
-            <li class="nav-item" :class="{'active' : navChoose === 6}">
-              <router-link class="nav-link" to="/origin">产品溯源</router-link>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/origin" :style="{color:(navChoose === 6)?'rgb(176 180 53)':'black'}">
+                产品溯源
+              </router-link>
             </li>
-            <li class="nav-item" :class="{'active' : navChoose === 7}" style="margin-left: 72px">
-              <router-link class="nav-link" to="/search"><i class="fa fa-search"></i> 搜索</router-link>
+            <li class="nav-item" style="margin-left: 72px">
+              <router-link class="nav-link" to="/search" :style="{color:(navChoose === 7)?'rgb(176 180 53)':'black'}">
+                <i class="fa fa-search"></i> 搜索
+              </router-link>
             </li>
-            <li class="nav-item" :class="{'active' : navChoose === 8}">
-              <router-link class="nav-link" to="/wishlist"><i class="fa fa-shopping-bag mr-1"></i> 我的收藏</router-link>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/wishlist" :style="{color:(navChoose === 8)?'rgb(176 180 53)':'black'}">
+                <i class="fa fa-shopping-bag mr-1"></i> 我的收藏
+              </router-link>
             </li>
           </ul>
         </div>
         <!-- /.navbar-collapse -->
-
       </div>
-      <!-- Start Side Menu -->
-      <!--      <div class="side">
-              <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-              <li class="cart-box">
-                <ul class="cart-list">
-                  <li>
-                    <a href="#" class="photo"><img src="../assets/images/img-pro-01.jpg" class="cart-thumb" alt=""/></a>
-                    <h6><a href="#">Delica omtantur </a></h6>
-                    <p>1x - <span class="price">$80.00</span></p>
-                  </li>
-                  <li>
-                    <a href="#" class="photo"><img src="../assets/images/img-pro-02.jpg" class="cart-thumb" alt=""/></a>
-                    <h6><a href="#">Omnes ocurreret</a></h6>
-                    <p>1x - <span class="price">$60.00</span></p>
-                  </li>
-                  <li>
-                    <a href="#" class="photo"><img src="../assets/images/img-pro-03.jpg" class="cart-thumb" alt=""/></a>
-                    <h6><a href="#">Agam facilisis</a></h6>
-                    <p>1x - <span class="price">$40.00</span></p>
-                  </li>
-                  <li class="total">
-                    <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                    <span class="float-right"><strong>Total</strong>: $180.00</span>
-                  </li>
-                </ul>
-              </li>
-            </div>-->
-      <!-- End Side Menu -->
     </nav>
     <!-- End Navigation -->
   </header>
@@ -146,7 +128,6 @@ export default {
   },
 
   // 监听路由变化
-
   watch: {
     '$route' (to) {
       // 路由发生变化页面刷新

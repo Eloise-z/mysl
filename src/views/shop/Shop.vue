@@ -33,7 +33,7 @@
             <div class="product-item-filter row">
               <div class="col-12 col-sm-8 text-center text-sm-left">
                 <div class="toolbar-sorter-right">
-                  <span class="col-3">排序 </span>
+                  <span class="col-3" style="font-size: 15px">排序 </span>
                   <select v-model="params.option" class="form-control col-6" @change="getDataList();flag=false">
                     <option value="0">默认</option>
                     <option value="1">最新商品</option>
@@ -42,12 +42,12 @@
                     <option value="4">最多售卖</option>
                   </select>
                 </div>
-                <span class="col-3 align-middle">展示了 {{ dataList.length }} 个结果</span>
+                <span class="col-3 align-middle" style="line-height: 42px;font-size: 15px">展示了 {{ dataList.length }} 个结果</span>
               </div>
               <div class="col-12 col-sm-4 text-center text-sm-right">
                 <ul class="nav nav-tabs ml-auto">
                   <li>
-                    <a class="nav-link active" href="#" data-toggle="tab"> <i class="fa fa-th"></i> </a>
+                    <a style="margin: 0" class="nav-link active" href="#" data-toggle="tab"> <i class="fa fa-th"></i> </a>
                   </li>
                 </ul>
               </div>

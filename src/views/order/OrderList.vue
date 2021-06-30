@@ -43,7 +43,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img :src="list.goodpicture" style="max-width: 150px" alt="">
+                <img :src="list.goodpicture" style="width: 150px;height: 200px;object-fit: contain" alt="">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
@@ -57,10 +57,10 @@
               </div>
               <hr>
               <div class="row w-75 text-center" style="margin: 0 auto">
-                <div class="col-md-3" v-if="list.status===5">
-                  <router-link to="/order-review">评价</router-link>
+                <div class="col-md-3" v-if="list.status==='5'">
+                  <router-link :to="{path: '/order-review', query:{orderId: list.orderId, userId: loginInfo.userId}}">评价</router-link>
                 </div>
-                <div class="col-md-3" v-if="list.status===1">
+                <div class="col-md-3" v-if="list.status==='1'">
                   <router-link to="/pay-page">去支付</router-link>
                 </div>
                 <!--<div v-show="false" class="col-md-3"><a role="button">再次购买</a></div>-->
