@@ -50,7 +50,8 @@
               <textarea v-model="reviewInfo.crText" class="form-control" id="review-text" rows="3"></textarea>
             </div>
             <div class="form-group mt-5">
-              <button type="button" class="btn btn-primary mr-3" @click="submit()">提交评价</button>
+              <button v-if="reviewInfo.flag" type="button" class="btn btn-primary mr-3" @click="submit()">修改评价</button>
+              <button v-if="!reviewInfo.flag" type="button" class="btn btn-primary mr-3" @click="submit()">提交评价</button>
               <button type="button" class="btn" @click="$router.back()">跳过评价</button>
             </div>
           </form>
@@ -71,44 +72,80 @@ export default {
         userId: '', // 用户编号
         orderId: '', // 订单编号
         crDegree: '', // 1好评 2中评 3差评
-        crText: '' // 评论内容
+        crText: '', // 评论内容
+        flag: false // 判断用户是否评价过
       }
     }
   },
   created () {
     this.reviewInfo.userId = this.$route.query.userId
     this.reviewInfo.orderId = this.$route.query.orderId
-    this.reviewInfo.goodName = this.$route.query.goodName
+    this.reviewInfo.crDegree = this.$route.query.crDegree
+    this.reviewInfo.crText = this.$route.query.crText
+    if (this.reviewInfo.crDegree) {
+      this.reviewInfo.flag = true
+    }
   },
   methods: {
     submit () {
-      goodsApi.addReview(this.reviewInfo).then((response) => {
-        if (response.data.code === 0) {
-          this.$notify({
-            title: '成功',
-            message: '评价成功！',
-            type: 'success',
-            duration: '5000'
-          })
-          if (this.$route.query.flag) {
-            // 跳转到个人中心
-            this.$router.push({
-              path: '/my-account',
-              query: { userId: this.reviewInfo.userId }
+      if (this.reviewInfo.flag) {
+        goodsApi.updateReview(this.reviewInfo).then((response) => {
+          if (response.data.code === 0) {
+            this.$notify({
+              title: '成功',
+              message: '修改评价成功！',
+              type: 'success',
+              duration: '5000'
             })
+            this.reviewInfo.flag = false
+            if (this.$route.query.flag) {
+              // 跳转到个人中心
+              this.$router.push({
+                path: '/my-account',
+                query: { userId: this.reviewInfo.userId }
+              })
+            } else {
+              // 跳转到我的农场
+              this.$router.push({ path: '/my-farm' })
+            }
           } else {
-            // 跳转到我的农场
-            this.$router.push({ path: '/my-farm' })
+            this.$notify({
+              title: '错误',
+              message: '修改评价失败！',
+              type: 'error',
+              duration: '5000'
+            })
           }
-        } else {
-          this.$notify({
-            title: '错误',
-            message: '评价失败！',
-            type: 'error',
-            duration: '5000'
-          })
-        }
-      })
+        })
+      } else {
+        goodsApi.addReview(this.reviewInfo).then((response) => {
+          if (response.data.code === 0) {
+            this.$notify({
+              title: '成功',
+              message: '评价成功！',
+              type: 'success',
+              duration: '5000'
+            })
+            if (this.$route.query.flag) {
+              // 跳转到个人中心
+              this.$router.push({
+                path: '/my-account',
+                query: { userId: this.reviewInfo.userId }
+              })
+            } else {
+              // 跳转到我的农场
+              this.$router.push({ path: '/my-farm' })
+            }
+          } else {
+            this.$notify({
+              title: '错误',
+              message: '评价失败！',
+              type: 'error',
+              duration: '5000'
+            })
+          }
+        })
+      }
     }
   }
 }

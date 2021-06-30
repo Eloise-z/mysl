@@ -85,6 +85,7 @@
 
 <script>
 import centerApi from '@/api/center'
+import goodsApi from '@/api/goods'
 import { ElMessage } from 'element-plus'
 import OSS from 'ali-oss'
 
@@ -104,9 +105,29 @@ export default {
   },
   created () {
     this.getgoodId()
-    this.getDataList()
+    this.judgeGood()
   },
   methods: {
+    // 判断商品是否是预售商品
+    judgeGood () {
+      goodsApi.getGoodDetail(this.dataForm.goodId).then((response) => {
+        if (response.data.goodsDetail.goodState === 0) {
+          this.$msgbox({
+            confirmButtonText: '确定',
+            type: 'warning',
+            title: '警告',
+            message: '该产品不是预售产品，没有动态信息！',
+            showClose: false,
+            closeOnClickModal: false,
+            closeOnPressEscape: false
+          }).then(() => {
+            this.$router.push('/sale-list')
+          })
+        } else {
+          this.getDataList()
+        }
+      })
+    },
     // 获取数据
     getDataList () {
       centerApi.selectdynById(this.dataForm.goodId).then((response) => {

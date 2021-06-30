@@ -247,8 +247,8 @@ export default {
       }
       this.orderInfo.goodStatus = this.goodsinfo.goodStatus
       this.orderInfo.payway = this.payway
-      this.orderInfo.discount = (this.goodsinfo.goodPrice - this.goodsinfo.goodPricecut)
-      this.orderInfo.totalpay = this.goodsinfo.goodPricecut
+      this.orderInfo.discount = this.goodsinfo.goodPricecut
+      this.orderInfo.totalpay = (this.goodsinfo.goodPrice - this.goodsinfo.goodPricecut)
       // 判断该商品是不是用户收藏名单，若是则从收藏表中删除
       wishApi.getWishByUserIdAndGoodId(this.orderInfo.userId, this.orderInfo.goodId).then((response) => {
         if (response.data.tag === 1) { // 说明是用户收藏名单

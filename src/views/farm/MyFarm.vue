@@ -45,7 +45,8 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img class="border p-1" :src="list.goodPicture" style="width: 150px; height: 200px; object-fit: contain" alt="图片不见了">
+                <img class="border p-1" :src="list.goodPicture" style="width: 150px; height: 200px; object-fit: contain"
+                     alt="图片不见了">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
@@ -62,9 +63,15 @@
             <hr>
             <div class="row w-75 text-center" style="margin: 0 auto">
               <div class="col-md-4">
-                <P v-if="list.status === 5" style="display: inline;">
+                <P v-if="list.status === 5 && list.crText" style="display: inline;">
+                  <router-link :to="{ path: '/order-review',
+                  query: { orderId: list.orderId, userId: list.userId, crDegree: list.crDegree, crText: list.crText } }">
+                    查看评价
+                  </router-link>
+                </P>
+                <P v-if="list.status === 5 && !list.crText" style="display: inline;">
                   <router-link :to="{ path: '/order-review', query: { orderId: list.orderId, userId: list.userId} }">
-                    评价
+                    去评价
                   </router-link>
                 </P>
                 <P v-if="list.status !== 5" style="display: inline;">
@@ -144,10 +151,11 @@ export default {
 </script>
 
 <style scoped>
-p{
+p {
   margin: 0;
 }
-span{
+
+span {
   font-size: 15px;
 }
 </style>

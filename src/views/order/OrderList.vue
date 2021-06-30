@@ -34,17 +34,18 @@
             <div class="row">
               <div class="col-md-6 text-left" v-if="list.goodFarm !== null"><p>{{ list.goodFarm }}</p></div>
               <div class="col-md-6 text-left" v-if="list.goodFarm === null"><p>现货商品</p></div>
-              <div class="col-md-6 text-right" v-if="list.status===1"><p>未支付</p></div>
-              <div class="col-md-6 text-right" v-if="list.status===2"><p>未接单</p></div>
-              <div class="col-md-6 text-right" v-if="list.status===3"><p>未发货</p></div>
-              <div class="col-md-6 text-right" v-if="list.status===4"><p>未签收</p></div>
-              <div class="col-md-6 text-right" v-if="list.status===5"><p>已完成</p></div>
-              <div class="col-md-6 text-right" v-if="list.status===6"><p>取消订单</p></div>
+              <div class="col-md-6 text-right" v-if="list.status==='1'"><p>未支付</p></div>
+              <div class="col-md-6 text-right" v-if="list.status==='2'"><p>未接单</p></div>
+              <div class="col-md-6 text-right" v-if="list.status==='3'"><p>未发货</p></div>
+              <div class="col-md-6 text-right" v-if="list.status==='4'"><p>未签收</p></div>
+              <div class="col-md-6 text-right" v-if="list.status==='5'"><p>已完成</p></div>
+              <div class="col-md-6 text-right" v-if="list.status==='6'"><p>取消订单</p></div>
             </div>
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img :src="list.goodpicture" class="border" style="width: 150px;height: 200px;object-fit: contain;padding: 10px" alt="">
+                <img :src="list.goodpicture" class="border"
+                     style="width: 150px;height: 200px;object-fit: contain;padding: 10px" alt="">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
@@ -57,13 +58,22 @@
                 </div>
               </div>
               <hr>
-              <div class="row w-75 text-center" style="padding-top: 10px; margin: 20px auto; border-top: 1px solid #cccccc">
-                <div class="col-md-3" v-if="list.status==='5'">
-                  <router-link
-                    :to="{path: '/order-review', query:{orderId: list.orderId, userId: loginInfo.userId,goodName:list.goodName}}">
-                    评价
+              <div class="row w-75 text-center"
+                   style="padding-top: 10px; margin: 20px auto; border-top: 1px solid #cccccc">
+                <div class="col-md-3" v-if="list.status==='5' && list.crText">
+                  <router-link :to="{path: '/order-review',
+                  query:{ orderId: list.orderId, userId: list.userId,
+                  crDegree: list.crDegree, crText: list.crText, flag: true }}">
+                    查看评价
                   </router-link>
                 </div>
+
+                <div class="col-md-3" v-if="list.status==='5' && !list.crText">
+                  <router-link :to="{ path: '/order-review',
+                  query: { orderId: list.orderId, userId: list.userId, flag: true, goodName:list.goodName } }">去评价
+                  </router-link>
+                </div>
+
                 <div class="col-md-3" v-if="list.status==='1'">
                   <router-link to="/pay-page">去支付</router-link>
                 </div>
@@ -160,10 +170,11 @@ export default {
 </script>
 
 <style scoped>
-p{
+p {
   margin: 2px;
 }
-span{
+
+span {
   font-size: 15px;
 }
 </style>

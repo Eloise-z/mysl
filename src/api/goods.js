@@ -53,6 +53,14 @@ export default {
       data: frontGcriticVo
     })
   },
+  // 修改评价
+  updateReview (frontGcriticVo) {
+    return request({
+      url: '/product/gcritic/front/updateReview',
+      method: 'post',
+      data: frontGcriticVo
+    })
+  },
   // 根据商品id查询该商品所属批次名称和溯源批次码
   getTrackInfo (goodId) {
     return request({
