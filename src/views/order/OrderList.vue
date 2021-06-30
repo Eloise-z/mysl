@@ -32,7 +32,8 @@
         <div class="col-lg-6" v-show="dataList.length !== 0" v-for="list in dataList" :key="list.orderId">
           <div class="order-item shadow p-3 mb-4">
             <div class="row">
-              <div class="col-md-6 text-left"><p>{{ list.goodFarm }}</p></div>
+              <div class="col-md-6 text-left" v-if="list.goodFarm !== null"><p>{{ list.goodFarm }}</p></div>
+              <div class="col-md-6 text-left" v-if="list.goodFarm === null"><p>现货商品</p></div>
               <div class="col-md-6 text-right" v-if="list.status===1"><p>未支付</p></div>
               <div class="col-md-6 text-right" v-if="list.status===2"><p>未接单</p></div>
               <div class="col-md-6 text-right" v-if="list.status===3"><p>未发货</p></div>
@@ -43,7 +44,7 @@
             <hr>
             <div class="row">
               <div class="col-md-4 text-left">
-                <img :src="list.goodpicture" style="width: 150px;height: 200px;object-fit: contain" alt="">
+                <img :src="list.goodpicture" class="border" style="width: 150px;height: 200px;object-fit: contain;padding: 10px" alt="">
               </div>
               <div class="col-md-8 text-left">
                 <div class="row">
@@ -56,9 +57,12 @@
                 </div>
               </div>
               <hr>
-              <div class="row w-75 text-center" style="margin: 0 auto">
+              <div class="row w-75 text-center" style="padding-top: 10px; margin: 20px auto; border-top: 1px solid #cccccc">
                 <div class="col-md-3" v-if="list.status==='5'">
-                  <router-link :to="{path: '/order-review', query:{orderId: list.orderId, userId: loginInfo.userId}}">评价</router-link>
+                  <router-link
+                    :to="{path: '/order-review', query:{orderId: list.orderId, userId: loginInfo.userId,goodName:list.goodName}}">
+                    评价
+                  </router-link>
                 </div>
                 <div class="col-md-3" v-if="list.status==='1'">
                   <router-link to="/pay-page">去支付</router-link>
@@ -156,5 +160,10 @@ export default {
 </script>
 
 <style scoped>
-
+p{
+  margin: 2px;
+}
+span{
+  font-size: 15px;
+}
 </style>

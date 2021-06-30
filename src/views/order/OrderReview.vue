@@ -78,6 +78,7 @@ export default {
   created () {
     this.reviewInfo.userId = this.$route.query.userId
     this.reviewInfo.orderId = this.$route.query.orderId
+    this.reviewInfo.goodName = this.$route.query.goodName
   },
   methods: {
     submit () {

@@ -28,11 +28,14 @@
         <form class="form-horizontal" role="form">
           <div class="top-tip">
             <div class="border-green">
-              <p class="ml-2">订单提交成功，请尽快付款！订单编号：{{ orderInfo.orderId }}</p>
-              <p class="ml-2">应付金额
-                <span class="font-weight-bold" style="color: #e31613;font-size: 18px">{{ orderInfo.totalpay }}
+              <div class="row">
+                <div class="col-6"><p class="ml-2">订单提交成功，请尽快付款！</p></div>
+                <div class="col-6"><p class="ml-2 text-right">应付金额
+                  <span class="font-weight-bold" style="color: #e31613;font-size: 18px">{{ orderInfo.totalpay }}
                 </span>元
-              </p>
+                </p></div>
+              </div>
+              <p class="ml-2">订单编号：{{ orderInfo.orderId }}</p>
             </div>
           </div>
           <hr>
@@ -146,5 +149,7 @@ export default {
 </script>
 
 <style scoped>
-
+p{
+  margin: 2px;
+}
 </style>

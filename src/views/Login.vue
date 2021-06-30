@@ -50,8 +50,10 @@
               <input type="text" v-model="user.userMail" name="userMail" @change="checkMail" placeholder="邮箱">
               <input type="password" v-model="user.userPwd" name="userPwd" placeholder="密码">
               <router-link to="/findpwd">忘记密码？</router-link>
-              <button type="button" @click="submitLogin()">登录</button>
-              <button type="button" @click="$router.push('/index')">游览</button>
+              <div class="row">
+                <div class="col-6"><button type="button" @click="submitLogin()">登录</button></div>
+                <div class="col-6"> <button type="button"  style="color: #99CC00;background: white;border: 1px solid #99CC00;" @click="$router.push('/index')">游览</button></div>
+              </div>
             </form>
           </div>
           <div class="overlay-container">
@@ -136,12 +138,6 @@ export default {
           loading.close()
           // alert(response.data.msg)
           if (response.data.code === 0) { // 登录成功
-            this.$notify({
-              title: '欢迎您使用本平台',
-              message: '新用户请进入个人中心上传头像，完善个人信息~',
-              type: 'success',
-              duration: '10000'
-            })
             ElMessage.success('登录成功！')
             // 获取到的token字符串放入cookie
             // 1.cookie名称，2.token参数值，3.作用范围-在什么样的请求中
@@ -150,6 +146,13 @@ export default {
             loginApi.getUserInfo()
               .then(response => {
                 this.loginInfo = response.data.userInfo
+                this.$notify({
+                  dangerouslyUseHTMLString: true,
+                  title: response.data.userInfo.userName,
+                  message: '欢迎您来到“梦”的世界！<br>新用户请进入个人中心上传头像，完善个人信息~',
+                  type: 'success',
+                  duration: '10000'
+                })
                 // 获取返回的用户信息  放入cookie
                 cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
                 // 路由跳转 跳转守页面

@@ -74,24 +74,23 @@
         <span style="margin-top: 20px; margin-bottom: 20px; font-size: 23px;">支付方式</span>
       </div>
       <div class="row">
-        <label id="payway1" class="mr-3" style="border: 2px solid white">
+        <label id="payway1" class="mr-3 p-2" style="border: 2px solid rgb(176 180 53)">
           <img style="height: 50px" src="../../assets/images/eloise/ali-pay.png" alt="图片找不到了">
           <span class="align-middle" style="font-size: 20px;">支付宝支付</span>
           <input v-model="payway" style="display: none" type="radio" name="payway" value="1">
         </label>
 
-        <label id="payway2" class="mr-3" style="border: 2px solid white">
+        <label id="payway2" class="mr-3 p-2" style="border: 2px solid white">
           <img style="height: 50px" src="../../assets/images/eloise/wechat-pay.png" alt="图片找不到了">
           <span class="align-middle" style="font-size: 20px">微信支付</span>
           <input v-model="payway" style="display: none" type="radio" name="payway" value="2">
         </label>
 
-        <label id="payway3" class="mr-3" style="border: 2px solid white">
+        <label id="payway3" class="mr-3 p-2" style="border: 2px solid white">
           <img style="height: 50px; " src="../../assets/images/eloise/qq-pay.png" alt="图片找不到了">
           <span class="align-middle" style="font-size: 20px">QQ支付</span>
           <input v-model="payway" style="display: none" type="radio" name="payway" value="3">
         </label>
-
       </div>
       <hr>
       <div class="row">
@@ -159,7 +158,7 @@ export default {
         goodId: '', // 商品编号
         userId: '', // 用户编号
         shipId: '', // 收货信息编号
-        payway: '', // 支付方式
+        payway: 1, // 支付方式
         discount: '', // 优惠金额
         totalpay: '', // 支付金额
         goodsnum: 1, // 购买数量
