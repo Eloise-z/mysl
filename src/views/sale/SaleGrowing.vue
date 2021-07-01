@@ -164,22 +164,21 @@ export default {
     adddyn () {
       centerApi.adddyn(this.dataList).then((response) => {
         if (response.data.code === 0) { // 增加成功
-          ElMessage.success(response.data.msg)
+          ElMessage.success('添加成功！')
           this.$router.push({ path: '/sale-list' })
         } else { // 增加失败
-          ElMessage.error(response.data.msg)
+          ElMessage.error('添加失败！')
           this.$router.push({ path: '/sale-list' })
         }
       })
     },
     openNextPhase (twid) {
-      alert('twid:' + twid)
       centerApi.nextPhase(twid).then((response) => {
         if (response.data.code === 0) { // 开启成功
-          ElMessage.success(response.data.msg)
+          ElMessage.success('阶段开启成功！')
           this.$router.push({ path: '/sale-list' })
         } else { // 开启失败
-          ElMessage.error(response.data.msg)
+          ElMessage.error('阶段开启失败！当前是最后一个时期！')
           this.$router.push({ path: '/sale-list' })
         }
       })
