@@ -126,7 +126,7 @@ export default {
         cancelButtonText: '取消',
         type: 'success'
       }).then(() => {
-        centerApi.sendOrder(orderId).then((response) => {
+        centerApi.recevieOrder(orderId).then((response) => {
           if (response.data.code === 0) { // 接单成功
             ElMessage.success('接单成功！')
             this.getDataList()
@@ -143,7 +143,7 @@ export default {
         cancelButtonText: '取消',
         type: 'success'
       }).then(() => {
-        centerApi.recevieOrder(orderId).then((response) => {
+        centerApi.sendOrder(orderId).then((response) => {
           if (response.data.code === 0) { // 发货成功
             ElMessage.success('发货成功！')
             this.getDataList()
