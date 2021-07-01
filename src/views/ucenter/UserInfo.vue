@@ -124,6 +124,7 @@ export default {
             if (response.data.code === 0) { // 修改成功
               ElMessage.success('修改成功！')
               cookie.set('agriculture_ucenter', this.loginInfo, { domain: 'localhost' })
+              this.loginInfo = JSON.parse(cookie.get('agriculture_ucenter'))
               this.$router.push({ path: '/my-account' })
             } else {
               ElMessage.error('修改失败！')
